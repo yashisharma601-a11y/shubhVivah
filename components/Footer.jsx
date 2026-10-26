@@ -155,6 +155,30 @@ export default function Footer() {
               </li>
               <li>
                 <Link
+                  href="/wedding-vendors/wedding-planner"
+                  className="text-[#C9BBAF] transition-colors hover:text-[#D6B875]"
+                >
+                  Wedding Planners
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/wedding-vendors/bridal-groom-wear"
+                  className="text-[#C9BBAF] transition-colors hover:text-[#D6B875]"
+                >
+                  Bridal &amp; Groom Wear
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/wedding-vendors/mehndi-artist"
+                  className="text-[#C9BBAF] transition-colors hover:text-[#D6B875]"
+                >
+                  Mehndi Artists
+                </Link>
+              </li>
+              <li>
+                <Link
                   href="/venues/heritage-palaces"
                   className="text-[#C9BBAF] transition-colors hover:text-[#D6B875]"
                 >

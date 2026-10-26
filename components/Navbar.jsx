@@ -23,9 +23,9 @@ const vendorLinks = [
   { name: "Wedding Photographers", href: "/wedding-vendors/wedding-photography", icon: Camera },
   { name: "Bridal Makeup Artists", href: "/wedding-vendors/bridal-makeup-artist", icon: Sparkles },
   { name: "Wedding Decorators", href: "/wedding-vendors/decoration", icon: Flower2 },
-  { name: "Wedding Planners", href: "/vendors/wedding-planners", icon: CalendarDays },
-  { name: "Bridal & Groom Wear", href: "/vendors/bridal-wear", icon: Shirt },
-  { name: "Mehndi Artists", href: "/vendors/mehndi", icon: Palette },
+  { name: "Wedding Planners", href: "/wedding-vendors/wedding-planner", icon: CalendarDays },
+  { name: "Bridal & Groom Wear", href: "/wedding-vendors/bridal-groom-wear", icon: Shirt },
+  { name: "Mehndi Artists", href: "/wedding-vendors/mehndi-artist", icon: Palette },
 ];
 
 const venueLinks = [
