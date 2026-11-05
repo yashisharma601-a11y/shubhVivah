@@ -114,6 +114,22 @@ export default function Footer() {
               </li>
               <li>
                 <Link
+                  href="/login"
+                  className="text-[#D6B875] font-semibold transition-colors hover:text-[#FFE29A]"
+                >
+                  Member Login
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/register"
+                  className="text-[#C9BBAF] transition-colors hover:text-[#D6B875]"
+                >
+                  Create Account
+                </Link>
+              </li>
+              <li>
+                <Link
                   href="/blog"
                   className="text-[#C9BBAF] transition-colors hover:text-[#D6B875]"
                 >
@@ -209,15 +225,15 @@ export default function Footer() {
               </li>
               <li className="flex items-center gap-2.5">
                 <Phone size={17} className="shrink-0 text-[#B08D45]" />
-                <span>+91 98765 43210</span>
+                <span>+91 00000 0000</span>
               </li>
               <li className="flex items-center gap-2.5">
                 <Mail size={17} className="shrink-0 text-[#B08D45]" />
-                <span>contact@shubhvivah.com</span>
+                <span>shubhvivah171@gmail.com</span>
               </li>
             </ul>
           </div>
-        </div>
+        </div>  
 
         {/* Bottom Copyright */}
         <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-[#665038]/40 pt-8 text-center text-xs text-[#C9BBAF]/80 sm:flex-row">

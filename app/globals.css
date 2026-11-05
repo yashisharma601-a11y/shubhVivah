@@ -39,3 +39,63 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: #B08D45;
 }
+
+/* Sathi Golden Glowing Light Animations */
+@keyframes goldenGlowPulse {
+  0%, 100% {
+    box-shadow: 
+      0 0 20px rgba(214, 184, 117, 0.75),
+      0 0 45px rgba(176, 141, 69, 0.5),
+      0 0 70px rgba(176, 141, 69, 0.3),
+      inset 0 0 15px rgba(255, 226, 154, 0.4);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 
+      0 0 32px rgba(255, 226, 154, 0.95),
+      0 0 65px rgba(214, 184, 117, 0.8),
+      0 0 100px rgba(176, 141, 69, 0.6),
+      inset 0 0 22px rgba(255, 226, 154, 0.6);
+    transform: scale(1.04);
+  }
+}
+
+@keyframes goldenAuraExpand {
+  0% {
+    transform: scale(0.92);
+    opacity: 0.85;
+  }
+  50% {
+    transform: scale(1.35);
+    opacity: 0.35;
+  }
+  100% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+}
+
+@keyframes goldenShimmerRotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.sathi-golden-glow-btn {
+  animation: goldenGlowPulse 2.6s infinite ease-in-out;
+}
+
+.sathi-golden-aura-ring {
+  animation: goldenAuraExpand 2.6s infinite ease-out;
+}
+
+.sathi-golden-aura-ring-delayed {
+  animation: goldenAuraExpand 2.6s infinite ease-out 1.3s;
+}
+
+.sathi-golden-shimmer-spin {
+  animation: goldenShimmerRotate 7s linear infinite;
+}

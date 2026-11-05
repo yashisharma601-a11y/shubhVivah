@@ -1,6 +1,7 @@
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import SathiChatbot from "@/components/SathiChatbot";
 
 export const metadata = {
   title: {
@@ -39,6 +40,7 @@ export default function RootLayout({ children }) {
         <Navbar />
         <main>{children}</main>
         <Footer />
+        <SathiChatbot />
       </body>
     </html>
   );

@@ -129,16 +129,31 @@ export default function HeroSection() {
           <span className="mr-1 font-medium text-[#C9BBAF]">Popular Searches:</span>
 
           {[
-            { label: "Palace Venues", query: "venues" },
-            { label: "Candid Photography", query: "photographers" },
-            { label: "Bridal Makeup", query: "makeup" },
-            { label: "Mandap Decorators", query: "decoration" },
-            { label: "Destination Weddings", query: "venues" },
+            {
+              label: "Palace Venues",
+              href: "/venues/heritage-palaces",
+            },
+            {
+              label: "Candid Photography",
+              href: "/wedding-vendors/wedding-photography",
+            },
+            {
+              label: "Bridal Makeup",
+              href: "/wedding-vendors/bridal-makeup-artist",
+            },
+            {
+              label: "Mandap Decorators",
+              href: "/wedding-vendors/decoration",
+            },
+            {
+              label: "Destination Weddings",
+              href: "/venues/destination-weddings",
+            },
           ].map((item) => (
             <Link
               key={item.label}
-              href={`/vendors?service=${encodeURIComponent(item.query)}`}
-              className="rounded-full border border-[#665038] bg-[#321B30]/60 px-3.5 py-1.5 text-[#E8D9B5] transition-all duration-200 hover:border-[#B08D45] hover:bg-[#3A2638] hover:text-[#F8F1E5]"
+              href={item.href}
+              className="inline-flex items-center cursor-pointer rounded-full border border-[#665038] bg-[#321B30]/60 px-3.5 py-1.5 text-[#E8D9B5] transition-all duration-200 hover:border-[#B08D45] hover:bg-[#3A2638] hover:text-[#F8F1E5] hover:shadow-[0_2px_10px_rgba(176,141,69,0.25)] hover:scale-[1.03] active:scale-[0.98]"
             >
               {item.label}
             </Link>

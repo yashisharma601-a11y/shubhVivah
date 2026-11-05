@@ -2,7 +2,6 @@
 
 import { useState, useMemo } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import {
   Search,
   MapPin,
@@ -10,224 +9,323 @@ import {
   Heart,
   SlidersHorizontal,
   RotateCcw,
-  Phone,
-  Mail,
-  Calendar,
   X,
   CheckCircle2,
   ChevronRight,
   ChevronDown,
-  ExternalLink,
+  Eye,
   Flower2,
-  Palette,
-  Lightbulb,
-  Building2,
-  Compass,
   ArrowRight,
-  IndianRupee,
+  Star,
+  Send,
 } from "lucide-react";
 
 // =========================================================================
-// DEMO DECORATION VENDOR DATA — Readily replaceable with MySQL / Backend API
+// 7 CURATED WEDDING DECORATION VENDOR CARDS
+// Inspired by WeddingKalki layout and crafted for ShubhVivah's golden aesthetic.
+// Each vendor specifically represents one of the 7 required decoration services:
+// 1. Royal wedding stage decoration
+// 2. Floral wedding mandap decoration
+// 3. Luxury wedding entrance decoration
+// 4. Outdoor garden wedding decoration
+// 5. Haldi and Mehndi ceremony decoration
+// 6. Reception stage decoration
+// 7. Destination wedding decoration
 // =========================================================================
 const DECORATORS_DATA = [
   {
-    id: "amara-floral-sets",
-    name: "Amara Floral & Set Designers",
-    company: "Amara Luxury Events Pvt Ltd",
+    id: "shahi-darbar-royal-stage",
+    name: "Shahi Darbar Stage Scenography",
+    company: "Shahi Darbar Royal Decorators Pvt Ltd",
+    categoryType: "Royal Wedding Stage Decoration",
+    city: "Jaipur",
+    location: "Jaipur & Delhi NCR",
+    priceStarting: 175000,
+    priceDisplay: "₹1,75,000",
+    priceRange: "₹1,75,000 – ₹5,50,000",
+    experience: "12+ Years Experience",
+    rating: 4.9,
+    reviewCount: 142,
+    badge: "Royal Stage Specialist",
+    image: "/images/decoration/royal-wedding-stage.jpg",
+    gallery: [
+      "/images/decoration/royal-wedding-stage.jpg",
+      "/images/decoration/reception-stage-decoration.jpg",
+      "/images/decoration/luxury-wedding-entrance.jpg",
+    ],
+    services: [
+      "Royal Wedding Stage",
+      "Mughal Arch Framing",
+      "Crystal Chandeliers",
+      "Velvet Backdrop Draping",
+      "Maharaja Throne Setup",
+    ],
+    highlights: [
+      "Carved Jharokha Backdrops",
+      "Imported Red & Ivory Roses",
+      "Austrian Crystal Chandeliers",
+    ],
+    about:
+      "Specialists in regal Indian wedding stage production featuring monumental 3D Mughal jharokhas, antique gold-carved pillars, handcrafted Rajasthani mirror panels, and rich velvet canopies for magnificent celebrations.",
+    packageIncludes: [
+      "32ft Royal Architectural Stage Backdrop",
+      "Handcrafted Gold Maharaja Throne Pair",
+      "Multi-Tier Crystal Chandelier Array",
+      "Fresh Rose & Orchid Floral Framing",
+      "DMX Computerized Warm Lighting & Focus Spots",
+    ],
+  },
+  {
+    id: "amara-floral-mandap-creations",
+    name: "Amara Floral Mandap Creators",
+    company: "Amara Luxury Mandap & Floral Studio",
+    categoryType: "Floral Wedding Mandap Decoration",
     city: "Delhi",
     location: "South Delhi & NCR",
     priceStarting: 150000,
     priceDisplay: "₹1,50,000",
-    experience: "9+ Years Experience",
-    badge: "Celebrity Mandap Artist",
-    image:
-      "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=80",
+    priceRange: "₹1,50,000 – ₹4,25,000",
+    experience: "10+ Years Experience",
+    rating: 4.9,
+    reviewCount: 168,
+    badge: "Master Mandap Artist",
+    image: "/images/decoration/floral-wedding-mandap.jpg",
     gallery: [
-      "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1544644181-1484b3fdfc62?auto=format&fit=crop&w=800&q=80",
+      "/images/decoration/floral-wedding-mandap.jpg",
+      "/images/decoration/destination-wedding-decor.jpg",
+      "/images/decoration/outdoor-garden-wedding.jpg",
     ],
     services: [
-      "Mandap Decoration",
-      "Floral Decoration",
-      "Wedding Stage Decoration",
-      "Reception Decoration",
-      "Theme Decoration",
+      "Floral Mandap Decoration",
+      "Vedic 4-Pillar Mandap",
+      "Tuberose & Mogra Curtains",
+      "Aisle Floral Walkways",
+      "Hawan Kund Sanctum",
+    ],
+    highlights: [
+      "100% Fresh Exotic Florals",
+      "Auspicious Vedic Geometry",
+      "Fragrant Rajnigandha Cascades",
     ],
     about:
-      "Specializing in royal Indian mandaps adorned with exotic tuberose, Dutch roses, brass bells, and architectural Mughal arches for high-profile weddings in Delhi NCR and luxury destinations.",
+      "Crafting sacred, divine floral mandaps adorned with fragrant Indian tuberose (rajnigandha), Bangalore mogra tassels, Dutch roses, brass temple bells, and serene holy hawan kund sanctum architecture.",
+    packageIncludes: [
+      "Full 4-Pillar Vedic Mandap with Floral Dome",
+      "Fresh Mogra & Jasmine Hanging Curtains",
+      "Brass Urli Floating Rose Petal Basin",
+      "Sacred Hawan Kund Platform with Cushions",
+      "Aisle Walkway with 8 Floral Pedestals",
+    ],
   },
   {
-    id: "royal-rajputana-decor",
-    name: "Royal Rajputana Decorators",
-    company: "Rajputana Wedding Concepts",
+    id: "imperial-grand-entryways",
+    name: "Imperial Grand Entry & Walkway Stylists",
+    company: "Imperial Gateway Decorators",
+    categoryType: "Luxury Wedding Entrance Decoration",
     city: "Jaipur",
     location: "Jaipur & Udaipur",
     priceStarting: 85000,
     priceDisplay: "₹85,000",
-    experience: "12+ Years Experience",
-    badge: "Palace Specialist",
-    image:
-      "https://images.unsplash.com/photo-1544644181-1484b3fdfc62?auto=format&fit=crop&w=800&q=80",
+    priceRange: "₹85,000 – ₹2,80,000",
+    experience: "9+ Years Experience",
+    rating: 4.8,
+    reviewCount: 114,
+    badge: "Grand Entrance Specialist",
+    image: "/images/decoration/luxury-wedding-entrance.jpg",
     gallery: [
-      "https://images.unsplash.com/photo-1544644181-1484b3fdfc62?auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=80",
+      "/images/decoration/luxury-wedding-entrance.jpg",
+      "/images/decoration/royal-wedding-stage.jpg",
+      "/images/decoration/reception-stage-decoration.jpg",
     ],
     services: [
-      "Mandap Decoration",
-      "Entrance and Welcome Gate Decoration",
-      "Wedding Lighting",
-      "Complete Wedding Decoration Packages",
+      "Luxury Entrance Decoration",
+      "Welcome Gate Archways",
+      "Baarat Pathway Lighting",
+      "Lantern & Candelabra Tunnels",
+      "Cold Pyro Baarat Entry",
+    ],
+    highlights: [
+      "24ft Statement Grand Arch",
+      "Moroccan Lantern Pathway",
+      "Cold Pyro Welcome Setup",
     ],
     about:
-      "Bespoke heritage palace decor experts bringing Rajasthan's royal grandeur alive with mirror-work canopies, marigold cascading waterfalls, traditional tikri glass art, and courtyard illumination.",
+      "Creating breathtaking first impressions with monumental 24-foot fresh floral entrance gateways, illuminated Moroccan lanterns, amber candlelit tunnels, and dramatic baarat procession pathways.",
+    packageIncludes: [
+      "Monumental 24ft Double-Arch Welcome Gate",
+      "60ft Red Carpet Pathway with Candle Lanterns",
+      "Side Floral Credenzas & Welcome Easel",
+      "Overhead Fairy Light Tunnel Draping",
+      "Synchronized Cold Pyro Entry Guns (Pair)",
+    ],
   },
   {
-    id: "awadh-floral-craft",
-    name: "Avadh Floral & Stage Craft",
-    company: "Avadh Celebrations",
+    id: "vrindavan-botanical-gardens",
+    name: "Vrindavan Garden & Lawn Stylists",
+    company: "Vrindavan Botanical Scenography",
+    categoryType: "Outdoor Garden Wedding Decoration",
+    city: "Noida",
+    location: "Noida & Greater Noida",
+    priceStarting: 95000,
+    priceDisplay: "₹95,000",
+    priceRange: "₹95,000 – ₹3,20,000",
+    experience: "7+ Years Experience",
+    rating: 4.8,
+    reviewCount: 96,
+    badge: "Garden Scenography",
+    image: "/images/decoration/outdoor-garden-wedding.jpg",
+    gallery: [
+      "/images/decoration/outdoor-garden-wedding.jpg",
+      "/images/decoration/haldi-mehndi-decoration.jpg",
+      "/images/decoration/destination-wedding-decor.jpg",
+    ],
+    services: [
+      "Outdoor Garden Decoration",
+      "Lawn Gazebo Styling",
+      "Fairy Light Sky Ceilings",
+      "Pastel Floral Pergolas",
+      "Boho Wooden Cabanas",
+    ],
+    highlights: [
+      "Overhead Fairy Light Sky",
+      "Wisteria Hanging Garlands",
+      "Rustic Wooden Gazebos",
+    ],
+    about:
+      "Transforming open-air marriage lawns and botanical gardens into magical wonderlands with wooden pergolas, cascading lilac wisteria, rustic vintage cabanas, and glowing starry fairy-light canopies.",
+    packageIncludes: [
+      "Centrally Styled Garden Gazebo with Florals",
+      "Fairy Light Sky Canopy Across 15,000 sq. ft.",
+      "6 Luxury Wooden Lounge Cabanas with Cushions",
+      "Illuminated Tree Wraps & Uplighting",
+      "Natural Grass Pathway with Floral Urns",
+    ],
+  },
+  {
+    id: "genda-phool-haldi-mehndi",
+    name: "Genda Phool Haldi & Mehndi Decor",
+    company: "Genda Phool Celebrations",
+    categoryType: "Haldi & Mehndi Decoration",
     city: "Lucknow",
     location: "Lucknow & Kanpur",
     priceStarting: 45000,
     priceDisplay: "₹45,000",
-    experience: "7+ Years Experience",
-    badge: "Top Rated in UP",
-    image:
-      "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=800&q=80",
-    gallery: [
-      "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1537633552985-df8429e8048b?auto=format&fit=crop&w=800&q=80",
-    ],
-    services: [
-      "Wedding Stage Decoration",
-      "Reception Decoration",
-      "Haldi and Mehendi Decoration",
-      "Floral Decoration",
-    ],
-    about:
-      "Graceful Nawabi wedding decor with delicate jasmine drapery, velvet bolsters, candle-lit shamiyanas, and pastel floral backdrops tailored for nikah, reception, and sangeet stages.",
-  },
-  {
-    id: "noida-modern-bloom",
-    name: "Bloom & Brass Event Stylists",
-    company: "Bloom & Brass Studio",
-    city: "Noida",
-    location: "Noida & Greater Noida",
-    priceStarting: 35000,
-    priceDisplay: "₹35,000",
-    experience: "5+ Years Experience",
-    badge: "Minimalist Trends",
-    image:
-      "https://images.unsplash.com/photo-1520854221256-17451cc331bf?auto=format&fit=crop&w=800&q=80",
-    gallery: [
-      "https://images.unsplash.com/photo-1520854221256-17451cc331bf?auto=format&fit=crop&w=800&q=80",
-    ],
-    services: [
-      "Wedding Stage Decoration",
-      "Haldi and Mehendi Decoration",
-      "Entrance and Welcome Gate Decoration",
-      "Theme Decoration",
-    ],
-    about:
-      "Contemporary bohemian and modern Indian wedding decor featuring pampas grass, warm fairy light tunnels, wooden cabanas, and sunburst floral installations for lively sundowner ceremonies.",
-  },
-  {
-    id: "moradabad-brass-weddings",
-    name: "Moradabad Shahi Mandap & Light",
-    company: "Shahi Decorators",
-    city: "Moradabad",
-    location: "Moradabad & Bareilly",
-    priceStarting: 22000,
-    priceDisplay: "₹22,000",
+    priceRange: "₹45,000 – ₹1,60,000",
     experience: "8+ Years Experience",
-    badge: "Budget Friendly",
-    image:
-      "https://images.unsplash.com/photo-1537633552985-df8429e8048b?auto=format&fit=crop&w=800&q=80",
+    rating: 4.9,
+    reviewCount: 135,
+    badge: "Vibrant Haldi Specialist",
+    image: "/images/decoration/haldi-mehndi-decoration.jpg",
     gallery: [
-      "https://images.unsplash.com/photo-1537633552985-df8429e8048b?auto=format&fit=crop&w=800&q=80",
+      "/images/decoration/haldi-mehndi-decoration.jpg",
+      "/images/decoration/outdoor-garden-wedding.jpg",
+      "/images/decoration/floral-wedding-mandap.jpg",
     ],
     services: [
-      "Mandap Decoration",
-      "Wedding Lighting",
-      "Bridal Entry Decoration",
-      "Entrance and Welcome Gate Decoration",
+      "Haldi & Mehndi Decoration",
+      "Floral Swing (Jhoola)",
+      "Brass Urli Ceremony Bath",
+      "Marigold Waterfall Backdrops",
+      "Color-Pop Tassel Shamiyanas",
+    ],
+    highlights: [
+      "Floral Bridal Jhoola (Swing)",
+      "Giant Brass Urli Flower Bath",
+      "Vibrant Yellow Marigold Drops",
     ],
     about:
-      "Famous for authentic handcrafted Moradabadi brass candelabras, traditional red & gold velvet mandaps, crystal chandeliers, and grand floral entryway setups with cold pyro effects.",
+      "Infusing vibrant sunshine hues with thick marigold cascades, traditionally carved floral swings for the bride, vintage brass urlis with floating rose petals, and playful tassel canopies for joyous haldi and mehndi rituals.",
+    packageIncludes: [
+      "Handcrafted Floral Swing (Jhoola) for Bride",
+      "Giant Vintage Brass Urli for Haldi Ceremony",
+      "12ft Marigold Waterfall Photo Backdrop",
+      "Festive Yellow & Orange Draping Shamiyana",
+      "Decorative Colorful Umbrella & Cushion Clusters",
+    ],
   },
   {
-    id: "taj-city-wedding-decor",
-    name: "Taj Heritage Decorators",
-    company: "Taj City Events",
-    city: "Agra",
-    location: "Agra & Mathura",
-    priceStarting: 65000,
-    priceDisplay: "₹65,000",
-    experience: "10+ Years Experience",
-    badge: "Mughal Architecture Decor",
-    image:
-      "https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=800&q=80",
-    gallery: [
-      "https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=800&q=80",
-    ],
-    services: [
-      "Wedding Stage Decoration",
-      "Mandap Decoration",
-      "Reception Decoration",
-      "Wedding Lighting",
-    ],
-    about:
-      "Creating iconic romantic wedding atmospheres in Agra with ivory marble-inspired stages, lotus pond centerpieces, and luminous amber ambient lighting designed for timeless celebrations.",
-  },
-  {
-    id: "mumbai-luxury-botanica",
-    name: "Botanica Wedding Production",
-    company: "Botanica Luxury Concepts",
+    id: "botanica-luxury-reception",
+    name: "Botanica Luxury Reception Stages",
+    company: "Botanica Scenography & Production",
+    categoryType: "Reception Stage Decoration",
     city: "Mumbai",
-    location: "South Mumbai & Bandra",
+    location: "Mumbai & Bandra",
     priceStarting: 220000,
     priceDisplay: "₹2,20,000",
+    priceRange: "₹2,20,000 – ₹6,50,000",
     experience: "11+ Years Experience",
-    badge: "Celebrity Production House",
-    image:
-      "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=800&q=80",
+    rating: 5.0,
+    reviewCount: 156,
+    badge: "High Glamour Reception",
+    image: "/images/decoration/reception-stage-decoration.jpg",
     gallery: [
-      "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=800&q=80",
+      "/images/decoration/reception-stage-decoration.jpg",
+      "/images/decoration/royal-wedding-stage.jpg",
+      "/images/decoration/luxury-wedding-entrance.jpg",
     ],
     services: [
-      "Complete Wedding Decoration Packages",
-      "Theme Decoration",
-      "Floral Decoration",
-      "Wedding Stage Decoration",
-      "Bridal Entry Decoration",
+      "Reception Stage Decoration",
+      "Crystal Chandelier Ceilings",
+      "White Hydrangea Floral Wall",
+      "Mirror Stage Runways",
+      "Architectural Amber Lighting",
+    ],
+    highlights: [
+      "Suspended Crystal Chandelier Sky",
+      "High-Gloss Mirror Runway Stage",
+      "Opulent White & Blush Florals",
     ],
     about:
-      "Full-scale wedding production and scenography firm building colossal floral glasshouses, mirror aisle walkways, and interactive kinetic light ceilings for five-star luxury ballrooms.",
+      "Ultra-contemporary luxury reception scenography featuring kinetic light fixtures, crystal chandelier ceilings, white hydrangea floral walls, mirror stage floors, and sleek geometric gold accents.",
+    packageIncludes: [
+      "36ft Modern Geometric Gold & White Stage",
+      "Full Gloss Mirror Finish Stage Floor",
+      "Hanging Crystal Chandelier Ceiling (12 Pieces)",
+      "Imported White Hydrangea & Rose Cluster Walls",
+      "Intelligent Moving Head Stage Light Profiling",
+    ],
   },
   {
-    id: "udaipur-lake-palace-decor",
-    name: "Udaipur Lakeview Decor",
-    company: "Mewar Royal Decorators",
+    id: "mewar-palace-destination-decor",
+    name: "Mewar Heritage Destination Decor",
+    company: "Mewar Destination Wedding Concepts",
+    categoryType: "Destination Wedding Decoration",
     city: "Udaipur",
-    location: "Lake Pichola & Fateh Sagar",
-    priceStarting: 110000,
-    priceDisplay: "₹1,10,000",
-    experience: "8+ Years Experience",
-    badge: "Lakeside Destination",
-    image:
-      "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=80",
+    location: "Udaipur & Lake Pichola",
+    priceStarting: 180000,
+    priceDisplay: "₹1,80,000",
+    priceRange: "₹1,80,000 – ₹5,80,000",
+    experience: "10+ Years Experience",
+    rating: 4.9,
+    reviewCount: 128,
+    badge: "Lakeside Destination Specialist",
+    image: "/images/decoration/destination-wedding-decor.jpg",
     gallery: [
-      "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=80",
+      "/images/decoration/destination-wedding-decor.jpg",
+      "/images/decoration/floral-wedding-mandap.jpg",
+      "/images/decoration/outdoor-garden-wedding.jpg",
     ],
     services: [
-      "Mandap Decoration",
-      "Entrance and Welcome Gate Decoration",
-      "Floral Decoration",
-      "Haldi and Mehendi Decoration",
+      "Destination Wedding Decoration",
+      "Floating Lakeside Mandap",
+      "Heritage Palace Courtyard Decor",
+      "Vintage Boat Floral Styling",
+      "Multi-Day Event Scenography",
+    ],
+    highlights: [
+      "Floating Mandap on Lake Waters",
+      "Fort Courtyard Tikri Mirror Decor",
+      "Complete 3-Day Turnkey Logistics",
     ],
     about:
-      "Specialized in floating lakeside mandaps, boat floral decor, and vintage Rajput gazebos designed to harmoniously blend with Udaipur's royal lake panoramas.",
+      "Premier destination wedding scenographers specializing in royal Udaipur lake palaces, Rajasthan forts, and luxury coastal venues. Famous for floating mandap setups, courtyard ambient candle-lighting, and heritage royal boat styling.",
+    packageIncludes: [
+      "Floating Mandap Platform with Lake Panorama",
+      "Heritage Courtyard Mashaal & Candle Lighting",
+      "Traditional Tikri Mirror-Work Accent Pillars",
+      "Vintage Royal Welcome Boat Floral Drapery",
+      "Dedicated Destination Project Team & Technicians",
+    ],
   },
 ];
 
@@ -235,102 +333,92 @@ const CITIES = [
   "All Cities",
   "Delhi",
   "Jaipur",
+  "Udaipur",
   "Lucknow",
   "Noida",
-  "Moradabad",
-  "Agra",
   "Mumbai",
-  "Udaipur",
 ];
 
 const DECORATION_SERVICES = [
   "All Services",
-  "Wedding Stage Decoration",
-  "Mandap Decoration",
-  "Floral Decoration",
-  "Reception Decoration",
-  "Entrance and Welcome Gate Decoration",
-  "Wedding Lighting",
-  "Theme Decoration",
-  "Haldi and Mehendi Decoration",
-  "Bridal Entry Decoration",
-  "Complete Wedding Decoration Packages",
+  "Royal Wedding Stage",
+  "Floral Mandap Decoration",
+  "Luxury Entrance Decoration",
+  "Outdoor Garden Decoration",
+  "Haldi & Mehndi Decoration",
+  "Reception Stage Decoration",
+  "Destination Wedding Decoration",
 ];
 
 const BUDGET_RANGES = [
   { label: "Any Budget", value: "all" },
-  { label: "Under ₹25,000", value: "under-25k" },
-  { label: "₹25,000–₹50,000", value: "25k-50k" },
-  { label: "₹50,000–₹1,00,000", value: "50k-100k" },
-  { label: "₹1,00,000 and above", value: "above-100k" },
+  { label: "Under ₹50,000", value: "under-50k" },
+  { label: "₹50,000 – ₹1,00,000", value: "50k-100k" },
+  { label: "₹1,00,000 – ₹2,00,000", value: "100k-200k" },
+  { label: "₹2,00,000 and above", value: "above-200k" },
 ];
 
 const SORT_OPTIONS = [
   { label: "Recommended", value: "recommended" },
   { label: "Price: Low to High", value: "price-asc" },
   { label: "Price: High to Low", value: "price-desc" },
+  { label: "Highest Rated", value: "rating-desc" },
   { label: "Name: A to Z", value: "name-asc" },
 ];
 
 const INSPIRATION_GALLERY = [
   {
-    title: "Luxury Floral Mandap",
-    tag: "Mandap Decor",
-    image:
-      "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=80",
+    title: "Imperial Mughal Royal Stage",
+    tag: "Royal Stage",
+    image: "/images/decoration/royal-wedding-stage.jpg",
   },
   {
-    title: "Elegant Royal Stage",
-    tag: "Stage Decor",
-    image:
-      "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=800&q=80",
+    title: "Vedic Floral Mandap with Tuberose",
+    tag: "Floral Mandap",
+    image: "/images/decoration/floral-wedding-mandap.jpg",
   },
   {
-    title: "Grand Palace Entrance",
-    tag: "Welcome Gate",
-    image:
-      "https://images.unsplash.com/photo-1544644181-1484b3fdfc62?auto=format&fit=crop&w=800&q=80",
+    title: "Monumental Floral Entrance Arch",
+    tag: "Luxury Entrance",
+    image: "/images/decoration/luxury-wedding-entrance.jpg",
   },
   {
-    title: "Outdoor Garden Gazebo",
-    tag: "Garden Decor",
-    image:
-      "https://images.unsplash.com/photo-1520854221256-17451cc331bf?auto=format&fit=crop&w=800&q=80",
+    title: "Botanical Garden Lawn Gazebo",
+    tag: "Outdoor Garden",
+    image: "/images/decoration/outdoor-garden-wedding.jpg",
   },
   {
-    title: "Minimal Ivory & Gold Mandap",
-    tag: "Ivory & Gold",
-    image:
-      "https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=800&q=80",
+    title: "Marigold Waterfall Haldi Jhoola",
+    tag: "Haldi & Mehndi",
+    image: "/images/decoration/haldi-mehndi-decoration.jpg",
   },
   {
-    title: "Vibrant Haldi & Mehendi Setup",
-    tag: "Haldi Decor",
-    image:
-      "https://images.unsplash.com/photo-1537633552985-df8429e8048b?auto=format&fit=crop&w=800&q=80",
+    title: "Five-Star Crystal Reception Scenography",
+    tag: "Reception Stage",
+    image: "/images/decoration/reception-stage-decoration.jpg",
   },
 ];
 
 const DECORATION_FAQS = [
   {
     q: "How much does wedding decoration typically cost in India?",
-    a: "Wedding decoration pricing varies based on venue scale, fresh vs. artificial florals, lighting sophistication, and custom fabrication. Basic regional venue decor can range from ₹20,000 to ₹50,000, while bespoke luxury themes, imported flower mandaps, and comprehensive multi-day palace packages typically range from ₹1,00,000 to ₹5,00,000+.",
+    a: "Wedding decoration pricing varies based on event scale, fresh florals vs. structural fabrications, venue acreage, and custom thematic elements. Regional ceremonies typically start from ₹45,000 for haldi or intimate setups, while grand royal stages, bespoke floral mandaps, and luxury multi-day palace packages range from ₹1,50,000 to ₹5,50,000+.",
   },
   {
     q: "What is typically included in a complete wedding decoration package?",
-    a: "A full wedding package usually covers the main wedding stage with customized backdrop, sacred 4-pillar or dome mandap, floral aisle/walkway, entrance archway/welcome gate, ambient venue illumination (fairy lights, up-lights, chandeliers), table centerpieces, and seating upholstery covers.",
+    a: "A turnkey wedding package generally covers the main stage backdrop with carved pillars and upholstered furniture, sacred 4-pillar Vedic mandap with fresh floral dome, monumental entrance gateway, illuminated walkway/aisle runner, atmospheric ambient lighting (chandeliers, focus spots, fairy lights), and guest seating table centerpieces.",
   },
   {
-    q: "Can decorators create custom wedding themes based on our mood board?",
-    a: "Yes! Most professional decorators on ShubhVivah welcome couple mood boards, Pinterest boards, and personal color palettes. They will generate 2D/3D sketches or physical mockups illustrating floral choices, fabric draping textures, and prop placement prior to execution.",
+    q: "Can decorators customize themes based on our Pinterest mood boards?",
+    a: "Yes! All verified decoration studios on ShubhVivah welcome couple mood boards, color palettes, and Pinterest concepts. Decorators will provide 3D CAD renders, floral swatches, and physical fabric mockups during consultation before execution.",
   },
   {
-    q: "How early should we book a wedding decorator?",
-    a: "For prime auspicious winter dates (November to February), booking 4 to 6 months in advance is recommended. This allows adequate time to source exotic seasonal flowers, build bespoke structure frames, and secure specialty lighting equipment.",
+    q: "How early in advance should we book a wedding decorator?",
+    a: "For prime winter wedding dates (November to March), booking 3 to 6 months in advance is recommended. This ensures priority reservation for structure frames, exotic floral imports (such as Dutch roses or carnations), and specialty lighting technicians.",
   },
   {
-    q: "Do decorators provide floral, mandap, lighting, and stage decoration together?",
-    a: "Yes, verified decoration studios on ShubhVivah generally provide all-inclusive turnkey services covering floral artistry, carpenter-built stage sets, electric lighting, sound trussing, and floral bridal entry canopies (phoolon ki chadar).",
+    q: "Do decorators handle setup, maintenance during events, and dismantling?",
+    a: "Yes, every professional package includes complete on-site logistics: early morning setup, live standby technicians during the ceremony to ensure lighting and floral freshness, and prompt post-event dismantling with zero hassle to the couple or families.",
   },
 ];
 
@@ -360,7 +448,7 @@ export default function WeddingDecorationPage() {
     date: "",
     location: "",
     budget: "",
-    service: "Mandap Decoration",
+    service: "Royal Wedding Stage",
     message: "",
   });
   const [formErrors, setFormErrors] = useState({});
@@ -369,7 +457,7 @@ export default function WeddingDecorationPage() {
   // FAQ Accordion State
   const [openFaqIndex, setOpenFaqIndex] = useState(0);
 
-  // Shortlist Toggle Handler with accessible state
+  // Shortlist Toggle Handler
   const toggleShortlist = (id) => {
     setShortlistedIds((prev) =>
       prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]
@@ -395,12 +483,13 @@ export default function WeddingDecorationPage() {
   // Client-Side Filter & Sort Logic
   const filteredDecorators = useMemo(() => {
     let result = DECORATORS_DATA.filter((vendor) => {
-      // Search by decorator name, company, city, or service
+      // Search term
       if (searchTerm.trim()) {
         const query = searchTerm.toLowerCase().trim();
         const matchesName = vendor.name.toLowerCase().includes(query);
         const matchesCompany = vendor.company.toLowerCase().includes(query);
         const matchesCity = vendor.city.toLowerCase().includes(query);
+        const matchesCategory = vendor.categoryType.toLowerCase().includes(query);
         const matchesService = vendor.services.some((s) =>
           s.toLowerCase().includes(query)
         );
@@ -410,6 +499,7 @@ export default function WeddingDecorationPage() {
           !matchesName &&
           !matchesCompany &&
           !matchesCity &&
+          !matchesCategory &&
           !matchesService &&
           !matchesAbout
         ) {
@@ -422,25 +512,21 @@ export default function WeddingDecorationPage() {
         return false;
       }
 
-      // Service filter
-      if (
-        selectedService !== "All Services" &&
-        !vendor.services.includes(selectedService)
-      ) {
-        return false;
+      // Service / Category filter
+      if (selectedService !== "All Services") {
+        const matchesDirect = vendor.categoryType
+          .toLowerCase()
+          .includes(selectedService.toLowerCase());
+        const matchesServiceList = vendor.services.some((s) =>
+          s.toLowerCase().includes(selectedService.toLowerCase())
+        );
+        if (!matchesDirect && !matchesServiceList) {
+          return false;
+        }
       }
 
       // Budget filter
-      if (
-        selectedBudget === "under-25k" &&
-        vendor.priceStarting >= 25000
-      ) {
-        return false;
-      }
-      if (
-        selectedBudget === "25k-50k" &&
-        (vendor.priceStarting < 25000 || vendor.priceStarting > 50000)
-      ) {
+      if (selectedBudget === "under-50k" && vendor.priceStarting > 50000) {
         return false;
       }
       if (
@@ -450,9 +536,12 @@ export default function WeddingDecorationPage() {
         return false;
       }
       if (
-        selectedBudget === "above-100k" &&
-        vendor.priceStarting < 100000
+        selectedBudget === "100k-200k" &&
+        (vendor.priceStarting < 100000 || vendor.priceStarting > 200000)
       ) {
+        return false;
+      }
+      if (selectedBudget === "above-200k" && vendor.priceStarting < 200000) {
         return false;
       }
 
@@ -466,6 +555,9 @@ export default function WeddingDecorationPage() {
       }
       if (sortBy === "price-desc") {
         return b.priceStarting - a.priceStarting;
+      }
+      if (sortBy === "rating-desc") {
+        return b.rating - a.rating;
       }
       if (sortBy === "name-asc") {
         return a.name.localeCompare(b.name);
@@ -486,7 +578,7 @@ export default function WeddingDecorationPage() {
       errors.phone = "Please enter a valid 10-digit mobile number.";
     if (!formData.date) errors.date = "Please select your wedding date.";
     if (!formData.location.trim())
-      errors.location = "Please enter venue or event location.";
+      errors.location = "Please enter wedding venue or event location.";
 
     if (Object.keys(errors).length > 0) {
       setFormErrors(errors);
@@ -507,7 +599,7 @@ export default function WeddingDecorationPage() {
       date: "",
       location: "",
       budget: "",
-      service: "Mandap Decoration",
+      service: "Royal Wedding Stage",
       message: "",
     });
     setFormErrors({});
@@ -524,11 +616,11 @@ export default function WeddingDecorationPage() {
           className="absolute inset-0 -z-20 bg-cover bg-center bg-no-repeat"
           style={{
             backgroundImage:
-              "url('https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=2000&q=85')",
+              "url('/images/decoration/royal-wedding-stage.jpg')",
           }}
         />
 
-        {/* Dark Luxury Deep Plum Overlay */}
+        {/* Deep Plum Gradient Overlay */}
         <div className="absolute inset-0 -z-10 bg-gradient-to-b from-[#241321]/90 via-[#241321]/80 to-[#241321]" />
 
         <div className="mx-auto max-w-7xl">
@@ -537,38 +629,30 @@ export default function WeddingDecorationPage() {
             aria-label="Breadcrumb"
             className="mb-5 flex items-center gap-2 text-xs text-[#C9BBAF]"
           >
-            <Link
-              href="/"
-              className="transition-colors hover:text-[#D6B875]"
-            >
+            <Link href="/" className="transition-colors hover:text-[#D6B875]">
               Home
             </Link>
             <ChevronRight size={13} className="text-[#665038]" />
-            <Link
-              href="/vendors"
-              className="transition-colors hover:text-[#D6B875]"
-            >
-              Wedding Vendors
-            </Link>
+            <span className="text-[#C9BBAF]">Wedding Vendors</span>
             <ChevronRight size={13} className="text-[#665038]" />
-            <span className="font-semibold text-[#D6B875]">Decoration</span>
+            <span className="font-semibold text-[#D6B875]">Wedding Decoration</span>
           </nav>
 
           <div className="max-w-3xl">
             <span className="inline-block rounded-full border border-[#665038] bg-[#321B30] px-3.5 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-[#D6B875]">
-              Royal Wedding Scenography
+              Bespoke Wedding Scenography &amp; Sets
             </span>
 
             <h1 className="mt-3 font-serif text-3xl font-bold tracking-tight text-[#F8F1E5] sm:text-4xl lg:text-5xl">
-              Find the Perfect Wedding Decorators
+              Wedding Decoration Services
             </h1>
 
             <div className="my-4 h-[2px] w-24 bg-gradient-to-r from-[#B08D45] via-[#D6B875] to-transparent" />
 
             <p className="text-sm leading-relaxed text-[#C9BBAF] sm:text-base">
-              Discover talented wedding decorators who bring your dream celebration
-              to life with beautiful floral arrangements, stunning mandaps, elegant stages,
-              and personalized themes.
+              Explore India&apos;s leading wedding decoration studios specializing in
+              royal stages, divine floral mandaps, grand entrance gates, fairytale garden lawns,
+              vibrant haldi canopies, luxury reception setups, and picturesque destination weddings.
             </p>
           </div>
 
@@ -581,7 +665,7 @@ export default function WeddingDecorationPage() {
                   type="text"
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  placeholder="Search decorator or company..."
+                  placeholder="Search decoration service or studio..."
                   className="w-full rounded-xl border border-[#665038] bg-[#241321] py-2.5 pl-10 pr-3 text-xs text-[#F8F1E5] placeholder-[#C9BBAF]/50 outline-none transition-colors focus:border-[#B08D45] sm:text-sm"
                 />
                 <Search
@@ -617,7 +701,7 @@ export default function WeddingDecorationPage() {
               <button
                 type="button"
                 onClick={() => {}}
-                className="flex items-center justify-center gap-1.5 rounded-xl bg-[#B08D45] px-6 py-2.5 text-xs font-semibold text-[#241321] transition-all hover:bg-[#D6B875] sm:text-sm"
+                className="flex items-center justify-center gap-1.5 rounded-xl bg-gradient-to-r from-[#B08D45] to-[#D6B875] px-6 py-2.5 text-xs font-semibold text-[#241321] shadow-md transition-all hover:brightness-105 sm:text-sm"
               >
                 <Sparkles size={15} />
                 Find Decorators
@@ -711,9 +795,9 @@ export default function WeddingDecorationPage() {
                 {/* Filter 2: Decoration Services */}
                 <div className="border-t border-[#665038]/40 pt-4">
                   <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-[#E8D9B5]">
-                    Decoration Services
+                    Decoration Service Type
                   </label>
-                  <div className="max-h-56 space-y-1.5 overflow-y-auto pr-1">
+                  <div className="space-y-1.5">
                     {DECORATION_SERVICES.map((serv) => (
                       <label
                         key={serv}
@@ -737,7 +821,7 @@ export default function WeddingDecorationPage() {
                 {/* Filter 3: Budget Range */}
                 <div className="border-t border-[#665038]/40 pt-4">
                   <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-[#E8D9B5]">
-                    Budget per Function
+                    Budget per Event
                   </label>
                   <div className="space-y-1.5">
                     {BUDGET_RANGES.map((b) => (
@@ -775,14 +859,14 @@ export default function WeddingDecorationPage() {
             </aside>
 
             {/* -------------------------------------------------------------
-                B. RESULTS & VENDOR CARDS
+                B. RESULTS & VENDOR CARDS (WeddingKalki Inspired Layout)
                ------------------------------------------------------------- */}
             <div>
               {/* Header Bar */}
               <div className="mb-6 flex flex-col justify-between gap-4 rounded-xl border border-[#665038]/40 bg-[#321B30] p-4 sm:flex-row sm:items-center">
                 <div>
                   <h2 className="font-serif text-xl font-bold text-[#F8F1E5]">
-                    Wedding Decoration Services
+                    Available Wedding Decorators
                   </h2>
                   <p className="text-xs text-[#C9BBAF]">
                     Showing {filteredDecorators.length}{" "}
@@ -807,7 +891,7 @@ export default function WeddingDecorationPage() {
                   {/* Sorting */}
                   <div className="flex items-center gap-2 text-xs">
                     <label htmlFor="sort-decor" className="text-[#C9BBAF]">
-                      Sort:
+                      Sort by:
                     </label>
                     <select
                       id="sort-decor"
@@ -836,19 +920,19 @@ export default function WeddingDecorationPage() {
                   </h3>
                   <p className="mx-auto mt-2 max-w-md text-xs leading-relaxed text-[#C9BBAF]">
                     We couldn&apos;t find any wedding decorators matching your selected
-                    city, service, or budget range.
+                    city, service type, or budget. Try resetting your filters.
                   </p>
                   <button
                     type="button"
                     onClick={handleClearFilters}
-                    className="mt-6 inline-flex items-center gap-2 rounded-full bg-[#B08D45] px-6 py-2.5 text-xs font-semibold text-[#241321] transition-all hover:bg-[#D6B875]"
+                    className="mt-6 inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#B08D45] to-[#D6B875] px-6 py-2.5 text-xs font-semibold text-[#241321] transition-all hover:brightness-105"
                   >
                     <RotateCcw size={14} />
-                    Clear All Filters
+                    Reset All Filters
                   </button>
                 </div>
               ) : (
-                /* Cards Grid (3 Columns on Large Screens) */
+                /* Cards Grid: 1 col on mobile, 2 cols on tablet, 3 cols on desktop */
                 <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
                   {filteredDecorators.map((vendor) => {
                     const isShortlisted = shortlistedIds.includes(vendor.id);
@@ -856,27 +940,28 @@ export default function WeddingDecorationPage() {
                     return (
                       <article
                         key={vendor.id}
-                        className="group flex flex-col justify-between overflow-hidden rounded-2xl border border-[#665038] bg-[#3A2638] shadow-lg transition-all duration-300 hover:-translate-y-1 hover:border-[#B08D45] hover:shadow-2xl hover:shadow-black/60"
+                        className="group flex flex-col justify-between overflow-hidden rounded-2xl border border-[#665038] bg-[#3A2638] shadow-lg transition-all duration-300 hover:-translate-y-1.5 hover:border-[#D6B875] hover:shadow-2xl hover:shadow-black/70"
                       >
                         <div>
-                          {/* Image Thumbnail with Overlay & Badges */}
-                          <div className="relative h-56 w-full overflow-hidden">
+                          {/* Image Thumbnail with Overlay, Badges, and Price Pill */}
+                          <div className="relative h-60 w-full overflow-hidden bg-[#241321]">
                             <img
                               src={vendor.image}
-                              alt={`${vendor.name} wedding decoration`}
-                              className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                              alt={`${vendor.name} - ${vendor.categoryType}`}
+                              className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                               loading="lazy"
                             />
-                            <div className="absolute inset-0 bg-gradient-to-t from-[#241321] via-transparent to-transparent opacity-80" />
+                            {/* Gradient Overlay for Text Readability */}
+                            <div className="absolute inset-0 bg-gradient-to-t from-[#241321] via-transparent to-black/40" />
 
-                            {/* Badge */}
+                            {/* Top Left: Category Service Tag */}
                             <div className="absolute left-3 top-3">
-                              <span className="rounded-full border border-[#B08D45]/40 bg-[#241321]/85 px-3 py-1 text-[10px] font-semibold text-[#E8D9B5] backdrop-blur-xs">
-                                {vendor.badge}
+                              <span className="rounded-full border border-[#D6B875]/40 bg-[#241321]/90 px-3 py-1 text-[10px] font-semibold tracking-wide text-[#E8D9B5] backdrop-blur-md">
+                                {vendor.categoryType}
                               </span>
                             </div>
 
-                            {/* Shortlist Heart Button */}
+                            {/* Top Right: Shortlist Button */}
                             <button
                               type="button"
                               onClick={() => toggleShortlist(vendor.id)}
@@ -886,50 +971,68 @@ export default function WeddingDecorationPage() {
                                   ? `Remove ${vendor.name} from shortlist`
                                   : `Shortlist ${vendor.name}`
                               }
-                              className="absolute right-3 top-3 flex h-9 w-9 items-center justify-center rounded-full border border-[#665038] bg-[#241321]/80 text-[#F8F1E5] backdrop-blur-xs transition-colors hover:border-[#B08D45]"
+                              className={`absolute right-3 top-3 flex h-9 w-9 items-center justify-center rounded-full border backdrop-blur-md transition-all ${
+                                isShortlisted
+                                  ? "border-[#D6B875] bg-[#241321] text-[#D6B875] shadow-lg shadow-[#D6B875]/20"
+                                  : "border-[#665038] bg-[#241321]/80 text-[#F8F1E5] hover:border-[#D6B875] hover:text-[#D6B875]"
+                              }`}
                             >
                               <Heart
-                                size={16}
+                                size={15}
                                 className={
                                   isShortlisted
-                                    ? "fill-[#B08D45] text-[#B08D45]"
+                                    ? "fill-[#D6B875] text-[#D6B875]"
                                     : "text-[#F8F1E5]"
                                 }
                               />
                             </button>
 
-                            {/* Experience Tag bottom right */}
-                            <div className="absolute bottom-3 right-3 rounded-md bg-[#241321]/90 px-2 py-0.5 text-[10px] font-medium text-[#C9BBAF]">
-                              {vendor.experience}
+                            {/* Bottom: Price Range Banner */}
+                            <div className="absolute bottom-2.5 left-3 right-3 flex items-center justify-between">
+                              <span className="rounded-lg border border-[#665038] bg-[#241321]/95 px-2.5 py-1 text-[11px] font-bold text-[#F8F1E5] backdrop-blur-md">
+                                Package: <span className="text-[#D6B875]">{vendor.priceRange}</span>
+                              </span>
+                              <span className="flex items-center gap-1 rounded-lg bg-[#241321]/90 px-2 py-1 text-[11px] font-semibold text-[#D6B875] backdrop-blur-md">
+                                <Star size={12} className="fill-[#D6B875] text-[#D6B875]" />
+                                {vendor.rating}
+                              </span>
                             </div>
                           </div>
 
-                          {/* Card Information */}
+                          {/* Card Information Body */}
                           <div className="p-5">
-                            {/* Location */}
+                            {/* Location & Experience Line */}
                             <div className="flex items-center justify-between text-xs text-[#C9BBAF]">
                               <span className="flex items-center gap-1">
                                 <MapPin size={13} className="text-[#B08D45]" />
                                 {vendor.location}
                               </span>
+                              <span className="text-[11px] text-[#D6B875] font-medium">
+                                {vendor.experience}
+                              </span>
                             </div>
 
-                            {/* Decorator Name */}
+                            {/* Decorator Vendor Name */}
                             <h3 className="mt-2.5 font-serif text-lg font-bold text-[#F8F1E5] transition-colors group-hover:text-[#D6B875]">
                               {vendor.name}
                             </h3>
 
+                            {/* Speciality Badge Line */}
+                            <p className="mt-0.5 text-xs text-[#E8D9B5]/80 font-medium truncate">
+                              {vendor.badge} • {vendor.company}
+                            </p>
+
                             {/* Short Description */}
-                            <p className="mt-2 line-clamp-2 text-xs leading-relaxed text-[#C9BBAF]">
+                            <p className="mt-2.5 line-clamp-2 text-xs leading-relaxed text-[#C9BBAF]">
                               {vendor.about}
                             </p>
 
-                            {/* Service Badges */}
-                            <div className="mt-3.5 flex flex-wrap gap-1">
+                            {/* Key Service Feature Badges */}
+                            <div className="mt-3.5 flex flex-wrap gap-1.5">
                               {vendor.services.slice(0, 3).map((serv) => (
                                 <span
                                   key={serv}
-                                  className="rounded-md border border-[#665038]/40 bg-[#321B30] px-2 py-0.5 text-[10px] text-[#E8D9B5]"
+                                  className="rounded-md border border-[#665038]/50 bg-[#321B30] px-2 py-0.5 text-[10px] text-[#E8D9B5]"
                                 >
                                   {serv}
                                 </span>
@@ -941,12 +1044,12 @@ export default function WeddingDecorationPage() {
                               )}
                             </div>
 
-                            {/* Pricing */}
-                            <div className="mt-5 flex items-baseline justify-between border-t border-[#665038]/40 pt-3">
+                            {/* Starting Price Row */}
+                            <div className="mt-4 flex items-baseline justify-between border-t border-[#665038]/40 pt-3">
                               <span className="text-xs text-[#C9BBAF]">
-                                Starting Package:
+                                Starting Price:
                               </span>
-                              <span className="font-serif text-lg font-bold text-[#D6B875]">
+                              <span className="font-serif text-base font-bold text-[#D6B875]">
                                 {vendor.priceDisplay}{" "}
                                 <span className="text-xs font-normal text-[#C9BBAF]">
                                   onwards
@@ -956,23 +1059,24 @@ export default function WeddingDecorationPage() {
                           </div>
                         </div>
 
-                        {/* Action Buttons */}
+                        {/* Action Buttons (View Details + Send Enquiry) */}
                         <div className="grid grid-cols-2 gap-2 p-5 pt-0">
                           <button
                             type="button"
                             onClick={() => setDetailsModalVendor(vendor)}
-                            className="flex items-center justify-center gap-1 rounded-xl border border-[#B08D45] bg-[#321B30] py-2.5 text-xs font-medium text-[#F8F1E5] transition-all hover:bg-[#241321] hover:text-[#D6B875]"
+                            className="flex items-center justify-center gap-1.5 rounded-xl border border-[#B08D45] bg-[#321B30] py-2.5 text-xs font-semibold text-[#F8F1E5] transition-all hover:bg-[#241321] hover:text-[#D6B875]"
                           >
-                            <ExternalLink size={13} />
-                            View Details
+                            <Eye size={14} className="text-[#D6B875]" />
+                            <span>View Details</span>
                           </button>
 
                           <button
                             type="button"
                             onClick={() => setEnquiryModalVendor(vendor)}
-                            className="flex items-center justify-center gap-1 rounded-xl bg-[#B08D45] py-2.5 text-xs font-semibold text-[#241321] transition-all hover:bg-[#D6B875]"
+                            className="flex items-center justify-center gap-1.5 rounded-xl bg-gradient-to-r from-[#B08D45] to-[#D6B875] py-2.5 text-xs font-semibold text-[#241321] shadow-md transition-all hover:brightness-105"
                           >
-                            Send Enquiry
+                            <Send size={13} />
+                            <span>Send Enquiry</span>
                           </button>
                         </div>
                       </article>
@@ -998,8 +1102,8 @@ export default function WeddingDecorationPage() {
               Wedding Decoration Inspiration
             </h2>
             <p className="mx-auto mt-2 max-w-xl text-xs text-[#C9BBAF] sm:text-sm">
-              Explore magnificent wedding mandaps, entrance walkways, haldi canopies,
-              and reception stages crafted by master scenographers.
+              Discover magnificent royal stages, floral mandaps, grand entrance gates,
+              garden setups, haldi backdrops, and reception productions.
             </p>
           </div>
 
@@ -1007,9 +1111,9 @@ export default function WeddingDecorationPage() {
             {INSPIRATION_GALLERY.map((item, idx) => (
               <div
                 key={idx}
-                className="group relative overflow-hidden rounded-2xl border border-[#665038] bg-[#3A2638] shadow-md"
+                className="group relative overflow-hidden rounded-2xl border border-[#665038] bg-[#3A2638] shadow-md transition-all duration-300 hover:border-[#D6B875] hover:-translate-y-1"
               >
-                <div className="relative h-64 w-full overflow-hidden">
+                <div className="relative h-64 w-full overflow-hidden bg-[#241321]">
                   <img
                     src={item.image}
                     alt={item.title}
@@ -1046,7 +1150,7 @@ export default function WeddingDecorationPage() {
               Frequently Asked Questions About Wedding Decoration
             </h2>
             <p className="mt-2 text-xs text-[#C9BBAF] sm:text-sm">
-              Helpful insights on budgets, custom theme fabrication, and booking timelines.
+              Helpful insights on package costs, custom theme fabrication, and booking timelines.
             </p>
           </div>
 
@@ -1101,14 +1205,14 @@ export default function WeddingDecorationPage() {
           </h2>
 
           <p className="mx-auto mt-3 max-w-xl text-xs leading-relaxed text-[#C9BBAF] sm:text-sm">
-            Showcase your creativity and connect with couples planning their dream wedding
-            on ShubhVivah. Direct customer leads, zero platform commission.
+            Showcase your artistry and connect with couples planning their dream wedding
+            on ShubhVivah. Direct customer enquiries, verified vendor badge, zero commission.
           </p>
 
           <div className="mt-7 flex flex-wrap items-center justify-center gap-4">
             <Link
-              href="/vendors/register"
-              className="inline-flex items-center gap-2 rounded-full bg-[#B08D45] px-7 py-3 text-xs font-semibold text-[#241321] shadow-lg transition-all hover:bg-[#D6B875]"
+              href="/contact"
+              className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#B08D45] to-[#D6B875] px-7 py-3 text-xs font-semibold text-[#241321] shadow-lg transition-all hover:brightness-105"
             >
               <span>List Your Business</span>
               <ArrowRight size={15} />
@@ -1125,7 +1229,7 @@ export default function WeddingDecorationPage() {
       </section>
 
       {/* =========================================================================
-          VENDOR DETAILS MODAL
+          VENDOR DETAILS MODAL (Opens on "View Details")
          ========================================================================= */}
       {detailsModalVendor && (
         <div
@@ -1133,7 +1237,7 @@ export default function WeddingDecorationPage() {
           aria-modal="true"
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 backdrop-blur-sm"
         >
-          <div className="relative max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-2xl border border-[#665038] bg-[#321B30] p-6 shadow-2xl sm:p-8">
+          <div className="relative max-h-[90vh] w-full max-w-3xl overflow-y-auto rounded-2xl border border-[#665038] bg-[#321B30] p-6 shadow-2xl sm:p-8">
             <button
               type="button"
               onClick={() => setDetailsModalVendor(null)}
@@ -1144,45 +1248,109 @@ export default function WeddingDecorationPage() {
             </button>
 
             <div>
-              <span className="text-xs font-semibold uppercase tracking-wider text-[#D6B875]">
-                Decoration Studio Profile
-              </span>
-              <h3 className="mt-1 font-serif text-2xl font-bold text-[#F8F1E5]">
+              <div className="flex flex-wrap items-center gap-2">
+                <span className="rounded-full border border-[#D6B875]/40 bg-[#241321] px-3 py-0.5 text-[11px] font-semibold uppercase tracking-wider text-[#D6B875]">
+                  {detailsModalVendor.categoryType}
+                </span>
+                <span className="flex items-center gap-1 text-xs text-[#D6B875]">
+                  <Star size={13} className="fill-[#D6B875]" />
+                  {detailsModalVendor.rating} ({detailsModalVendor.reviewCount} Reviews)
+                </span>
+              </div>
+
+              <h3 className="mt-2 font-serif text-2xl font-bold text-[#F8F1E5] sm:text-3xl">
                 {detailsModalVendor.name}
               </h3>
               <p className="text-xs text-[#C9BBAF]">
-                {detailsModalVendor.location} • {detailsModalVendor.experience}
+                {detailsModalVendor.location} • {detailsModalVendor.experience} • {detailsModalVendor.company}
               </p>
 
+              {/* Price Range Banner in Modal */}
+              <div className="mt-4 flex flex-wrap items-center justify-between gap-3 rounded-xl border border-[#665038]/60 bg-[#241321] p-3.5">
+                <div>
+                  <span className="text-[11px] uppercase tracking-wider text-[#C9BBAF]">
+                    Price Range
+                  </span>
+                  <p className="font-serif text-lg font-bold text-[#D6B875]">
+                    {detailsModalVendor.priceRange}
+                  </p>
+                </div>
+                <div className="text-right">
+                  <span className="text-[11px] uppercase tracking-wider text-[#C9BBAF]">
+                    Starting Package
+                  </span>
+                  <p className="font-serif text-lg font-bold text-[#F8F1E5]">
+                    {detailsModalVendor.priceDisplay}{" "}
+                    <span className="text-xs font-normal text-[#C9BBAF]">onwards</span>
+                  </p>
+                </div>
+              </div>
+
               {/* Gallery Grid */}
-              <div className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-2">
-                {detailsModalVendor.gallery.map((imgUrl, i) => (
-                  <div
-                    key={i}
-                    className="overflow-hidden rounded-xl border border-[#665038]/50"
-                  >
-                    <img
-                      src={imgUrl}
-                      alt={`${detailsModalVendor.name} decor sample ${i + 1}`}
-                      className="h-44 w-full object-cover transition-transform duration-500 hover:scale-105"
-                      loading="lazy"
-                    />
-                  </div>
-                ))}
+              <div className="mt-5">
+                <h4 className="mb-2.5 font-serif text-sm font-bold text-[#F8F1E5]">
+                  Portfolio Samples
+                </h4>
+                <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
+                  {detailsModalVendor.gallery.map((imgUrl, i) => (
+                    <div
+                      key={i}
+                      className="overflow-hidden rounded-xl border border-[#665038]/50 bg-[#241321]"
+                    >
+                      <img
+                        src={imgUrl}
+                        alt={`${detailsModalVendor.name} sample ${i + 1}`}
+                        className="h-40 w-full object-cover transition-transform duration-500 hover:scale-105"
+                        loading="lazy"
+                      />
+                    </div>
+                  ))}
+                </div>
               </div>
 
               {/* About description */}
               <div className="mt-5 rounded-xl border border-[#665038]/50 bg-[#241321] p-4 text-xs leading-relaxed text-[#C9BBAF]">
                 <h4 className="mb-1 font-serif text-sm font-bold text-[#F8F1E5]">
-                  About the Studio
+                  About this Decoration Service
                 </h4>
                 {detailsModalVendor.about}
               </div>
 
-              {/* Service Badges */}
-              <div className="mt-4">
-                <h4 className="mb-2 text-xs font-semibold text-[#E8D9B5]">
-                  Decoration Services Offered:
+              {/* Highlights & Inclusions */}
+              <div className="mt-5 grid grid-cols-1 gap-4 sm:grid-cols-2">
+                <div className="rounded-xl border border-[#665038]/40 bg-[#241321] p-4">
+                  <h4 className="mb-2 text-xs font-semibold uppercase tracking-wider text-[#E8D9B5]">
+                    Key Highlights:
+                  </h4>
+                  <ul className="space-y-1.5 text-xs text-[#C9BBAF]">
+                    {detailsModalVendor.highlights.map((h, i) => (
+                      <li key={i} className="flex items-center gap-2">
+                        <CheckCircle2 size={13} className="shrink-0 text-[#D6B875]" />
+                        <span>{h}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div className="rounded-xl border border-[#665038]/40 bg-[#241321] p-4">
+                  <h4 className="mb-2 text-xs font-semibold uppercase tracking-wider text-[#E8D9B5]">
+                    Package Inclusions:
+                  </h4>
+                  <ul className="space-y-1.5 text-xs text-[#C9BBAF]">
+                    {detailsModalVendor.packageIncludes.map((inc, i) => (
+                      <li key={i} className="flex items-center gap-2">
+                        <CheckCircle2 size={13} className="shrink-0 text-[#D6B875]" />
+                        <span>{inc}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+
+              {/* Services Offered Badges */}
+              <div className="mt-5">
+                <h4 className="mb-2 text-xs font-semibold uppercase tracking-wider text-[#E8D9B5]">
+                  Services Covered:
                 </h4>
                 <div className="flex flex-wrap gap-2">
                   {detailsModalVendor.services.map((s) => (
@@ -1199,10 +1367,8 @@ export default function WeddingDecorationPage() {
               {/* Bottom modal actions */}
               <div className="mt-6 flex items-center justify-between border-t border-[#665038]/50 pt-4">
                 <div>
-                  <span className="text-xs text-[#C9BBAF]">Package starts at:</span>
-                  <p className="font-serif text-lg font-bold text-[#D6B875]">
-                    {detailsModalVendor.priceDisplay} onwards
-                  </p>
+                  <span className="text-xs text-[#C9BBAF]">Direct Vendor Booking</span>
+                  <p className="text-xs text-[#D6B875]">No commission fees charged</p>
                 </div>
 
                 <button
@@ -1212,9 +1378,10 @@ export default function WeddingDecorationPage() {
                     setDetailsModalVendor(null);
                     setEnquiryModalVendor(v);
                   }}
-                  className="rounded-full bg-[#B08D45] px-6 py-2.5 text-xs font-semibold text-[#241321] transition-all hover:bg-[#D6B875]"
+                  className="flex items-center gap-1.5 rounded-full bg-gradient-to-r from-[#B08D45] to-[#D6B875] px-7 py-2.5 text-xs font-semibold text-[#241321] shadow-md transition-all hover:brightness-105"
                 >
-                  Send Enquiry
+                  <Send size={13} />
+                  <span>Send Enquiry Now</span>
                 </button>
               </div>
             </div>
@@ -1247,30 +1414,30 @@ export default function WeddingDecorationPage() {
                   <CheckCircle2 size={32} />
                 </div>
                 <h3 className="mt-4 font-serif text-2xl font-bold text-[#F8F1E5]">
-                  Enquiry Prepared
+                  Enquiry Sent Successfully
                 </h3>
                 <p className="mx-auto mt-2 max-w-sm text-xs leading-relaxed text-[#C9BBAF]">
-                  Thank you, <strong className="text-[#F8F1E5]">{formData.name}</strong>. Your enquiry details for{" "}
-                  <strong className="text-[#D6B875]">{enquiryModalVendor.name}</strong> have been recorded in this demo UI.
+                  Thank you, <strong className="text-[#F8F1E5]">{formData.name}</strong>. Your decoration requirements for{" "}
+                  <strong className="text-[#D6B875]">{enquiryModalVendor.name}</strong> have been recorded.
                 </p>
                 <div className="mt-4 rounded-xl border border-[#665038]/60 bg-[#241321] p-3 text-left text-xs text-[#C9BBAF]">
                   <p>
                     <span className="font-semibold text-[#E8D9B5]">Date:</span> {formData.date}
                   </p>
                   <p className="mt-1">
-                    <span className="font-semibold text-[#E8D9B5]">Location:</span> {formData.location}
+                    <span className="font-semibold text-[#E8D9B5]">Venue / Location:</span> {formData.location}
                   </p>
                   <p className="mt-1">
-                    <span className="font-semibold text-[#E8D9B5]">Service:</span> {formData.service}
+                    <span className="font-semibold text-[#E8D9B5]">Decoration Service:</span> {formData.service}
                   </p>
                   <p className="mt-1">
-                    <span className="font-semibold text-[#E8D9B5]">Budget:</span> {formData.budget || "Flexible"}
+                    <span className="font-semibold text-[#E8D9B5]">Budget Range:</span> {formData.budget || enquiryModalVendor.priceRange}
                   </p>
                 </div>
                 <button
                   type="button"
                   onClick={closeEnquiryModal}
-                  className="mt-6 rounded-full bg-[#B08D45] px-6 py-2 text-xs font-semibold text-[#241321] transition-all hover:bg-[#D6B875]"
+                  className="mt-6 rounded-full bg-gradient-to-r from-[#B08D45] to-[#D6B875] px-6 py-2 text-xs font-semibold text-[#241321] transition-all hover:brightness-105"
                 >
                   Close Window
                 </button>
@@ -1284,9 +1451,9 @@ export default function WeddingDecorationPage() {
                   {enquiryModalVendor.name}
                 </h3>
                 <p className="mt-1 text-xs text-[#C9BBAF]">
-                  {enquiryModalVendor.location} • Starting from{" "}
+                  {enquiryModalVendor.location} • Price:{" "}
                   <span className="font-semibold text-[#D6B875]">
-                    {enquiryModalVendor.priceDisplay}
+                    {enquiryModalVendor.priceRange}
                   </span>
                 </p>
 
@@ -1389,7 +1556,7 @@ export default function WeddingDecorationPage() {
                         htmlFor="decor-enquiry-location"
                         className="block text-xs font-medium text-[#E8D9B5]"
                       >
-                        Venue or Event Location *
+                        Venue or Event City *
                       </label>
                       <input
                         id="decor-enquiry-location"
@@ -1415,7 +1582,7 @@ export default function WeddingDecorationPage() {
                         htmlFor="decor-enquiry-service"
                         className="block text-xs font-medium text-[#E8D9B5]"
                       >
-                        Decoration Service Required
+                        Decoration Requirement
                       </label>
                       <select
                         id="decor-enquiry-service"
@@ -1425,11 +1592,13 @@ export default function WeddingDecorationPage() {
                         }
                         className="mt-1 w-full cursor-pointer rounded-xl border border-[#665038] bg-[#241321] px-3 py-2 text-xs text-[#F8F1E5] outline-none focus:border-[#B08D45]"
                       >
-                        <option value="Mandap Decoration">Mandap Decoration</option>
-                        <option value="Wedding Stage Decoration">Wedding Stage</option>
-                        <option value="Floral Decoration">Floral Decoration</option>
-                        <option value="Haldi and Mehendi Decoration">Haldi &amp; Mehendi</option>
-                        <option value="Complete Wedding Decoration Packages">Complete Package</option>
+                        <option value="Royal Wedding Stage">Royal Wedding Stage</option>
+                        <option value="Floral Mandap Decoration">Floral Mandap</option>
+                        <option value="Luxury Entrance Decoration">Luxury Entrance Arch</option>
+                        <option value="Outdoor Garden Decoration">Outdoor Garden Lawn</option>
+                        <option value="Haldi & Mehndi Decoration">Haldi &amp; Mehndi Setup</option>
+                        <option value="Reception Stage Decoration">Reception Stage</option>
+                        <option value="Destination Wedding Decoration">Destination Wedding</option>
                       </select>
                     </div>
 
@@ -1450,9 +1619,10 @@ export default function WeddingDecorationPage() {
                       >
                         <option value="">Select Range</option>
                         <option value="Under ₹50,000">Under ₹50,000</option>
-                        <option value="₹50,000–₹1,00,000">₹50,000–₹1,00,000</option>
-                        <option value="₹1,00,000–₹2,50,000">₹1,00,000–₹2,50,000</option>
-                        <option value="Above ₹2,50,000">Above ₹2,50,000</option>
+                        <option value="₹50,000 – ₹1,00,000">₹50,000 – ₹1,00,000</option>
+                        <option value="₹1,00,000 – ₹2,50,000">₹1,00,000 – ₹2,50,000</option>
+                        <option value="₹2,50,000 – ₹5,00,000">₹2,50,000 – ₹5,00,000</option>
+                        <option value="Above ₹5,00,000">Above ₹5,00,000</option>
                       </select>
                     </div>
                   </div>
@@ -1462,7 +1632,7 @@ export default function WeddingDecorationPage() {
                       htmlFor="decor-enquiry-message"
                       className="block text-xs font-medium text-[#E8D9B5]"
                     >
-                      Additional Notes or Ideas
+                      Special Themes, Colors, or Floral Ideas
                     </label>
                     <textarea
                       id="decor-enquiry-message"
@@ -1471,7 +1641,7 @@ export default function WeddingDecorationPage() {
                       onChange={(e) =>
                         setFormData({ ...formData, message: e.target.value })
                       }
-                      placeholder="Share your color palette, indoor/outdoor preferences, or specific ideas..."
+                      placeholder="Share your color palette, indoor vs. outdoor preference, or specific setup ideas..."
                       className="mt-1 w-full rounded-xl border border-[#665038] bg-[#241321] px-3.5 py-2 text-xs text-[#F8F1E5] placeholder-[#C9BBAF]/50 outline-none focus:border-[#B08D45]"
                     />
                   </div>
@@ -1479,7 +1649,7 @@ export default function WeddingDecorationPage() {
                   <div className="pt-2">
                     <button
                       type="submit"
-                      className="w-full rounded-full bg-[#B08D45] py-2.5 text-xs font-semibold text-[#241321] transition-all hover:bg-[#D6B875]"
+                      className="w-full rounded-full bg-gradient-to-r from-[#B08D45] to-[#D6B875] py-2.5 text-xs font-semibold text-[#241321] shadow-md transition-all hover:brightness-105"
                     >
                       Submit Decoration Enquiry
                     </button>

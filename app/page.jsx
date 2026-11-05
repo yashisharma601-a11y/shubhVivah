@@ -22,6 +22,8 @@ const weddingServices = [
     icon: MapPin,
     href: "/venues",
     tag: "3,200+ Venues",
+    image:
+      "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1000&q=85",
   },
   {
     title: "Candid Photography",
@@ -30,6 +32,8 @@ const weddingServices = [
     icon: Camera,
     href: "/wedding-vendors/wedding-photography",
     tag: "Verified Portfolios",
+    image:
+      "https://images.unsplash.com/photo-1606800052052-a08af7148866?auto=format&fit=crop&w=1000&q=85",
   },
   {
     title: "Bridal Makeup & Hair",
@@ -38,6 +42,8 @@ const weddingServices = [
     icon: Sparkles,
     href: "/wedding-vendors/bridal-makeup-artist",
     tag: "Celebrity Artists",
+    image:
+      "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?auto=format&fit=crop&w=1000&q=85",
   },
   {
     title: "Mandap & Floral Decor",
@@ -46,22 +52,28 @@ const weddingServices = [
     icon: Flower2,
     href: "/wedding-vendors/decoration",
     tag: "Custom Themes",
+    image:
+      "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1000&q=85",
   },
   {
     title: "Wedding Planners",
     description:
       "End-to-end luxury wedding coordination, guest hospitality, vendor management, and seamless execution.",
     icon: CalendarDays,
-    href: "/vendors/wedding-planners",
+    href: "/wedding-vendors/wedding-planner",
     tag: "Full Coordination",
+    image:
+      "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=1000&q=85",
   },
   {
     title: "Bridal & Groom Couture",
     description:
       "Discover bespoke bridal lehengas, royal sherwanis, heritage jewelry, and curated trousseau stylists.",
     icon: Shirt,
-    href: "/vendors/bridal-wear",
+    href: "/wedding-vendors/bridal-groom-wear",
     tag: "Designer Trousseau",
+    image:
+      "https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=1000&q=85",
   },
 ];
 
@@ -155,7 +167,7 @@ export default function HomePage() {
           </div>
 
           {/* Service Cards Grid (6 Services) */}
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 sm:gap-8">
             {weddingServices.map((service) => {
               const Icon = service.icon;
 
@@ -163,35 +175,59 @@ export default function HomePage() {
                 <Link
                   href={service.href}
                   key={service.title}
-                  className="group relative flex flex-col justify-between rounded-2xl border border-[#665038]/60 bg-[#3A2638]/70 p-7 shadow-lg shadow-black/30 transition-all duration-300 hover:-translate-y-1 hover:border-[#B08D45] hover:bg-[#3A2638]"
+                  className="group relative flex flex-col justify-between rounded-3xl border border-[#B08D45]/30 bg-[#1F0E1D] overflow-hidden shadow-xl shadow-black/40 transition-all duration-300 hover:-translate-y-1.5 hover:border-[#D6B875] hover:shadow-[0_12px_35px_rgba(176,141,69,0.22)] h-full cursor-pointer"
                 >
-                  <div>
-                    {/* Top Tag & Icon */}
-                    <div className="mb-6 flex items-center justify-between">
-                      <div className="flex h-13 w-13 items-center justify-center rounded-xl border border-[#665038] bg-[#241321] text-[#B08D45] transition-colors group-hover:border-[#B08D45] group-hover:bg-[#B08D45] group-hover:text-[#241321]">
-                        <Icon size={24} strokeWidth={1.8} />
+                  {/* Top Image Banner with Royal Dark Gradient Overlay */}
+                  <div className="relative h-60 w-full overflow-hidden bg-[#241321]">
+                    <img
+                      src={service.image}
+                      alt={service.title}
+                      className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+                    />
+                    {/* Dark Plum Gradient Overlays for optimal readability & royal luxury */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#1F0E1D] via-[#1F0E1D]/50 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-transparent opacity-80" />
+
+                    {/* Top Floating Badges */}
+                    <div className="absolute top-4 inset-x-4 flex items-center justify-between pointer-events-none">
+                      {/* Golden Icon Badge */}
+                      <div className="flex h-11 w-11 items-center justify-center rounded-2xl border border-[#B08D45]/60 bg-[#1F0E1D]/85 text-[#E5C583] shadow-md backdrop-blur-md transition-all duration-300 group-hover:border-[#D6B875] group-hover:bg-[#B08D45] group-hover:text-[#1F0E1D] group-hover:scale-105">
+                        <Icon size={20} strokeWidth={2} />
                       </div>
 
-                      <span className="rounded-full border border-[#665038]/40 bg-[#321B30] px-3 py-1 text-[11px] font-medium text-[#E8D9B5]">
+                      {/* Category Tag Pill */}
+                      <span className="rounded-full border border-[#B08D45]/40 bg-[#1F0E1D]/85 px-3.5 py-1 text-[11px] font-semibold tracking-wider text-[#E8D9B5] backdrop-blur-md shadow-sm">
                         {service.tag}
                       </span>
                     </div>
-
-                    <h3 className="font-serif text-xl font-bold text-[#F8F1E5] transition-colors group-hover:text-[#D6B875]">
-                      {service.title}
-                    </h3>
-
-                    <p className="mt-3 text-sm leading-relaxed text-[#C9BBAF]">
-                      {service.description}
-                    </p>
                   </div>
 
-                  <div className="mt-6 flex items-center gap-2 border-t border-[#665038]/40 pt-4 text-sm font-semibold text-[#B08D45] transition-colors group-hover:text-[#D6B875]">
-                    <span>Explore Category</span>
-                    <ArrowRight
-                      size={15}
-                      className="transition-transform duration-300 group-hover:translate-x-1"
-                    />
+                  {/* Card Body & Content */}
+                  <div className="p-6 sm:p-7 flex-1 flex flex-col justify-between space-y-4">
+                    <div>
+                      <h3 className="font-serif text-xl sm:text-2xl font-bold tracking-tight text-[#F8F1E5] transition-colors duration-200 group-hover:text-[#E5C583]">
+                        {service.title}
+                      </h3>
+
+                      <p className="mt-3 text-xs sm:text-sm leading-relaxed text-[#C9BBAF]">
+                        {service.description}
+                      </p>
+                    </div>
+
+                    {/* Bottom Action Footer with Explore Category button */}
+                    <div className="pt-4 border-t border-[#B08D45]/20 flex items-center justify-between">
+                      <span className="text-xs sm:text-sm font-semibold tracking-wide text-[#E5C583] transition-colors group-hover:text-[#F8F1E5] flex items-center gap-1.5">
+                        <span>Explore Category</span>
+                        <ArrowRight
+                          size={15}
+                          className="transition-transform duration-300 group-hover:translate-x-1.5 text-[#B08D45] group-hover:text-[#E5C583]"
+                        />
+                      </span>
+
+                      <span className="text-[11px] font-medium text-[#C9BBAF]/70 uppercase tracking-widest group-hover:text-[#B08D45] transition-colors">
+                        View Details
+                      </span>
+                    </div>
                   </div>
                 </Link>
               );

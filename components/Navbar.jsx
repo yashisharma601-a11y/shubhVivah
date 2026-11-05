@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import {
@@ -17,6 +17,13 @@ import {
   Users,
   Shirt,
   CalendarDays,
+  Droplets,
+  Milk,
+  Flame,
+  Carrot,
+  Mail,
+  Video,
+  User,
 } from "lucide-react";
 
 const vendorLinks = [
@@ -35,43 +42,105 @@ const venueLinks = [
   { name: "Destination Wedding Resorts", href: "/venues/destination-weddings", icon: Heart },
 ];
 
+const supplierLinks = [
+  { name: "Water Camper Supplier", href: "/suppliers/water-camper", icon: Droplets },
+  { name: "Dairy Products", href: "/suppliers/dairy-products", icon: Milk },
+  { name: "Cylinder Suppliers", href: "/suppliers/cylinder-suppliers", icon: Flame },
+  { name: "Vegetable Supplier", href: "/suppliers/vegetable-supplier", icon: Carrot },
+];
+
+const eInviteLinks = [
+  { name: "Wedding Card Designer", href: "/e-invites/wedding-card-designer", icon: Mail },
+  { name: "E-Invitation Card Design", href: "/e-invites/e-invitation-card-design", icon: Sparkles },
+  { name: "Invitation Video Template", href: "/e-invites/invitation-video-template", icon: Video },
+];
+
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState(null);
+  const [currentUser, setCurrentUser] = useState(null);
+  const timeoutRef = useRef(null);
+
+  useEffect(() => {
+    fetch("/api/auth/me")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.authenticated && data.user) {
+          setCurrentUser(data.user);
+        }
+      })
+      .catch(() => { });
+  }, []);
 
   const closeMenu = () => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
     setMobileOpen(false);
     setActiveDropdown(null);
   };
 
+  const handleMouseEnter = (id) => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+    setActiveDropdown(id);
+  };
+
+  const handleMouseLeave = () => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+    timeoutRef.current = setTimeout(() => {
+      setActiveDropdown(null);
+    }, 200);
+  };
+
   const toggleDropdown = (id) => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
     setActiveDropdown(activeDropdown === id ? null : id);
   };
 
-  const renderDropdown = (label, items, id) => {
+  const renderDropdown = (label, items, id, isMobile = false) => {
     const isOpen = activeDropdown === id;
 
     return (
-      <div className="relative">
+      <div
+        className="relative"
+        onMouseEnter={() => {
+          if (!isMobile) handleMouseEnter(id);
+        }}
+        onMouseLeave={() => {
+          if (!isMobile) handleMouseLeave();
+        }}
+      >
         <button
           type="button"
           onClick={() => toggleDropdown(id)}
           aria-expanded={isOpen}
-          className={`flex w-full items-center justify-between gap-1.5 py-2 text-sm font-medium transition-colors ${
-            isOpen ? "text-[#D6B875]" : "text-[#F8F1E5] hover:text-[#B08D45]"
-          }`}
+          className={`flex w-full items-center justify-between gap-1.5 py-2 text-sm font-medium transition-colors ${isOpen ? "text-[#D6B875]" : "text-[#F8F1E5] hover:text-[#B08D45]"
+            }`}
         >
           <span>{label}</span>
           <ChevronDown
             size={15}
-            className={`transition-transform duration-200 ${
-              isOpen ? "rotate-180 text-[#B08D45]" : "text-[#C9BBAF]"
-            }`}
+            className={`transition-transform duration-200 ${isOpen ? "rotate-180 text-[#B08D45]" : "text-[#C9BBAF]"
+              }`}
           />
         </button>
 
         {isOpen && (
-          <div className="mt-1 rounded-xl border border-[#665038] bg-[#321B30] p-2 shadow-2xl shadow-black/50 lg:absolute lg:left-0 lg:top-full lg:z-50 lg:mt-2.5 lg:w-72">
+          <div
+            className="mt-1 rounded-xl border border-[#665038] bg-[#321B30] p-2 shadow-2xl shadow-black/50 animate-in fade-in zoom-in-95 duration-200 lg:absolute lg:left-0 lg:top-full lg:z-50 lg:mt-0 lg:w-72 lg:before:absolute lg:before:-top-3 lg:before:left-0 lg:before:h-3 lg:before:w-full lg:before:content-['']"
+            onMouseEnter={() => {
+              if (!isMobile) handleMouseEnter(id);
+            }}
+            onMouseLeave={() => {
+              if (!isMobile) handleMouseLeave();
+            }}
+          >
             <div className="space-y-1">
               {items.map((item) => {
                 const ItemIcon = item.icon;
@@ -132,19 +201,9 @@ export default function Navbar() {
 
           {renderDropdown("Venues", venueLinks, "desktop-venues")}
 
-          <Link
-            href="/real-weddings"
-            className="text-sm font-medium text-[#F8F1E5] transition-colors hover:text-[#D6B875]"
-          >
-            Real Weddings
-          </Link>
+          {renderDropdown("Suppliers", supplierLinks, "desktop-suppliers")}
 
-          <Link
-            href="/blog"
-            className="text-sm font-medium text-[#F8F1E5] transition-colors hover:text-[#D6B875]"
-          >
-            Blog
-          </Link>
+          {renderDropdown("E-invites", eInviteLinks, "desktop-e-invites")}
 
           <Link
             href="/contact"
@@ -154,8 +213,8 @@ export default function Navbar() {
           </Link>
         </div>
 
-        {/* Desktop Action Buttons */}
-        <div className="hidden items-center gap-3 lg:flex">
+        {/* Desktop Action Buttons & Far-Right Login */}
+        <div className="hidden items-center gap-5 lg:flex xl:gap-6">
           <Link
             href="/vendors/register"
             className="flex items-center gap-2 rounded-full border border-[#B08D45] bg-transparent px-4 py-2 text-sm font-medium text-[#F8F1E5] transition-all duration-200 hover:border-[#D6B875] hover:bg-[#3A2638] hover:text-[#D6B875]"
@@ -164,13 +223,30 @@ export default function Navbar() {
             List Your Business
           </Link>
 
-          <Link
-            href="/vendors"
-            className="flex items-center gap-1.5 rounded-full bg-[#B08D45] px-5 py-2 text-sm font-semibold text-[#241321] shadow-sm transition-all duration-200 hover:bg-[#D6B875]"
-          >
-            <Sparkles size={15} />
-            Get Started
-          </Link>
+          {currentUser && currentUser.user_type !== "admin" ? (
+            <div className="flex items-center gap-3">
+              <Link
+                href="/dashboard/profile"
+                className="flex items-center gap-1.5 rounded-full border border-[#B08D45]/60 bg-[#321B30] px-3.5 py-1.5 text-xs font-semibold text-[#D6B875] hover:bg-[#3A2638] hover:text-[#FFE29A] transition-all shadow-sm"
+              >
+                <User size={13} />
+                <span>My Profile</span>
+              </Link>
+              <Link
+                href={`/dashboard/${currentUser.user_type}`}
+                className="text-sm font-medium text-[#F8F1E5] transition-colors hover:text-[#D6B875]"
+              >
+                Dashboard
+              </Link>
+            </div>
+          ) : (
+            <Link
+              href="/login"
+              className="rounded-full border border-[#B08D45] bg-[#B08D45] px-4 py-1.5 text-sm font-semibold text-[#241321] shadow-md shadow-[#B08D45]/20 transition-all duration-200 hover:bg-[#D6B875] hover:border-[#D6B875] hover:scale-105"
+            >
+              Login
+            </Link>
+          )}
         </div>
 
         {/* Mobile Menu Button */}
@@ -198,11 +274,19 @@ export default function Navbar() {
             </Link>
 
             <div className="border-b border-[#665038]/40 py-1">
-              {renderDropdown("Wedding Vendors", vendorLinks, "mobile-vendors")}
+              {renderDropdown("Wedding Vendors", vendorLinks, "mobile-vendors", true)}
             </div>
 
             <div className="border-b border-[#665038]/40 py-1">
-              {renderDropdown("Venues", venueLinks, "mobile-venues")}
+              {renderDropdown("Venues", venueLinks, "mobile-venues", true)}
+            </div>
+
+            <div className="border-b border-[#665038]/40 py-1">
+              {renderDropdown("Suppliers", supplierLinks, "mobile-suppliers", true)}
+            </div>
+
+            <div className="border-b border-[#665038]/40 py-1">
+              {renderDropdown("E-invites", eInviteLinks, "mobile-e-invites", true)}
             </div>
 
             <Link
@@ -229,6 +313,28 @@ export default function Navbar() {
               Contact Us
             </Link>
 
+            {currentUser && currentUser.user_type !== "admin" && (
+              <Link
+                href="/dashboard/profile"
+                onClick={closeMenu}
+                className="border-b border-[#665038]/40 py-3 text-sm font-medium text-[#D6B875] hover:text-[#FFE29A] flex items-center gap-2"
+              >
+                <User size={15} />
+                <span>My Profile</span>
+              </Link>
+            )}
+
+            <Link
+              href={currentUser && currentUser.user_type !== "admin" ? `/dashboard/${currentUser.user_type}` : "/login"}
+              onClick={closeMenu}
+              className="border-b border-[#665038]/40 py-3 text-sm font-semibold text-[#D6B875] hover:text-[#FFE29A] flex items-center justify-between"
+            >
+              <span>{currentUser && currentUser.user_type !== "admin" ? "Go to Dashboard" : "Login to Your Account"}</span>
+              <span className="text-xs rounded-full bg-[#B08D45] text-[#241321] px-2.5 py-0.5 font-bold">
+                {currentUser && currentUser.user_type !== "admin" ? "Account" : "Login"}
+              </span>
+            </Link>
+
             <div className="pt-4 space-y-2.5">
               <Link
                 href="/vendors/register"
@@ -237,15 +343,6 @@ export default function Navbar() {
               >
                 <Store size={16} className="text-[#B08D45]" />
                 List Your Business
-              </Link>
-
-              <Link
-                href="/vendors"
-                onClick={closeMenu}
-                className="flex w-full items-center justify-center gap-2 rounded-full bg-[#B08D45] py-3 text-sm font-semibold text-[#241321]"
-              >
-                <Sparkles size={16} />
-                Get Started
               </Link>
             </div>
           </div>
