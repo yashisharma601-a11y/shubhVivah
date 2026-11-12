@@ -56,22 +56,7 @@ export async function middleware(request) {
 
   // 3. Handle Public Routes
   if (isPublicPage(pathname) || isPublicApi(pathname)) {
-    // If logged-in user visits /login or /register, redirect to their dashboard or intended redirect
-    if (isAuthenticated && (pathname === "/login" || pathname === "/register")) {
-      const redirectParam = request.nextUrl.searchParams.get("redirect");
-      let destination = `/dashboard/${user.user_type || "couple"}`;
-      if (
-        redirectParam &&
-        redirectParam.startsWith("/") &&
-        !redirectParam.startsWith("//") &&
-        !redirectParam.startsWith("/login") &&
-        !redirectParam.startsWith("/register")
-      ) {
-        destination = redirectParam;
-      }
-      return NextResponse.redirect(new URL(destination, request.url));
-    }
-
+    // Always permit direct access to /login and /register so users can view and use the form anytime
     return NextResponse.next();
   }
 

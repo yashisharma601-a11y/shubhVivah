@@ -18,7 +18,6 @@ import {
   Mail,
   ArrowLeft,
   UserPlus,
-  ShieldCheck,
 } from "lucide-react";
 
 function LoginForm() {
@@ -142,16 +141,13 @@ function LoginForm() {
 
       <div className="relative z-10 max-w-md w-full mx-auto">
         {/* Top Navigation */}
-        <div className="flex items-center justify-between mb-6">
+        <div className="mb-6">
           <Link
             href="/"
             className="inline-flex items-center gap-2 text-xs font-semibold text-[#D6B875] hover:text-[#FFE29A] transition-colors"
           >
             <ArrowLeft size={15} /> Back to ShubhVivah Home
           </Link>
-          <span className="flex items-center gap-1.5 text-[11px] text-[#C9BBAF]">
-            <ShieldCheck size={13} className="text-[#B08D45]" /> 256-Bit SSL Encrypted
-          </span>
         </div>
 
         {/* Card Header & Brand Logo */}
