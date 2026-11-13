@@ -110,7 +110,7 @@ export default function CoupleDashboardPage() {
       setRefreshing(true);
       const res = await fetch("/api/dashboard/couple");
       const data = await res.json();
-      if (data.success) {
+      if (data.success && data.user) {
         setDashboardData(data);
         setUser(data.user);
         setProfileForm({
@@ -127,6 +127,8 @@ export default function CoupleDashboardPage() {
           guest_count: data.user.guest_count || 350,
           event_types: data.user.event_types || "Sangeet, Mehendi, Royal Wedding Ceremony & Reception",
         });
+      } else if (data.success) {
+        setDashboardData(data);
       }
     } catch (err) {
       console.error("Error loading couple dashboard:", err);

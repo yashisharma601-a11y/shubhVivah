@@ -67,10 +67,25 @@ export default function Navbar() {
       .then((data) => {
         if (data.authenticated && data.user) {
           setCurrentUser(data.user);
+        } else {
+          setCurrentUser(null);
         }
       })
-      .catch(() => { });
+      .catch(() => {
+        setCurrentUser(null);
+      });
   }, []);
+
+  const handleLogout = async () => {
+    try {
+      await fetch("/api/auth/logout", { method: "POST" });
+    } catch {
+      // ignore
+    }
+    setCurrentUser(null);
+    closeMenu();
+    window.location.href = "/login";
+  };
 
   const closeMenu = () => {
     if (timeoutRef.current) {
@@ -226,18 +241,19 @@ export default function Navbar() {
           {currentUser && currentUser.user_type !== "admin" ? (
             <div className="flex items-center gap-3">
               <Link
-                href="/dashboard/profile"
-                className="flex items-center gap-1.5 rounded-full border border-[#B08D45]/60 bg-[#321B30] px-3.5 py-1.5 text-xs font-semibold text-[#D6B875] hover:bg-[#3A2638] hover:text-[#FFE29A] transition-all shadow-sm"
+                href={`/dashboard/${currentUser.user_type}`}
+                className="flex items-center gap-1.5 rounded-full border border-[#B08D45]/60 bg-[#321B30] px-4 py-1.5 text-xs font-semibold text-[#D6B875] hover:bg-[#3A2638] hover:text-[#FFE29A] transition-all shadow-sm"
               >
                 <User size={13} />
-                <span>My Profile</span>
+                <span>Dashboard</span>
               </Link>
-              <Link
-                href={`/dashboard/${currentUser.user_type}`}
-                className="text-sm font-medium text-[#F8F1E5] transition-colors hover:text-[#D6B875]"
+              <button
+                type="button"
+                onClick={handleLogout}
+                className="text-xs font-semibold text-[#C9BBAF] hover:text-red-400 transition-colors"
               >
-                Dashboard
-              </Link>
+                Logout
+              </button>
             </div>
           ) : (
             <Link
@@ -313,27 +329,41 @@ export default function Navbar() {
               Contact Us
             </Link>
 
-            {currentUser && currentUser.user_type !== "admin" && (
+            {currentUser && currentUser.user_type !== "admin" ? (
+              <>
+                <Link
+                  href={`/dashboard/${currentUser.user_type}`}
+                  onClick={closeMenu}
+                  className="border-b border-[#665038]/40 py-3 text-sm font-semibold text-[#D6B875] hover:text-[#FFE29A] flex items-center justify-between"
+                >
+                  <span className="flex items-center gap-2">
+                    <User size={15} />
+                    <span>Dashboard</span>
+                  </span>
+                  <span className="text-xs rounded-full bg-[#B08D45] text-[#241321] px-2.5 py-0.5 font-bold">
+                    Active
+                  </span>
+                </Link>
+                <button
+                  type="button"
+                  onClick={handleLogout}
+                  className="w-full text-left border-b border-[#665038]/40 py-3 text-sm font-medium text-red-400 hover:text-red-300"
+                >
+                  Logout
+                </button>
+              </>
+            ) : (
               <Link
-                href="/dashboard/profile"
+                href="/login"
                 onClick={closeMenu}
-                className="border-b border-[#665038]/40 py-3 text-sm font-medium text-[#D6B875] hover:text-[#FFE29A] flex items-center gap-2"
+                className="border-b border-[#665038]/40 py-3 text-sm font-semibold text-[#D6B875] hover:text-[#FFE29A] flex items-center justify-between"
               >
-                <User size={15} />
-                <span>My Profile</span>
+                <span>Login to Your Account</span>
+                <span className="text-xs rounded-full bg-[#B08D45] text-[#241321] px-2.5 py-0.5 font-bold">
+                  Login
+                </span>
               </Link>
             )}
-
-            <Link
-              href={currentUser && currentUser.user_type !== "admin" ? `/dashboard/${currentUser.user_type}` : "/login"}
-              onClick={closeMenu}
-              className="border-b border-[#665038]/40 py-3 text-sm font-semibold text-[#D6B875] hover:text-[#FFE29A] flex items-center justify-between"
-            >
-              <span>{currentUser && currentUser.user_type !== "admin" ? "Go to Dashboard" : "Login to Your Account"}</span>
-              <span className="text-xs rounded-full bg-[#B08D45] text-[#241321] px-2.5 py-0.5 font-bold">
-                {currentUser && currentUser.user_type !== "admin" ? "Account" : "Login"}
-              </span>
-            </Link>
 
             <div className="pt-4 space-y-2.5">
               <Link

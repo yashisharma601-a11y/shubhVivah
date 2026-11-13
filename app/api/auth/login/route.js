@@ -154,14 +154,22 @@ export async function POST(request) {
       city: user.city || null,
     };
 
-    const targetDashboard = `/dashboard/${effectiveType}`;
+    // Determine default landing page based on role:
+    // Couple/Customer users go to homepage by default (or requested redirect).
+    // Sellers & Vendors go to their dedicated management dashboards.
+    const targetDestination =
+      effectiveType === "seller"
+        ? "/dashboard/seller"
+        : effectiveType === "vendor"
+        ? "/dashboard/vendor"
+        : "/";
 
     const response = NextResponse.json({
       success: true,
       message: "Login successful! Welcome back.",
       user: safeUser,
       actualType: effectiveType,
-      redirectUrl: targetDashboard,
+      redirectUrl: targetDestination,
     });
 
     response.cookies.set("shubhvivah_session", token, {

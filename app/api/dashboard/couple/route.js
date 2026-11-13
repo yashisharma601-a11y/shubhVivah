@@ -21,7 +21,8 @@ export async function GET(request) {
       return NextResponse.json({ success: false, message: "Invalid session" }, { status: 401 });
     }
 
-    const user = await findUserById(payload.id);
+    const dbUser = await findUserById(payload.id);
+    const user = dbUser || payload;
     const coupleId = payload.id;
 
     const [bookings, wishlist, checklist, budget, enquiries] = await Promise.all([

@@ -1,5 +1,13 @@
 [
   {
+    "id": 3,
+    "vendor_id": 1,
+    "name": "Royal Candid Wedding Cinematography",
+    "starting_price": "65000",
+    "status": "active",
+    "created_at": "2026-11-12T11:12:36.950Z"
+  },
+  {
     "id": 1,
     "vendor_id": 2,
     "vendor_name": "Royal Heritage Captures",

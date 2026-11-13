@@ -26,7 +26,7 @@
       "message": ""
     },
     "submitted_at": "2026-11-05T10:47:16.660Z",
-    "status": "new"
+    "status": "Rejected"
   },
   {
     "id": 1,
@@ -43,7 +43,7 @@
     "message": "[Matrimonial Inquiry - Looking for: Groom, Age: 26, Location: Jaipur / Delhi NCR]\n\nRequirement: Looking for a Rajput / Brahmin groom, software engineer or businessman.",
     "source": "Sathi AI Chatbot",
     "conversation_summary": "Asked about membership plans and matchmaking",
-    "status": "Contacted",
+    "status": "Rejected",
     "submitted_at": "2026-11-05T10:14:46.758Z",
     "created_at": "2026-11-05T10:14:46.758Z",
     "userType": "couple",
@@ -74,7 +74,7 @@
       "message": "Ready to fulfill bulk orders for marriage gardens."
     },
     "submitted_at": "2026-10-29T11:26:23.438Z",
-    "status": "new"
+    "status": "Rejected"
   },
   {
     "id": 2,

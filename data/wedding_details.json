@@ -1,0 +1,23 @@
+[
+  {
+    "userId": 101,
+    "weddingDate": "2027-02-22",
+    "guestCount": "300 - 500 Guests",
+    "updated_at": "2026-11-12T11:23:17.849Z",
+    "created_at": "2026-11-12T11:12:21.042Z",
+    "groomName": "Rohan",
+    "brideName": "Priya",
+    "dateNotFinalized": false,
+    "isDateFlexible": "No",
+    "location": "Noida",
+    "budget": "₹10 Lakhs - ₹25 Lakhs",
+    "functions": [
+      "Haldi",
+      "Mehndi",
+      "Sangeet",
+      "Wedding Ceremony",
+      "Reception",
+      "Engagement"
+    ]
+  }
+]

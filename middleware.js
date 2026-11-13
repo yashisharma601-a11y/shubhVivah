@@ -24,6 +24,8 @@ const PUBLIC_APIS = [
   "/api/auth/register",
   "/api/auth/forgot-password",
   "/api/auth/reset-password",
+  "/api/auth/send-otp",
+  "/api/upload",
   "/api/auth/me",
   "/api/auth/logout",
   "/api/admin/login",

@@ -1,0 +1,42 @@
+[
+  {
+    "userId": 101,
+    "brideName": "Priya",
+    "groomName": "Rohan",
+    "weddingDate": "2027-02-22",
+    "dateNotFinalized": false,
+    "updated_at": "2026-11-12T11:23:17.842Z",
+    "created_at": "2026-11-12T11:12:21.038Z",
+    "firstName": "Rohan",
+    "lastName": "Priya",
+    "userRole": "Bride",
+    "isDateFlexible": "No",
+    "weddingLocation": "Noida",
+    "country": "India",
+    "state": "Uttar Pradesh",
+    "city": "Noida",
+    "fullAddress": "noida sector 22",
+    "pincode": "224455",
+    "expectedGuestCount": "300 - 500 Guests",
+    "weddingBudget": "₹10 Lakhs - ₹25 Lakhs",
+    "weddingFunctions": [
+      "Haldi",
+      "Mehndi",
+      "Sangeet",
+      "Wedding Ceremony",
+      "Reception",
+      "Engagement"
+    ],
+    "servicesRequired": [
+      "Wedding Venue",
+      "Photography",
+      "Makeup Artist",
+      "Decoration",
+      "Catering",
+      "Mehndi Artist",
+      "Choreography",
+      "DJ & Entertainment"
+    ],
+    "avatar_url": null
+  }
+]

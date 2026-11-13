@@ -114,6 +114,24 @@ export default function HeroSection() {
             </div>
           </div>
 
+          {/* Action Buttons: Browse Venues & Browse Vendors */}
+          <div className="mt-7 flex flex-wrap items-center justify-center gap-3 sm:gap-4">
+            <Link
+              href="/venues"
+              className="inline-flex items-center gap-2 rounded-full bg-[#B08D45] px-6 py-2.5 text-xs sm:text-sm font-bold text-[#241321] transition-all hover:bg-[#D6B875] shadow-lg hover:scale-105"
+            >
+              <MapPin size={15} />
+              <span>Browse Venues</span>
+            </Link>
+            <Link
+              href="/vendors"
+              className="inline-flex items-center gap-2 rounded-full border border-[#D6B875] bg-[#321B30]/80 px-6 py-2.5 text-xs sm:text-sm font-semibold text-[#F8F1E5] transition-all hover:bg-[#3A2638] hover:text-[#D6B875] shadow-lg hover:scale-105"
+            >
+              <Sparkles size={15} className="text-[#D6B875]" />
+              <span>Browse Vendors</span>
+            </Link>
+          </div>
+
           {/* Search Button in Antique Gold */}
           <button
             type="submit"

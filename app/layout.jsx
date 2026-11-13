@@ -36,7 +36,10 @@ export default function RootLayout({ children }) {
           rel="stylesheet"
         />
       </head>
-      <body className="min-h-screen bg-[#241321] font-sans text-[#F8F1E5] antialiased selection:bg-[#B08D45] selection:text-[#241321]">
+      <body
+        suppressHydrationWarning
+        className="min-h-screen bg-[#241321] font-sans text-[#F8F1E5] antialiased selection:bg-[#B08D45] selection:text-[#241321]"
+      >
         <Navbar />
         <main>{children}</main>
         <Footer />

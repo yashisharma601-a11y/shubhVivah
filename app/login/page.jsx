@@ -111,6 +111,8 @@ function LoginForm() {
       // Success
       setSuccessMsg("Authentication successful! Welcome back to ShubhVivah. Redirecting...");
 
+      const effectiveType = (data.actualType || userType || "couple").toLowerCase();
+
       // Validate safe redirect destination (prevent open redirect vulnerabilities)
       const isSafeRedirect =
         redirectParam &&
@@ -120,9 +122,18 @@ function LoginForm() {
         !redirectParam.startsWith("/register") &&
         !redirectParam.startsWith("/api");
 
+      // Couple/Customer users go to homepage or the originally requested page.
+      // Seller and Vendor go to their respective dashboards.
+      const defaultRoleDestination =
+        effectiveType === "seller"
+          ? "/dashboard/seller"
+          : effectiveType === "vendor"
+          ? "/dashboard/vendor"
+          : "/";
+
       const finalDestination = isSafeRedirect
         ? redirectParam
-        : data.redirectUrl || `/dashboard/${data.actualType || userType}`;
+        : data.redirectUrl || defaultRoleDestination;
 
       setTimeout(() => {
         router.push(finalDestination);
@@ -134,7 +145,10 @@ function LoginForm() {
   };
 
   return (
-    <div className="relative min-h-screen bg-[#1F0E1D] text-[#F8F1E5] py-10 px-4 sm:px-6 lg:px-8 flex flex-col justify-center overflow-hidden">
+    <div
+      suppressHydrationWarning
+      className="relative min-h-screen bg-[#1F0E1D] text-[#F8F1E5] py-10 px-4 sm:px-6 lg:px-8 flex flex-col justify-center overflow-hidden"
+    >
       {/* Background Decorative Glow Elements */}
       <div className="pointer-events-none absolute -top-32 -left-32 h-96 w-96 rounded-full bg-[#B08D45]/15 blur-3xl" />
       <div className="pointer-events-none absolute -bottom-32 -right-32 h-96 w-96 rounded-full bg-[#B08D45]/10 blur-3xl" />

@@ -1,0 +1,21 @@
+[
+  {
+    "userId": 101,
+    "servicesRequired": [
+      "Wedding Venue",
+      "Photography",
+      "Makeup Artist",
+      "Decoration",
+      "Catering",
+      "Mehndi Artist",
+      "Choreography",
+      "DJ & Entertainment"
+    ],
+    "preferredVendorCity": "Noida",
+    "estimatedBudgetPerService": "₹50,000 - ₹2,00,000 per vendor category",
+    "preferredContactMethod": "WhatsApp",
+    "additionalRequirements": "Looking for royal traditional setup with bespoke candid photography.",
+    "updated_at": "2026-11-12T11:23:17.854Z",
+    "created_at": "2026-11-12T11:23:17.854Z"
+  }
+]
