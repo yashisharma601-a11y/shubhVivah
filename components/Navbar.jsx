@@ -245,23 +245,31 @@ export default function Navbar() {
                 className="flex items-center gap-1.5 rounded-full border border-[#B08D45]/60 bg-[#321B30] px-4 py-1.5 text-xs font-semibold text-[#D6B875] hover:bg-[#3A2638] hover:text-[#FFE29A] transition-all shadow-sm"
               >
                 <User size={13} />
-                <span>Dashboard</span>
+                <span>Account</span>
               </Link>
               <button
                 type="button"
                 onClick={handleLogout}
-                className="text-xs font-semibold text-[#C9BBAF] hover:text-red-400 transition-colors"
+                className="text-xs font-semibold text-[#C9BBAF] hover:text-red-400 transition-colors cursor-pointer"
               >
                 Logout
               </button>
             </div>
           ) : (
-            <Link
-              href="/login"
-              className="rounded-full border border-[#B08D45] bg-[#B08D45] px-4 py-1.5 text-sm font-semibold text-[#241321] shadow-md shadow-[#B08D45]/20 transition-all duration-200 hover:bg-[#D6B875] hover:border-[#D6B875] hover:scale-105"
-            >
-              Login
-            </Link>
+            <div className="flex items-center gap-2.5">
+              <Link
+                href="/login"
+                className="rounded-full border border-[#B08D45] bg-[#B08D45] px-4 py-1.5 text-sm font-semibold text-[#241321] shadow-md shadow-[#B08D45]/20 transition-all duration-200 hover:bg-[#D6B875] hover:border-[#D6B875] hover:scale-105"
+              >
+                Login
+              </Link>
+              <Link
+                href="/register"
+                className="rounded-full border border-[#665038] bg-[#321B30]/70 px-4 py-1.5 text-sm font-medium text-[#E8D9B5] transition-all duration-200 hover:border-[#B08D45] hover:bg-[#3A2638] hover:text-[#F8F1E5]"
+              >
+                Register
+              </Link>
+            </div>
           )}
         </div>
 
@@ -338,10 +346,10 @@ export default function Navbar() {
                 >
                   <span className="flex items-center gap-2">
                     <User size={15} />
-                    <span>Dashboard</span>
+                    <span>Account ({currentUser.name?.split(" ")[0] || currentUser.user_type})</span>
                   </span>
-                  <span className="text-xs rounded-full bg-[#B08D45] text-[#241321] px-2.5 py-0.5 font-bold">
-                    Active
+                  <span className="text-xs rounded-full bg-[#B08D45] text-[#241321] px-2.5 py-0.5 font-bold capitalize">
+                    {currentUser.user_type}
                   </span>
                 </Link>
                 <button
@@ -353,16 +361,23 @@ export default function Navbar() {
                 </button>
               </>
             ) : (
-              <Link
-                href="/login"
-                onClick={closeMenu}
-                className="border-b border-[#665038]/40 py-3 text-sm font-semibold text-[#D6B875] hover:text-[#FFE29A] flex items-center justify-between"
-              >
-                <span>Login to Your Account</span>
-                <span className="text-xs rounded-full bg-[#B08D45] text-[#241321] px-2.5 py-0.5 font-bold">
-                  Login
-                </span>
-              </Link>
+              <div className="space-y-2 border-b border-[#665038]/40 py-3">
+                <Link
+                  href="/login"
+                  onClick={closeMenu}
+                  className="w-full flex items-center justify-between rounded-xl bg-[#B08D45] px-4 py-2.5 text-sm font-semibold text-[#241321]"
+                >
+                  <span>Login to Your Account</span>
+                  <span className="text-xs font-bold uppercase tracking-wider">Login</span>
+                </Link>
+                <Link
+                  href="/register"
+                  onClick={closeMenu}
+                  className="w-full flex items-center justify-center rounded-xl border border-[#665038] bg-[#321B30] px-4 py-2 text-xs font-medium text-[#E8D9B5]"
+                >
+                  Create New Account (Register)
+                </Link>
+              </div>
             )}
 
             <div className="pt-4 space-y-2.5">

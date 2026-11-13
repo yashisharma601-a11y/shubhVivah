@@ -54,92 +54,102 @@ export default function HeroSection() {
           you need to create your perfect celebration.
         </p>
 
-        {/* Search Form with Warm Ivory Background & Antique Gold Accents */}
+        {/* Search Bar Container with Warm Ivory Background & Antique Gold Accents */}
         <form
+          suppressHydrationWarning
           onSubmit={handleSearch}
-          className="mt-10 grid w-full max-w-4xl grid-cols-1 gap-3 rounded-2xl border border-[#665038] bg-[#F7F1E7] p-3 shadow-2xl shadow-black/60 sm:grid-cols-2 sm:p-4 lg:grid-cols-[1fr_1fr_auto] lg:rounded-full"
+          className="mt-10 w-full max-w-5xl rounded-2xl border border-[#665038] bg-[#F7F1E7] p-2.5 sm:p-3 shadow-2xl shadow-black/60 lg:rounded-full lg:py-2 lg:px-3"
         >
-          {/* Location Input */}
-          <div className="flex items-center gap-3 rounded-xl border border-[#665038]/30 bg-white/70 px-4 py-3 text-left lg:border-0 lg:bg-transparent">
-            <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#321B30] text-[#B08D45]">
-              <MapPin size={17} />
-            </span>
-            <div className="min-w-0 flex-1">
-              <label
-                htmlFor="city"
-                className="mb-0.5 block text-xs font-bold uppercase tracking-wider text-[#392B31]"
-              >
-                Destination / City
-              </label>
+          <div className="flex flex-col gap-2.5 lg:flex-row lg:items-center lg:gap-2">
+            {/* 1. Destination / City Input with Location Icon */}
+            <div className="flex flex-1 items-center gap-2.5 rounded-xl border border-[#665038]/20 bg-white/70 px-3.5 py-2.5 text-left lg:border-0 lg:bg-transparent lg:py-1.5 lg:px-3">
+              <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#321B30] text-[#B08D45]">
+                <MapPin size={16} />
+              </span>
+              <div className="min-w-0 flex-1">
+                <label
+                  htmlFor="city"
+                  className="block text-[10px] font-bold uppercase tracking-wider text-[#392B31]"
+                >
+                  Destination / City
+                </label>
+                <input
+                  id="city"
+                  type="text"
+                  suppressHydrationWarning
+                  value={city}
+                  onChange={(e) => setCity(e.target.value)}
+                  placeholder="e.g. Udaipur, Jaipur, Delhi"
+                  className="w-full bg-transparent text-xs sm:text-sm font-medium text-[#392B31] outline-none placeholder:text-[#392B31]/50"
+                />
+              </div>
+            </div>
 
-              <input
-                id="city"
-                type="text"
-                value={city}
-                onChange={(e) => setCity(e.target.value)}
-                placeholder="e.g. Udaipur, Jaipur, Delhi, Mumbai"
-                className="w-full bg-transparent text-sm font-medium text-[#392B31] outline-none placeholder:text-[#392B31]/50"
-              />
+            {/* Subtle Divider for Desktop */}
+            <div className="hidden lg:block h-8 w-[1px] bg-[#665038]/30 shrink-0" />
+
+            {/* 2. Wedding Service Dropdown with Sparkle Icon */}
+            <div className="flex flex-1 items-center gap-2.5 rounded-xl border border-[#665038]/20 bg-white/70 px-3.5 py-2.5 text-left lg:border-0 lg:bg-transparent lg:py-1.5 lg:px-3">
+              <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#321B30] text-[#B08D45]">
+                <Sparkles size={16} />
+              </span>
+              <div className="min-w-0 flex-1">
+                <label
+                  htmlFor="service"
+                  className="block text-[10px] font-bold uppercase tracking-wider text-[#392B31]"
+                >
+                  Wedding Service
+                </label>
+                <select
+                  id="service"
+                  suppressHydrationWarning
+                  value={service}
+                  onChange={(e) => setService(e.target.value)}
+                  className="w-full cursor-pointer bg-transparent text-xs sm:text-sm font-medium text-[#392B31] outline-none"
+                >
+                  <option value="">All Services</option>
+                  <option value="venues">Wedding Venues</option>
+                  <option value="photographers">Photographers</option>
+                  <option value="makeup">Bridal Makeup</option>
+                  <option value="decoration">Wedding Decorators</option>
+                  <option value="wedding-planners">Wedding Planners</option>
+                  <option value="bridal-wear">Bridal Wear</option>
+                  <option value="catering">Catering</option>
+                </select>
+              </div>
+            </div>
+
+            {/* 3, 4, 5. Action Buttons Row on Mobile / Direct Inline on Desktop */}
+            <div className="flex flex-wrap items-center gap-2 sm:gap-2.5 lg:flex-nowrap lg:shrink-0">
+              {/* 3. Browse Venues Button */}
+              <Link
+                href="/venues"
+                className="flex-1 sm:flex-initial inline-flex h-11 items-center justify-center gap-1.5 rounded-xl lg:rounded-full bg-[#321B30] px-4 text-xs font-bold text-[#E8D9B5] border border-[#B08D45]/40 transition-all duration-200 hover:bg-[#3A2638] hover:border-[#D6B875] hover:text-[#FFE29A] hover:scale-[1.02] active:scale-[0.98] whitespace-nowrap"
+              >
+                <MapPin size={14} className="text-[#B08D45] shrink-0" />
+                <span>Browse Venues</span>
+              </Link>
+
+              {/* 4. Browse Vendors Button */}
+              <Link
+                href="/vendors"
+                className="flex-1 sm:flex-initial inline-flex h-11 items-center justify-center gap-1.5 rounded-xl lg:rounded-full bg-[#321B30] px-4 text-xs font-bold text-[#E8D9B5] border border-[#B08D45]/40 transition-all duration-200 hover:bg-[#3A2638] hover:border-[#D6B875] hover:text-[#FFE29A] hover:scale-[1.02] active:scale-[0.98] whitespace-nowrap"
+              >
+                <Sparkles size={14} className="text-[#D6B875] shrink-0" />
+                <span>Browse Vendors</span>
+              </Link>
+
+              {/* 5. Find Vendors Button */}
+              <button
+                type="submit"
+                suppressHydrationWarning
+                className="w-full sm:w-auto inline-flex h-11 items-center justify-center gap-1.5 rounded-xl lg:rounded-full bg-[#B08D45] px-5 text-xs sm:text-sm font-bold text-[#241321] transition-all duration-200 hover:bg-[#D6B875] shadow-md shadow-[#B08D45]/20 hover:scale-[1.02] active:scale-[0.98] whitespace-nowrap"
+              >
+                <Search size={15} className="shrink-0" />
+                <span>Find Vendors</span>
+              </button>
             </div>
           </div>
-
-          {/* Wedding Service Select */}
-          <div className="flex items-center gap-3 rounded-xl border border-[#665038]/30 bg-white/70 px-4 py-3 text-left lg:border-l lg:border-[#665038]/30 lg:border-y-0 lg:border-r-0 lg:rounded-none lg:bg-transparent">
-            <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#321B30] text-[#B08D45]">
-              <Sparkles size={17} />
-            </span>
-            <div className="min-w-0 flex-1">
-              <label
-                htmlFor="service"
-                className="mb-0.5 block text-xs font-bold uppercase tracking-wider text-[#392B31]"
-              >
-                Wedding Service
-              </label>
-
-              <select
-                id="service"
-                value={service}
-                onChange={(e) => setService(e.target.value)}
-                className="w-full cursor-pointer bg-transparent text-sm font-medium text-[#392B31] outline-none"
-              >
-                <option value="">Select Service</option>
-                <option value="venues">Wedding Venues</option>
-                <option value="photographers">Photographers</option>
-                <option value="makeup">Bridal Makeup</option>
-                <option value="decoration">Wedding Decorators</option>
-                <option value="wedding-planners">Wedding Planners</option>
-                <option value="bridal-wear">Bridal Wear</option>
-                <option value="catering">Catering</option>
-              </select>
-            </div>
-          </div>
-
-          {/* Action Buttons: Browse Venues & Browse Vendors */}
-          <div className="mt-7 flex flex-wrap items-center justify-center gap-3 sm:gap-4">
-            <Link
-              href="/venues"
-              className="inline-flex items-center gap-2 rounded-full bg-[#B08D45] px-6 py-2.5 text-xs sm:text-sm font-bold text-[#241321] transition-all hover:bg-[#D6B875] shadow-lg hover:scale-105"
-            >
-              <MapPin size={15} />
-              <span>Browse Venues</span>
-            </Link>
-            <Link
-              href="/vendors"
-              className="inline-flex items-center gap-2 rounded-full border border-[#D6B875] bg-[#321B30]/80 px-6 py-2.5 text-xs sm:text-sm font-semibold text-[#F8F1E5] transition-all hover:bg-[#3A2638] hover:text-[#D6B875] shadow-lg hover:scale-105"
-            >
-              <Sparkles size={15} className="text-[#D6B875]" />
-              <span>Browse Vendors</span>
-            </Link>
-          </div>
-
-          {/* Search Button in Antique Gold */}
-          <button
-            type="submit"
-            className="flex min-h-12 items-center justify-center gap-2 rounded-xl bg-[#B08D45] px-8 py-3.5 text-sm font-semibold text-[#241321] transition-all duration-200 hover:bg-[#D6B875] focus:outline-none focus:ring-2 focus:ring-[#B08D45] lg:rounded-full"
-          >
-            <Search size={17} />
-            Find Vendors
-          </button>
         </form>
 
         {/* Quick Category Searches */}

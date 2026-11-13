@@ -1,5 +1,6 @@
 import Link from "next/link";
 import HeroSection from "@/components/HeroSection";
+import GuestSignupPopup from "@/components/GuestSignupPopup";
 import {
   Camera,
   MapPin,
@@ -143,6 +144,9 @@ const blogArticles = [
 export default function HomePage() {
   return (
     <div className="overflow-hidden bg-[#241321] text-[#F8F1E5]">
+      {/* Recurring Guest Sign Up Popup for Unauthenticated Visitors */}
+      <GuestSignupPopup />
+
       {/* 1. Hero Section */}
       <HeroSection />
 

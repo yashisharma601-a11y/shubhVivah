@@ -1,13 +1,23 @@
 import { NextResponse } from "next/server";
 import { verifySessionTokenUniversal } from "./lib/session";
 
-// 1. Explicitly Allowed Public Pages (Only Home, Login, Register, Forgot Password)
+// 1. Explicitly Allowed Public Pages
+// Allow guest visitors to browse the website so they can explore venues, vendors, suppliers, etc.
+// The recurring 10-second Sign Up popup prompts them to register/login while browsing.
+// Protected user-specific areas (like dashboards and personal profile) still require login.
 const PUBLIC_PAGES = [
   "/",
   "/login",
   "/register",
-  "/vendors/register",
   "/forgot-password",
+  "/venues",
+  "/wedding-vendors",
+  "/vendors",
+  "/suppliers",
+  "/e-invites",
+  "/real-weddings",
+  "/blog",
+  "/contact",
 ];
 
 function isPublicPage(pathname) {
@@ -31,7 +41,7 @@ const PUBLIC_APIS = [
   "/api/admin/login",
   "/api/sathi-chat",
   "/api/sathi-chat/inquiry",
-  "/api/vendors/register",
+  "/api/vendors",
   "/api/contact/register",
 ];
 
@@ -84,9 +94,12 @@ export async function middleware(request) {
     }
 
     // 4b. Protected Page Route -> Redirect to /login with original URL and message
-    const targetUrl = pathname + search;
+    // If the guest attempted to open root "/", redirect clean to /login without redundant ?redirect=/
     const loginUrl = new URL("/login", request.url);
-    loginUrl.searchParams.set("redirect", targetUrl);
+    if (pathname !== "/") {
+      const targetUrl = pathname + search;
+      loginUrl.searchParams.set("redirect", targetUrl);
+    }
     loginUrl.searchParams.set("message", "auth_required");
 
     const response = NextResponse.redirect(loginUrl, { status: 307 });
