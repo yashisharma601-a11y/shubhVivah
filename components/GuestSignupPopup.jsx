@@ -154,13 +154,12 @@ export default function GuestSignupPopup() {
           id="guest-popup-title"
           className="font-serif text-2xl sm:text-3xl font-bold leading-snug text-[#241321]"
         >
-          Your Dream Wedding Starts Here! ❤️
+          Find Your Perfect Wedding Match! ❤️
         </h2>
 
         {/* Description */}
         <p className="mt-3 text-xs sm:text-sm leading-relaxed text-[#392B31]/80">
-          Create your free ShubhVivah account to explore beautiful wedding venues, discover trusted
-          vendors, and plan your perfect wedding in one place.
+          Join ShubhVivah today to explore wedding vendors, venues, and exclusive services. Register now to unlock your complete wedding experience!
         </p>
 
         {/* Feature Highlights */}
@@ -183,7 +182,7 @@ export default function GuestSignupPopup() {
             onClick={handleClose}
             className="w-full inline-flex h-12 items-center justify-center gap-2 rounded-full bg-[#B08D45] px-6 text-sm font-bold text-[#241321] shadow-lg shadow-[#B08D45]/25 transition-all duration-200 hover:bg-[#D6B875] hover:scale-[1.02] active:scale-[0.98]"
           >
-            <span>Create Free Account</span>
+            <span>Register Now</span>
             <ArrowRight size={16} />
           </Link>
 
@@ -193,7 +192,7 @@ export default function GuestSignupPopup() {
             onClick={handleClose}
             className="w-full inline-flex h-11 items-center justify-center gap-2 rounded-full border border-[#665038] bg-[#321B30] px-6 text-sm font-semibold text-[#E8D9B5] transition-all duration-200 hover:bg-[#3A2638] hover:border-[#D6B875] hover:text-[#FFE29A]"
           >
-            <span>Login to Existing Account</span>
+            <span>Login Now</span>
           </Link>
 
           {/* Maybe Later */}

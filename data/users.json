@@ -108,8 +108,8 @@
     "name": "ShubhVivah Super Admin",
     "email": "admin@shubhvivah.com",
     "phone": "9999999999",
-    "password_hash": "6dfdc4aa49bbe17c27217d8e3a45355fff920dd07b397df0995fafc9a4554bbdd10ef6699e19d03e17d92c1c09e532658f45d61423bc33e9106268ef0e0d2998",
-    "salt": "9c3cde3209d4de835b1ab0678fc346a2",
+    "password_hash": "377eb500a8a0adba13defd113c91a84eb2eff59f86bc68fd2d7f0995b09d088af3c4364193503f4b0f4a4cdd155c87646c9462a1a5548c5b2cc4f057d858d394",
+    "salt": "54aa3ee0e8ee64d56db4cac2ebaf4516",
     "user_type": "admin",
     "business_name": "ShubhVivah Corporate",
     "category": "Platform Administration",
@@ -119,6 +119,6 @@
     "reset_otp_expires": null,
     "terms_accepted": true,
     "created_at": "2026-11-12T11:26:23.768Z",
-    "updated_at": "2026-11-13T11:13:00.397Z"
+    "updated_at": "2026-11-13T11:54:34.418Z"
   }
 ]
