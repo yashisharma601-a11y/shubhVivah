@@ -495,7 +495,7 @@ export default function VendorRegisterPage() {
             </div>
 
             <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
-              <button
+              <button suppressHydrationWarning
                 type="button"
                 onClick={handleReset}
                 className="w-full rounded-full border border-[#B08D45] bg-transparent px-8 py-3 text-sm font-semibold text-[#D6B875] transition hover:bg-[#3A2638] sm:w-auto"
@@ -677,7 +677,7 @@ export default function VendorRegisterPage() {
                         WhatsApp Number (Optional)
                       </label>
                       {formData.phone && (
-                        <button
+                        <button suppressHydrationWarning
                           type="button"
                           onClick={handleSameAsPhone}
                           className="text-[11px] font-semibold text-[#D6B875] hover:underline"
@@ -1062,7 +1062,7 @@ export default function VendorRegisterPage() {
                             fill
                             className="object-cover"
                           />
-                          <button
+                          <button suppressHydrationWarning
                             type="button"
                             onClick={removeLogo}
                             className="absolute top-1 right-1 flex h-6 w-6 items-center justify-center rounded-full bg-red-600 text-white shadow-md transition hover:bg-red-700"
@@ -1111,7 +1111,7 @@ export default function VendorRegisterPage() {
                             fill
                             className="object-cover"
                           />
-                          <button
+                          <button suppressHydrationWarning
                             type="button"
                             onClick={removeCover}
                             className="absolute top-1 right-1 flex h-6 w-6 items-center justify-center rounded-full bg-red-600 text-white shadow-md transition hover:bg-red-700"
@@ -1198,7 +1198,7 @@ export default function VendorRegisterPage() {
                                 fill
                                 className="object-cover"
                               />
-                              <button
+                              <button suppressHydrationWarning
                                 type="button"
                                 onClick={(e) => {
                                   e.stopPropagation();
@@ -1389,7 +1389,7 @@ export default function VendorRegisterPage() {
               {/* SUBMIT BUTTON */}
               {/* ========================================================= */}
               <div className="text-center pt-2">
-                <button
+                <button suppressHydrationWarning
                   type="submit"
                   disabled={isSubmitting}
                   className="inline-flex w-full items-center justify-center gap-2.5 rounded-full bg-[#B08D45] px-10 py-4 text-base font-bold text-[#241321] shadow-xl shadow-[#B08D45]/20 transition-all duration-200 hover:bg-[#D6B875] hover:scale-[1.01] active:scale-[0.99] disabled:opacity-60 cursor-pointer sm:w-auto"

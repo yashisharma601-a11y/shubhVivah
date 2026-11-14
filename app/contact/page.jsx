@@ -272,7 +272,7 @@ export default function ContactPage() {
                 <span>Proceed to Login Now</span>
                 <ArrowRight size={16} />
               </Link>
-              <button
+              <button suppressHydrationWarning
                 type="button"
                 onClick={resetForm}
                 className="w-full sm:w-auto rounded-full border border-[#B08D45] px-6 py-2.5 text-sm font-semibold text-[#D6B875] hover:bg-[#3A2638] transition-colors"
@@ -290,7 +290,7 @@ export default function ContactPage() {
               </label>
               <div className="grid grid-cols-3 gap-2 sm:gap-4 p-1.5 rounded-2xl bg-[#241321] border border-[#665038]">
                 {/* Couple Tab */}
-                <button
+                <button suppressHydrationWarning
                   type="button"
                   onClick={() => {
                     setUserType("couple");
@@ -307,7 +307,7 @@ export default function ContactPage() {
                 </button>
 
                 {/* Vendor Tab */}
-                <button
+                <button suppressHydrationWarning
                   type="button"
                   onClick={() => {
                     setUserType("vendor");
@@ -324,7 +324,7 @@ export default function ContactPage() {
                 </button>
 
                 {/* Seller Tab */}
-                <button
+                <button suppressHydrationWarning
                   type="button"
                   onClick={() => {
                     setUserType("seller");
@@ -537,7 +537,7 @@ export default function ContactPage() {
                       {COUPLE_SERVICES.map((srv) => {
                         const isSelected = coupleData.services.includes(srv);
                         return (
-                          <button
+                          <button suppressHydrationWarning
                             key={srv}
                             type="button"
                             onClick={() => handleCoupleServiceToggle(srv)}
@@ -1031,7 +1031,7 @@ export default function ContactPage() {
                     placeholder="Create a password (default: Password@123)"
                     className="w-full rounded-xl border border-[#665038] bg-[#321B30] px-4 py-2.5 pr-10 text-sm text-[#F8F1E5] placeholder-[#C9BBAF]/50 outline-none focus:border-[#D6B875] transition-colors"
                   />
-                  <button
+                  <button suppressHydrationWarning
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
                     className="absolute inset-y-0 right-0 flex items-center pr-3.5 text-[#C9BBAF] hover:text-[#D6B875]"
@@ -1046,7 +1046,7 @@ export default function ContactPage() {
 
               {/* Submit Button */}
               <div className="pt-4">
-                <button
+                <button suppressHydrationWarning
                   type="submit"
                   disabled={submitting}
                   className="flex w-full items-center justify-center gap-2 rounded-xl bg-[#B08D45] py-3.5 px-6 text-sm font-bold text-[#241321] shadow-lg shadow-[#B08D45]/20 transition-all duration-200 hover:bg-[#D6B875] hover:shadow-xl hover:shadow-[#D6B875]/30 active:scale-[0.99] disabled:opacity-60 cursor-pointer"

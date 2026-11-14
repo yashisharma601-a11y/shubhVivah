@@ -132,7 +132,7 @@ export default function GuestSignupPopup() {
         <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-[#B08D45] via-[#D6B875] to-[#B08D45]" />
 
         {/* Close Button */}
-        <button
+        <button suppressHydrationWarning
           type="button"
           onClick={handleClose}
           aria-label="Close dialog"
@@ -196,7 +196,7 @@ export default function GuestSignupPopup() {
           </Link>
 
           {/* Maybe Later */}
-          <button
+          <button suppressHydrationWarning
             type="button"
             onClick={handleClose}
             className="mt-1 text-center text-xs font-medium text-[#392B31]/70 hover:text-[#241321] hover:underline transition-colors"

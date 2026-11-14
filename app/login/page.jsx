@@ -147,25 +147,26 @@ function LoginForm() {
   return (
     <div
       suppressHydrationWarning
-      className="relative min-h-screen bg-[#1F0E1D] text-[#F8F1E5] py-10 px-4 sm:px-6 lg:px-8 flex flex-col justify-center overflow-hidden"
+      className="relative min-h-screen bg-[#1F0E1D] text-[#F8F1E5] py-8 px-4 sm:px-6 lg:px-8 flex flex-col justify-center overflow-hidden"
     >
       {/* Background Decorative Glow Elements */}
       <div className="pointer-events-none absolute -top-32 -left-32 h-96 w-96 rounded-full bg-[#B08D45]/15 blur-3xl" />
       <div className="pointer-events-none absolute -bottom-32 -right-32 h-96 w-96 rounded-full bg-[#B08D45]/10 blur-3xl" />
 
-      <div className="relative z-10 max-w-md w-full mx-auto">
-        {/* Top Navigation */}
-        <div className="mb-6">
-          <Link
-            href="/"
-            className="inline-flex items-center gap-2 text-xs font-semibold text-[#D6B875] hover:text-[#FFE29A] transition-colors"
-          >
-            <ArrowLeft size={15} /> Back to ShubhVivah Home
-          </Link>
-        </div>
+      {/* Top Left Back Navigation Bar */}
+      <div className="w-full max-w-5xl mx-auto px-4 mb-4">
+        <Link
+          href="/"
+          className="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold text-[#D6B875] hover:text-[#FFE29A] transition-colors group"
+        >
+          <ArrowLeft size={16} className="transition-transform group-hover:-translate-x-1" />
+          <span>Back to ShubhVivah Home</span>
+        </Link>
+      </div>
 
+      <div className="relative z-10 max-w-md w-full mx-auto">
         {/* Card Header & Brand Logo */}
-        <div className="text-center mb-6">
+        <div className="flex flex-col items-center text-center mb-6">
           <Link href="/" className="inline-block transition-transform hover:scale-105 duration-200">
             <Image
               src="/shubhvivah-logo.png"
@@ -173,19 +174,21 @@ function LoginForm() {
               width={230}
               height={70}
               priority
-              className="h-14 sm:h-16 w-auto object-contain mx-auto drop-shadow-[0_2px_14px_rgba(214,184,117,0.35)]"
+              className="h-16 w-auto object-contain mx-auto drop-shadow-[0_2px_14px_rgba(214,184,117,0.35)]"
             />
           </Link>
 
-          <div className="mt-4 inline-flex items-center gap-2 rounded-full border border-[#B08D45]/40 bg-[#321B30] px-4 py-1 text-xs font-semibold text-[#D6B875] shadow-sm">
-            <Sparkles size={13} /> Matrimonial Member Login
+          <div className="mt-4 flex items-center justify-center">
+            <span className="inline-flex items-center gap-2 rounded-full border border-[#B08D45]/40 bg-[#321B30] px-4 py-1 text-xs font-semibold text-[#D6B875] shadow-sm">
+              <Sparkles size={13} /> Member Login
+            </span>
           </div>
 
-          <h1 className="mt-3 text-2xl sm:text-3xl font-serif font-bold text-[#F8F1E5] tracking-tight">
+          <h1 className="mt-4 text-2xl sm:text-3xl font-serif font-bold text-[#F8F1E5] tracking-tight">
             Welcome to ShubhVivah
           </h1>
-          <p className="mt-1.5 text-xs sm:text-sm text-[#C9BBAF]">
-            Log in to continue your matrimonial journey and connect with your partner.
+          <p className="mt-2 text-xs sm:text-sm text-[#C9BBAF] max-w-sm">
+            Log in to continue your wedding journey with ShubhVivah.
           </p>
         </div>
 

@@ -164,7 +164,7 @@ export default function AllVenuesPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#241321] text-[#F8F1E5]">
+    <div suppressHydrationWarning className="min-h-screen bg-[#241321] text-[#F8F1E5]">
       {/* =========================================================================
           1. BREADCRUMBS & SECTION HEADER (Follows reference website's layout)
          ========================================================================= */}
@@ -207,7 +207,7 @@ export default function AllVenuesPage() {
 
             {/* Quick Share / Count */}
             <div className="flex items-center gap-3">
-              <button
+              <button suppressHydrationWarning
                 type="button"
                 onClick={handleShare}
                 className="inline-flex items-center gap-1.5 rounded-full border border-[#665038] bg-[#321B30] px-3.5 py-1.5 text-xs font-medium text-[#C9BBAF] transition-colors hover:border-[#B08D45] hover:text-[#D6B875]"
@@ -227,7 +227,7 @@ export default function AllVenuesPage() {
             {VENUE_CATEGORIES.map((cat) => {
               const isActive = selectedCategory === cat;
               return (
-                <button
+                <button suppressHydrationWarning
                   key={cat}
                   type="button"
                   onClick={() => setSelectedCategory(cat)}
@@ -257,7 +257,7 @@ export default function AllVenuesPage() {
                 size={16}
                 className="absolute left-3.5 top-3 text-[#B08D45]"
               />
-              <input
+              <input suppressHydrationWarning
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
@@ -272,7 +272,7 @@ export default function AllVenuesPage() {
                 size={15}
                 className="pointer-events-none absolute left-3.5 top-3 text-[#B08D45]"
               />
-              <select
+              <select suppressHydrationWarning
                 value={selectedCity}
                 onChange={(e) => setSelectedCity(e.target.value)}
                 className="w-full cursor-pointer appearance-none rounded-xl border border-[#665038] bg-[#241321] py-2 pl-9 pr-8 text-xs font-medium text-[#F8F1E5] outline-none transition-colors focus:border-[#B08D45] sm:text-sm"
@@ -287,7 +287,7 @@ export default function AllVenuesPage() {
 
             {/* Sort Dropdown */}
             <div className="relative sm:w-48">
-              <select
+              <select suppressHydrationWarning
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value)}
                 className="w-full cursor-pointer appearance-none rounded-xl border border-[#665038] bg-[#241321] py-2 pl-3 pr-8 text-xs font-medium text-[#F8F1E5] outline-none transition-colors focus:border-[#B08D45] sm:text-sm"
@@ -302,7 +302,7 @@ export default function AllVenuesPage() {
 
             {/* Reset Filter Button */}
             {activeFiltersCount > 0 && (
-              <button
+              <button suppressHydrationWarning
                 type="button"
                 onClick={handleClearFilters}
                 className="inline-flex items-center justify-center gap-1 rounded-xl border border-[#665038] bg-[#241321] px-4 py-2 text-xs font-semibold text-[#D6B875] transition-colors hover:border-[#B08D45]"
@@ -372,7 +372,7 @@ export default function AllVenuesPage() {
                         </div>
 
                         {/* Shortlist Heart Button */}
-                        <button
+                        <button suppressHydrationWarning
                           type="button"
                           onClick={(e) => {
                             e.preventDefault();
@@ -512,7 +512,7 @@ export default function AllVenuesPage() {
                         Card Action Buttons: View Details & Enquire Now
                        ------------------------------------------------------------- */}
                     <div className="grid grid-cols-2 gap-2 p-5 pt-0">
-                      <button
+                      <button suppressHydrationWarning
                         type="button"
                         onClick={() => setEnquiryModalVenue(venue)}
                         className="flex items-center justify-center rounded-xl border border-[#B08D45] bg-[#241321] py-2.5 text-xs font-semibold text-[#F8F1E5] transition-all hover:bg-[#3A2638] hover:text-[#D6B875]"
@@ -548,7 +548,7 @@ export default function AllVenuesPage() {
               <p className="mx-auto mt-2 max-w-md text-xs text-[#C9BBAF]">
                 We couldn&apos;t find any venues matching your current city or search criteria.
               </p>
-              <button
+              <button suppressHydrationWarning
                 type="button"
                 onClick={handleClearFilters}
                 className="mt-5 rounded-full bg-[#B08D45] px-6 py-2.5 text-xs font-semibold text-[#241321]"
@@ -630,7 +630,7 @@ export default function AllVenuesPage() {
                       </div>
 
                       {/* Shortlist Heart Button */}
-                      <button
+                      <button suppressHydrationWarning
                         type="button"
                         onClick={(e) => {
                           e.preventDefault();
@@ -730,7 +730,7 @@ export default function AllVenuesPage() {
 
                   {/* Action Buttons */}
                   <div className="grid grid-cols-2 gap-2 p-5 pt-0">
-                    <button
+                    <button suppressHydrationWarning
                       type="button"
                       onClick={() => setEnquiryModalVenue(venue)}
                       className="flex items-center justify-center rounded-xl border border-[#B08D45]/60 bg-[#1E1019] py-2.5 text-xs font-semibold text-[#E8D9B5] transition-all hover:border-[#D6B875] hover:text-[#D6B875]"
@@ -752,7 +752,7 @@ export default function AllVenuesPage() {
 
           {/* Bottom CTA for Heritage category */}
           <div className="mt-10 text-center">
-            <button
+            <button suppressHydrationWarning
               type="button"
               onClick={() => setSelectedCategory("Heritage Palaces & Forts")}
               className="inline-flex items-center gap-2 rounded-full border border-[#B08D45] bg-[#321B30] px-6 py-2.5 text-xs font-semibold text-[#D6B875] transition-all hover:bg-[#B08D45] hover:text-[#1E1019]"
@@ -877,7 +877,7 @@ export default function AllVenuesPage() {
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/75 p-4 backdrop-blur-sm"
         >
           <div className="relative w-full max-w-lg rounded-2xl border border-[#665038] bg-[#321B30] p-6 shadow-2xl">
-            <button
+            <button suppressHydrationWarning
               type="button"
               onClick={closeEnquiryModal}
               className="absolute right-4 top-4 text-[#C9BBAF] hover:text-[#F8F1E5]"
@@ -897,7 +897,7 @@ export default function AllVenuesPage() {
                   Our royal venue concierge has sent your details to the senior banquet manager of{" "}
                   <span className="font-semibold text-[#D6B875]">{enquiryModalVenue.name}</span>. You will receive an official quotation and slot availability within 2 hours.
                 </p>
-                <button
+                <button suppressHydrationWarning
                   type="button"
                   onClick={closeEnquiryModal}
                   className="mt-6 rounded-full bg-[#B08D45] px-6 py-2.5 text-xs font-semibold text-[#241321]"
@@ -922,7 +922,7 @@ export default function AllVenuesPage() {
                     <label className="block text-xs font-medium text-[#E8D9B5]">
                       Full Name *
                     </label>
-                    <input
+                    <input suppressHydrationWarning
                       type="text"
                       required
                       value={formData.name}
@@ -936,7 +936,7 @@ export default function AllVenuesPage() {
                     <label className="block text-xs font-medium text-[#E8D9B5]">
                       Phone / WhatsApp Number *
                     </label>
-                    <input
+                    <input suppressHydrationWarning
                       type="tel"
                       required
                       value={formData.phone}
@@ -951,7 +951,7 @@ export default function AllVenuesPage() {
                       <label className="block text-xs font-medium text-[#E8D9B5]">
                         Wedding Date *
                       </label>
-                      <input
+                      <input suppressHydrationWarning
                         type="date"
                         required
                         value={formData.date}
@@ -963,7 +963,7 @@ export default function AllVenuesPage() {
                       <label className="block text-xs font-medium text-[#E8D9B5]">
                         Estimated Guests
                       </label>
-                      <select
+                      <select suppressHydrationWarning
                         value={formData.guests}
                         onChange={(e) => setFormData({ ...formData, guests: e.target.value })}
                         className="mt-1 w-full rounded-xl border border-[#665038] bg-[#241321] px-3 py-2 text-xs text-[#F8F1E5] outline-none focus:border-[#B08D45]"
@@ -989,7 +989,7 @@ export default function AllVenuesPage() {
                   </div>
 
                   <div className="pt-2">
-                    <button
+                    <button suppressHydrationWarning
                       type="submit"
                       className="w-full rounded-xl bg-[#B08D45] py-2.5 text-xs font-bold text-[#241321] transition-all hover:bg-[#D6B875]"
                     >

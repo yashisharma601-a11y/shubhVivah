@@ -387,7 +387,7 @@ export default function CoupleDashboardPage() {
             >
               Go to My {mismatchedRole.toUpperCase()} Dashboard
             </Link>
-            <button
+            <button suppressHydrationWarning
               onClick={handleLogout}
               className="block w-full py-2.5 px-4 rounded-xl border border-[#665038] text-xs text-[#C9BBAF] hover:text-white"
             >
@@ -467,7 +467,7 @@ export default function CoupleDashboardPage() {
                   Shubh<span className="text-[#D6B875]">Vivah</span>
                 </span>
               </Link>
-              <button
+              <button suppressHydrationWarning
                 onClick={() => setSidebarOpen(false)}
                 className="lg:hidden p-1.5 text-[#C9BBAF] hover:text-[#F8F1E5]"
               >
@@ -496,7 +496,7 @@ export default function CoupleDashboardPage() {
               const Icon = tab.icon;
               const isActive = activeTab === tab.id;
               return (
-                <button
+                <button suppressHydrationWarning
                   key={tab.id}
                   onClick={() => {
                     setActiveTab(tab.id);
@@ -546,7 +546,7 @@ export default function CoupleDashboardPage() {
             </Link>
           </div>
 
-          <button
+          <button suppressHydrationWarning
             onClick={handleLogout}
             className="w-full flex items-center justify-center gap-2 py-2 px-3 rounded-xl bg-red-950/60 border border-red-800/40 text-xs font-bold text-red-200 hover:bg-red-900/80 transition-colors cursor-pointer"
           >
@@ -570,7 +570,7 @@ export default function CoupleDashboardPage() {
         {/* Top Navbar Header */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#665038]/40 pb-5">
           <div className="flex items-center gap-3">
-            <button
+            <button suppressHydrationWarning
               onClick={() => setSidebarOpen(true)}
               className="lg:hidden p-2 rounded-xl bg-[#241321] border border-[#665038] text-[#D6B875]"
             >
@@ -595,7 +595,7 @@ export default function CoupleDashboardPage() {
           <div className="flex items-center gap-3">
             {/* Notification Bell Dropdown */}
             <div className="relative">
-              <button
+              <button suppressHydrationWarning
                 onClick={() => setNotificationsOpen(!notificationsOpen)}
                 className="relative p-2.5 rounded-xl border border-[#665038] bg-[#241321] text-[#D6B875] hover:bg-[#321B30] transition-colors cursor-pointer"
                 title="Notifications"
@@ -628,7 +628,7 @@ export default function CoupleDashboardPage() {
                       ))
                     )}
                   </div>
-                  <button
+                  <button suppressHydrationWarning
                     onClick={() => {
                       setActiveTab("notifications");
                       setNotificationsOpen(false);
@@ -720,7 +720,7 @@ export default function CoupleDashboardPage() {
 
                 <div className="mt-5 pt-4 border-t border-[#665038]/30 flex items-center justify-between text-xs">
                   <span className="text-[#C9BBAF]">Location: {profileForm.wedding_location || "Jaipur, Rajasthan"}</span>
-                  <button onClick={() => setActiveTab("profile")} className="text-[#D6B875] hover:underline font-semibold">
+                  <button suppressHydrationWarning onClick={() => setActiveTab("profile")} className="text-[#D6B875] hover:underline font-semibold">
                     Edit →
                   </button>
                 </div>
@@ -772,7 +772,7 @@ export default function CoupleDashboardPage() {
                 </div>
 
                 <div className="flex justify-end pt-1">
-                  <button
+                  <button suppressHydrationWarning
                     onClick={() => setActiveTab("planning")}
                     className="text-xs font-semibold text-[#D6B875] hover:underline"
                   >
@@ -788,7 +788,7 @@ export default function CoupleDashboardPage() {
               <div className="rounded-3xl border border-[#665038]/60 bg-[#241321] p-6 shadow-xl space-y-4">
                 <div className="flex items-center justify-between border-b border-[#665038]/40 pb-3">
                   <h4 className="text-base font-serif font-bold text-[#F8F1E5]">My Active Wedding Bookings</h4>
-                  <button onClick={() => setActiveTab("bookings")} className="text-xs text-[#D6B875] hover:underline">
+                  <button suppressHydrationWarning onClick={() => setActiveTab("bookings")} className="text-xs text-[#D6B875] hover:underline">
                     View All ({bookings.length}) →
                   </button>
                 </div>
@@ -834,7 +834,7 @@ export default function CoupleDashboardPage() {
               <div className="rounded-3xl border border-[#665038]/60 bg-[#241321] p-6 shadow-xl space-y-4">
                 <div className="flex items-center justify-between border-b border-[#665038]/40 pb-3">
                   <h4 className="text-base font-serif font-bold text-[#F8F1E5]">Shortlisted Wishlist</h4>
-                  <button onClick={() => setActiveTab("wishlist")} className="text-xs text-[#D6B875] hover:underline">
+                  <button suppressHydrationWarning onClick={() => setActiveTab("wishlist")} className="text-xs text-[#D6B875] hover:underline">
                     View All ({wishlist.length}) →
                   </button>
                 </div>
@@ -879,7 +879,7 @@ export default function CoupleDashboardPage() {
                 <h3 className="text-xl font-serif font-bold text-[#F8F1E5]">Couple Wedding Profile</h3>
                 <p className="text-xs text-[#C9BBAF]">Personal details, bride & groom identity, wedding budget, and city details</p>
               </div>
-              <button
+              <button suppressHydrationWarning
                 onClick={() => setIsEditingProfile(!isEditingProfile)}
                 className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl border border-[#665038] bg-[#321B30] text-xs font-semibold text-[#D6B875] hover:bg-[#B08D45] hover:text-[#1F0E1D] transition-colors cursor-pointer shrink-0"
               >
@@ -1010,7 +1010,7 @@ export default function CoupleDashboardPage() {
 
               {isEditingProfile && (
                 <div className="flex justify-end pt-3">
-                  <button
+                  <button suppressHydrationWarning
                     type="submit"
                     className="flex items-center gap-2 px-6 py-2.5 rounded-xl bg-[#B08D45] text-[#1F0E1D] font-bold text-xs hover:bg-[#D6B875] transition-colors cursor-pointer"
                   >
@@ -1057,7 +1057,7 @@ export default function CoupleDashboardPage() {
                     <option value="Catering & Cake">Catering & Cake</option>
                     <option value="Music & DJ">Music & DJ</option>
                   </select>
-                  <button
+                  <button suppressHydrationWarning
                     type="submit"
                     className="flex items-center gap-1 px-3.5 py-2 rounded-xl bg-[#B08D45] text-[#1F0E1D] text-xs font-bold hover:bg-[#D6B875] transition-colors cursor-pointer shrink-0"
                   >
@@ -1093,7 +1093,7 @@ export default function CoupleDashboardPage() {
                       <span className="text-[10px] px-2 py-0.5 rounded-full bg-[#321B30] text-[#D6B875] border border-[#665038]/30">
                         {task.category || "Custom"}
                       </span>
-                      <button
+                      <button suppressHydrationWarning
                         onClick={() => handleDeleteChecklist(task.id)}
                         className="text-[#C9BBAF] hover:text-red-400 p-1"
                         title="Remove Task"
@@ -1139,7 +1139,7 @@ export default function CoupleDashboardPage() {
                     placeholder="Act ₹"
                     className="w-24 px-3 py-1.5 rounded-xl bg-[#1A0B18] border border-[#665038]/60 text-xs text-[#F8F1E5] placeholder-[#C9BBAF] focus:outline-none focus:border-[#D6B875]"
                   />
-                  <button
+                  <button suppressHydrationWarning
                     type="submit"
                     className="px-3 py-1.5 rounded-xl bg-[#B08D45] text-[#1F0E1D] text-xs font-bold hover:bg-[#D6B875] transition-colors cursor-pointer"
                   >
@@ -1179,7 +1179,7 @@ export default function CoupleDashboardPage() {
                             {diff >= 0 ? `+₹${diff.toLocaleString("en-IN")}` : `-₹${Math.abs(diff).toLocaleString("en-IN")}`}
                           </td>
                           <td className="py-3 px-4 text-right">
-                            <button
+                            <button suppressHydrationWarning
                               onClick={() => handleDeleteBudget(item.id)}
                               className="text-[#C9BBAF] hover:text-red-400 transition-colors p-1"
                             >
@@ -1287,20 +1287,20 @@ export default function CoupleDashboardPage() {
                           </td>
                           <td className="py-3 px-4 text-right">
                             <div className="flex items-center justify-end gap-1.5">
-                              <button
+                              <button suppressHydrationWarning
                                 onClick={() => setSelectedBookingModal(b)}
                                 className="px-2.5 py-1 rounded-lg bg-[#321B30] text-[11px] text-[#D6B875] hover:bg-[#B08D45] hover:text-[#1F0E1D] transition-colors"
                               >
                                 View Details
                               </button>
-                              <button
+                              <button suppressHydrationWarning
                                 onClick={() => setContactVendorModal(b)}
                                 className="px-2.5 py-1 rounded-lg bg-[#321B30] text-[11px] text-[#F8F1E5] hover:bg-[#D6B875] hover:text-[#1F0E1D] transition-colors"
                               >
                                 Message
                               </button>
                               {b.booking_status !== "Cancelled" && (
-                                <button
+                                <button suppressHydrationWarning
                                   onClick={() => handleCancelBooking(b.id)}
                                   className="px-2.5 py-1 rounded-lg bg-red-950/80 text-[11px] text-red-300 hover:bg-red-900 transition-colors"
                                 >
@@ -1371,7 +1371,7 @@ export default function CoupleDashboardPage() {
                       >
                         Explore Details <ChevronRight size={13} />
                       </Link>
-                      <button
+                      <button suppressHydrationWarning
                         onClick={() => handleRemoveWishlist(item.id)}
                         className="text-xs text-red-300 hover:text-red-200 transition-colors"
                       >
@@ -1533,7 +1533,7 @@ export default function CoupleDashboardPage() {
                 />
               </div>
 
-              <button
+              <button suppressHydrationWarning
                 type="submit"
                 className="w-full py-2.5 rounded-xl bg-[#B08D45] text-[#1F0E1D] font-bold text-xs hover:bg-[#D6B875] transition-colors cursor-pointer"
               >
@@ -1554,7 +1554,7 @@ export default function CoupleDashboardPage() {
               <h3 className="text-base font-serif font-bold text-[#F8F1E5]">
                 Booking #{selectedBookingModal.id}
               </h3>
-              <button
+              <button suppressHydrationWarning
                 onClick={() => setSelectedBookingModal(null)}
                 className="text-[#C9BBAF] hover:text-[#F8F1E5]"
               >
@@ -1598,7 +1598,7 @@ export default function CoupleDashboardPage() {
             </div>
 
             <div className="flex justify-end gap-2 pt-2 border-t border-[#665038]/40">
-              <button
+              <button suppressHydrationWarning
                 onClick={() => setSelectedBookingModal(null)}
                 className="px-4 py-2 rounded-xl bg-[#321B30] text-xs font-semibold text-[#D6B875] hover:bg-[#B08D45] hover:text-[#1F0E1D] transition-colors"
               >
@@ -1619,7 +1619,7 @@ export default function CoupleDashboardPage() {
               <h3 className="text-base font-serif font-bold text-[#F8F1E5]">
                 Contact {contactVendorModal.vendor_name}
               </h3>
-              <button
+              <button suppressHydrationWarning
                 onClick={() => setContactVendorModal(null)}
                 className="text-[#C9BBAF] hover:text-[#F8F1E5]"
               >
@@ -1640,13 +1640,13 @@ export default function CoupleDashboardPage() {
             />
 
             <div className="flex justify-end gap-2">
-              <button
+              <button suppressHydrationWarning
                 onClick={() => setContactVendorModal(null)}
                 className="px-4 py-2 rounded-xl border border-[#665038] text-xs text-[#C9BBAF]"
               >
                 Cancel
               </button>
-              <button
+              <button suppressHydrationWarning
                 onClick={handleSendVendorEnquiry}
                 className="px-4 py-2 rounded-xl bg-[#B08D45] text-[#1F0E1D] text-xs font-bold hover:bg-[#D6B875] transition-colors"
               >

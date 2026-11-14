@@ -154,7 +154,7 @@ export default function VenueDetailClient({ venue: propVenue, slug }) {
 
             {/* Quick CTAs */}
             <div className="flex items-center gap-2.5">
-              <button
+              <button suppressHydrationWarning
                 type="button"
                 onClick={handleShare}
                 className="flex items-center gap-1.5 rounded-xl border border-[#665038] bg-[#241321] px-3.5 py-2 text-xs font-medium text-[#C9BBAF] transition-colors hover:border-[#B08D45] hover:text-[#D6B875]"
@@ -163,7 +163,7 @@ export default function VenueDetailClient({ venue: propVenue, slug }) {
                 <span>{copiedLink ? "Copied!" : "Share"}</span>
               </button>
 
-              <button
+              <button suppressHydrationWarning
                 type="button"
                 onClick={() => setIsShortlisted(!isShortlisted)}
                 className={`flex items-center gap-1.5 rounded-xl border px-3.5 py-2 text-xs font-medium transition-colors ${
@@ -179,7 +179,7 @@ export default function VenueDetailClient({ venue: propVenue, slug }) {
                 <span>{isShortlisted ? "Shortlisted" : "Shortlist"}</span>
               </button>
 
-              <button
+              <button suppressHydrationWarning
                 type="button"
                 onClick={() => setEnquiryModalOpen(true)}
                 className="rounded-xl bg-[#B08D45] px-5 py-2 text-xs font-bold text-[#241321] transition-all hover:bg-[#D6B875]"
@@ -209,7 +209,7 @@ export default function VenueDetailClient({ venue: propVenue, slug }) {
                 { id: "indoor", label: "Indoor Banquet Halls" },
                 { id: "outdoor", label: "Outdoor Lawns & Facade" },
               ].map((tab) => (
-                <button
+                <button suppressHydrationWarning
                   key={tab.id}
                   type="button"
                   onClick={() => {
@@ -231,7 +231,7 @@ export default function VenueDetailClient({ venue: propVenue, slug }) {
               ))}
             </div>
 
-            <button
+            <button suppressHydrationWarning
               type="button"
               onClick={() => setLightboxOpen(true)}
               className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#D6B875] hover:underline"
@@ -264,7 +264,7 @@ export default function VenueDetailClient({ venue: propVenue, slug }) {
                     </h3>
                   </div>
 
-                  <button
+                  <button suppressHydrationWarning
                     type="button"
                     onClick={() => setLightboxOpen(true)}
                     className="flex h-9 w-9 items-center justify-center rounded-full bg-[#241321]/80 text-[#F8F1E5] backdrop-blur-md transition-colors hover:bg-[#B08D45] hover:text-[#241321]"
@@ -290,7 +290,7 @@ export default function VenueDetailClient({ venue: propVenue, slug }) {
                 {venue.gallery.map((photo, idx) => {
                   const isSelected = selectedPhotoIndex === idx;
                   return (
-                    <button
+                    <button suppressHydrationWarning
                       key={photo.id}
                       type="button"
                       onClick={() => setSelectedPhotoIndex(idx)}
@@ -419,7 +419,7 @@ export default function VenueDetailClient({ venue: propVenue, slug }) {
                     { id: "pricing", label: "Pricing & Packages" },
                     { id: "reviews", label: `Reviews (${venue.reviewsCount})` },
                   ].map((tab) => (
-                    <button
+                    <button suppressHydrationWarning
                       key={tab.id}
                       type="button"
                       onClick={() => setActiveTab(tab.id)}
@@ -707,7 +707,7 @@ export default function VenueDetailClient({ venue: propVenue, slug }) {
 
                   {/* Primary Contact / Enquire Button */}
                   <div className="mt-5 space-y-2.5">
-                    <button
+                    <button suppressHydrationWarning
                       type="button"
                       onClick={() => setEnquiryModalOpen(true)}
                       className="w-full rounded-xl bg-gradient-to-r from-[#B08D45] to-[#D6B875] py-3 text-xs font-bold text-[#241321] shadow-lg shadow-[#B08D45]/20 transition-all hover:brightness-110"
@@ -772,7 +772,7 @@ export default function VenueDetailClient({ venue: propVenue, slug }) {
           aria-modal="true"
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 p-4 backdrop-blur-md"
         >
-          <button
+          <button suppressHydrationWarning
             type="button"
             onClick={() => setLightboxOpen(false)}
             className="absolute right-5 top-5 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white hover:bg-white/25"
@@ -809,7 +809,7 @@ export default function VenueDetailClient({ venue: propVenue, slug }) {
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 backdrop-blur-sm"
         >
           <div className="relative w-full max-w-lg rounded-2xl border border-[#665038] bg-[#321B30] p-6 shadow-2xl">
-            <button
+            <button suppressHydrationWarning
               type="button"
               onClick={() => {
                 setEnquiryModalOpen(false);
@@ -832,7 +832,7 @@ export default function VenueDetailClient({ venue: propVenue, slug }) {
                   Thank you, <span className="font-semibold text-[#D6B875]">{formData.name || "Valued Guest"}</span>.
                   The banquet reservation desk at {venue.name} has been notified. You will receive an official date hold confirmation and detailed quote shortly.
                 </p>
-                <button
+                <button suppressHydrationWarning
                   type="button"
                   onClick={() => {
                     setEnquiryModalOpen(false);
@@ -927,7 +927,7 @@ export default function VenueDetailClient({ venue: propVenue, slug }) {
                   </div>
 
                   <div className="pt-2">
-                    <button
+                    <button suppressHydrationWarning
                       type="submit"
                       className="w-full rounded-xl bg-[#B08D45] py-2.5 text-xs font-bold text-[#241321] transition-all hover:bg-[#D6B875]"
                     >

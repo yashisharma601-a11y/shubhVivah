@@ -992,7 +992,7 @@ export default function BridalGroomWearPage() {
                   className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#D6B875]"
                 />
                 {searchTerm && (
-                  <button
+                  <button suppressHydrationWarning
                     type="button"
                     onClick={() => setSearchTerm("")}
                     className="absolute right-3 top-1/2 -translate-y-1/2 text-[#C9BBAF] hover:text-[#F8F1E5]"
@@ -1051,7 +1051,7 @@ export default function BridalGroomWearPage() {
                 { label: "Velvet Tuxedos", cat: "Groom Wear", type: "Tuxedo" },
                 { label: "Rental Outfits", cat: "All Wedding Wear", type: "Rental Outfit" },
               ].map((item) => (
-                <button
+                <button suppressHydrationWarning
                   key={item.label}
                   type="button"
                   onClick={() => handleCategorySwitch(item.cat, item.type)}
@@ -1061,7 +1061,7 @@ export default function BridalGroomWearPage() {
                 </button>
               ))}
               {activeFiltersCount > 0 && (
-                <button
+                <button suppressHydrationWarning
                   type="button"
                   onClick={handleClearFilters}
                   className="ml-auto inline-flex items-center gap-1 text-[11px] text-[#D6B875] underline underline-offset-2 hover:text-[#E8D9B5]"
@@ -1143,7 +1143,7 @@ export default function BridalGroomWearPage() {
                 </div>
 
                 <div className="mt-6">
-                  <button
+                  <button suppressHydrationWarning
                     type="button"
                     className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-[#B08D45] to-[#D6B875] px-5 py-2.5 text-xs font-semibold uppercase tracking-wider text-[#241321] shadow-md transition-all hover:brightness-105"
                   >
@@ -1218,7 +1218,7 @@ export default function BridalGroomWearPage() {
                 </div>
 
                 <div className="mt-6">
-                  <button
+                  <button suppressHydrationWarning
                     type="button"
                     className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-[#B08D45] to-[#D6B875] px-5 py-2.5 text-xs font-semibold uppercase tracking-wider text-[#241321] shadow-md transition-all hover:brightness-105"
                   >
@@ -1261,7 +1261,7 @@ export default function BridalGroomWearPage() {
             {/* Controls: Category Pills, Shortlist, and Sort */}
             <div className="flex flex-wrap items-center gap-2.5 sm:gap-3">
               {/* Shortlist Filter Toggle */}
-              <button
+              <button suppressHydrationWarning
                 type="button"
                 onClick={() => setOnlyShortlisted((prev) => !prev)}
                 aria-pressed={onlyShortlisted}
@@ -1283,7 +1283,7 @@ export default function BridalGroomWearPage() {
               </button>
 
               {/* Mobile Filter Button */}
-              <button
+              <button suppressHydrationWarning
                 type="button"
                 onClick={() => setMobileFilterOpen(true)}
                 className="relative inline-flex items-center gap-1.5 rounded-xl border border-[#665038] bg-[#321B30] px-3.5 py-2 text-xs font-medium text-[#F8F1E5] transition-colors hover:border-[#B08D45] lg:hidden"
@@ -1324,7 +1324,7 @@ export default function BridalGroomWearPage() {
 
               {/* Clear Filters (if active) */}
               {activeFiltersCount > 0 && (
-                <button
+                <button suppressHydrationWarning
                   type="button"
                   onClick={handleClearFilters}
                   className="hidden items-center gap-1 rounded-xl border border-[#665038] bg-[#241321] px-3 py-2 text-xs text-[#D6B875] transition-colors hover:bg-[#321B30] sm:inline-flex"
@@ -1340,7 +1340,7 @@ export default function BridalGroomWearPage() {
           {/* Category Tabs Bar */}
           <div className="flex flex-wrap items-center gap-2 pt-2">
             {CATEGORIES.map((cat) => (
-              <button
+              <button suppressHydrationWarning
                 key={cat}
                 type="button"
                 onClick={() => {
@@ -1374,7 +1374,7 @@ export default function BridalGroomWearPage() {
                   </span>
                 </div>
                 {activeFiltersCount > 0 && (
-                  <button
+                  <button suppressHydrationWarning
                     type="button"
                     onClick={handleClearFilters}
                     className="inline-flex items-center gap-1 text-xs text-[#D6B875] hover:text-[#E8D9B5]"
@@ -1394,7 +1394,7 @@ export default function BridalGroomWearPage() {
                   {activeOutfitTypes.map((type) => {
                     const isSelected = selectedOutfitType === type;
                     return (
-                      <button
+                      <button suppressHydrationWarning
                         key={type}
                         type="button"
                         onClick={() => setSelectedOutfitType(type)}
@@ -1514,7 +1514,7 @@ export default function BridalGroomWearPage() {
               </div>
 
               {/* Clear All Filters Button */}
-              <button
+              <button suppressHydrationWarning
                 type="button"
                 onClick={handleClearFilters}
                 className="w-full rounded-xl border border-[#665038] bg-[#241321] py-2.5 text-center text-xs font-medium text-[#F8F1E5] transition-colors hover:bg-[#3A2638] hover:text-[#D6B875]"
@@ -1546,7 +1546,7 @@ export default function BridalGroomWearPage() {
                   occasion, budget, or filters. Try resetting your search or choosing
                   a broader price range.
                 </p>
-                <button
+                <button suppressHydrationWarning
                   type="button"
                   onClick={handleClearFilters}
                   className="mt-6 inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#B08D45] to-[#D6B875] px-6 py-2.5 text-xs font-semibold text-[#241321] shadow-lg transition-all hover:brightness-105"
@@ -1590,7 +1590,7 @@ export default function BridalGroomWearPage() {
                         </div>
 
                         {/* Shortlist Heart Button */}
-                        <button
+                        <button suppressHydrationWarning
                           type="button"
                           onClick={() => toggleShortlist(outfit.id)}
                           aria-label={
@@ -1670,7 +1670,7 @@ export default function BridalGroomWearPage() {
 
                         {/* Card Actions */}
                         <div className="mt-auto pt-4 grid grid-cols-2 gap-2 border-t border-[#665038]/60">
-                          <button
+                          <button suppressHydrationWarning
                             type="button"
                             onClick={() => openDetailsModal(outfit)}
                             className="inline-flex items-center justify-center gap-1 rounded-xl border border-[#665038] bg-[#321B30] px-2.5 py-2 text-[11px] font-semibold text-[#F8F1E5] transition-colors hover:border-[#B08D45] hover:bg-[#241321] hover:text-[#D6B875]"
@@ -1679,7 +1679,7 @@ export default function BridalGroomWearPage() {
                             <span>Details</span>
                           </button>
 
-                          <button
+                          <button suppressHydrationWarning
                             type="button"
                             onClick={() => openEnquiryModal(outfit)}
                             className="inline-flex items-center justify-center gap-1 rounded-xl bg-gradient-to-r from-[#B08D45] to-[#D6B875] px-2.5 py-2 text-[11px] font-semibold text-[#241321] shadow-md transition-all hover:brightness-105 active:scale-95"
@@ -1716,7 +1716,7 @@ export default function BridalGroomWearPage() {
                   Filter Wedding Wear
                 </span>
               </div>
-              <button
+              <button suppressHydrationWarning
                 type="button"
                 onClick={() => setMobileFilterOpen(false)}
                 className="flex h-8 w-8 items-center justify-center rounded-full border border-[#665038] bg-[#241321] text-[#F8F1E5] hover:bg-[#3A2638]"
@@ -1865,14 +1865,14 @@ export default function BridalGroomWearPage() {
 
             {/* Drawer Actions */}
             <div className="border-t border-[#665038] pt-4 space-y-2">
-              <button
+              <button suppressHydrationWarning
                 type="button"
                 onClick={() => setMobileFilterOpen(false)}
                 className="w-full rounded-xl bg-gradient-to-r from-[#B08D45] to-[#D6B875] py-2.5 text-center text-xs font-semibold text-[#241321]"
               >
                 Apply Filters ({filteredOutfits.length})
               </button>
-              <button
+              <button suppressHydrationWarning
                 type="button"
                 onClick={handleClearFilters}
                 className="w-full rounded-xl border border-[#665038] bg-[#241321] py-2 text-center text-xs text-[#C9BBAF] hover:text-[#D6B875]"
@@ -1895,7 +1895,7 @@ export default function BridalGroomWearPage() {
         >
           <div className="relative max-h-[92vh] w-full max-w-3xl overflow-y-auto rounded-3xl border border-[#665038] bg-[#321B30] p-6 shadow-2xl sm:p-8">
             {/* Close Button */}
-            <button
+            <button suppressHydrationWarning
               type="button"
               onClick={closeDetailsModal}
               className="absolute right-4 top-4 flex h-9 w-9 items-center justify-center rounded-full border border-[#665038] bg-[#241321] text-[#F8F1E5] transition-colors hover:bg-[#3A2638] hover:text-[#D6B875]"
@@ -1956,7 +1956,7 @@ export default function BridalGroomWearPage() {
               {detailsOutfit.gallery.length > 1 && (
                 <div className="flex gap-2 overflow-x-auto pb-1">
                   {detailsOutfit.gallery.map((img, idx) => (
-                    <button
+                    <button suppressHydrationWarning
                       key={img}
                       type="button"
                       onClick={() => setModalActiveImage(idx)}
@@ -2042,7 +2042,7 @@ export default function BridalGroomWearPage() {
 
             {/* Modal Bottom Actions */}
             <div className="mt-8 flex flex-wrap items-center justify-between gap-4 border-t border-[#665038] pt-5">
-              <button
+              <button suppressHydrationWarning
                 type="button"
                 onClick={() => toggleShortlist(detailsOutfit.id)}
                 className={`inline-flex items-center gap-2 rounded-xl border px-4 py-2.5 text-xs font-medium transition-all ${
@@ -2067,14 +2067,14 @@ export default function BridalGroomWearPage() {
               </button>
 
               <div className="flex items-center gap-3">
-                <button
+                <button suppressHydrationWarning
                   type="button"
                   onClick={closeDetailsModal}
                   className="rounded-xl border border-[#665038] bg-[#241321] px-4 py-2.5 text-xs font-medium text-[#F8F1E5] hover:bg-[#3A2638]"
                 >
                   Close
                 </button>
-                <button
+                <button suppressHydrationWarning
                   type="button"
                   onClick={() => {
                     const sel = detailsOutfit;
@@ -2103,7 +2103,7 @@ export default function BridalGroomWearPage() {
         >
           <div className="relative max-h-[92vh] w-full max-w-xl overflow-y-auto rounded-3xl border border-[#665038] bg-[#321B30] p-6 shadow-2xl sm:p-8">
             {/* Close Button */}
-            <button
+            <button suppressHydrationWarning
               type="button"
               onClick={closeEnquiryModal}
               className="absolute right-4 top-4 flex h-9 w-9 items-center justify-center rounded-full border border-[#665038] bg-[#241321] text-[#F8F1E5] transition-colors hover:bg-[#3A2638] hover:text-[#D6B875]"
@@ -2166,7 +2166,7 @@ export default function BridalGroomWearPage() {
                   </p>
                 </div>
 
-                <button
+                <button suppressHydrationWarning
                   type="button"
                   onClick={closeEnquiryModal}
                   className="mt-6 rounded-full bg-gradient-to-r from-[#B08D45] to-[#D6B875] px-8 py-2.5 text-xs font-semibold text-[#241321] shadow-lg hover:brightness-105"
@@ -2411,14 +2411,14 @@ export default function BridalGroomWearPage() {
 
                   {/* Actions */}
                   <div className="flex items-center justify-end gap-3 pt-2">
-                    <button
+                    <button suppressHydrationWarning
                       type="button"
                       onClick={closeEnquiryModal}
                       className="rounded-xl border border-[#665038] bg-[#241321] px-4 py-2.5 font-medium text-[#F8F1E5] hover:bg-[#3A2638]"
                     >
                       Cancel
                     </button>
-                    <button
+                    <button suppressHydrationWarning
                       type="submit"
                       className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-[#B08D45] to-[#D6B875] px-6 py-2.5 font-semibold text-[#241321] shadow-lg transition-all hover:brightness-105"
                     >
@@ -2567,7 +2567,7 @@ export default function BridalGroomWearPage() {
                   key={faq.q}
                   className="overflow-hidden rounded-2xl border border-[#665038] bg-[#321B30] transition-colors"
                 >
-                  <button
+                  <button suppressHydrationWarning
                     type="button"
                     onClick={() => setOpenFaqIndex(isOpen ? -1 : index)}
                     aria-expanded={isOpen}

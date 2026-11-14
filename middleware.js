@@ -2,22 +2,13 @@ import { NextResponse } from "next/server";
 import { verifySessionTokenUniversal } from "./lib/session";
 
 // 1. Explicitly Allowed Public Pages
-// Allow guest visitors to browse the website so they can explore venues, vendors, suppliers, etc.
-// The recurring 10-second Sign Up popup prompts them to register/login while browsing.
-// Protected user-specific areas (like dashboards and personal profile) still require login.
+// ONLY the Home page and public Authentication routes are accessible to guests.
+// All services, venues, vendors, suppliers, bookings, dashboards, and profile pages require login.
 const PUBLIC_PAGES = [
   "/",
   "/login",
   "/register",
   "/forgot-password",
-  "/venues",
-  "/wedding-vendors",
-  "/vendors",
-  "/suppliers",
-  "/e-invites",
-  "/real-weddings",
-  "/blog",
-  "/contact",
 ];
 
 function isPublicPage(pathname) {
@@ -29,6 +20,7 @@ function isPublicPage(pathname) {
 }
 
 // 2. Explicitly Allowed Public APIs
+// Public auth endpoints, chatbot, and public registrations
 const PUBLIC_APIS = [
   "/api/auth/login",
   "/api/auth/register",
@@ -41,8 +33,8 @@ const PUBLIC_APIS = [
   "/api/admin/login",
   "/api/sathi-chat",
   "/api/sathi-chat/inquiry",
-  "/api/vendors",
   "/api/contact/register",
+  "/api/vendors/register",
 ];
 
 function isPublicApi(pathname) {

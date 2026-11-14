@@ -181,7 +181,7 @@ export default function DestinationWeddingsPage() {
 
             {/* Quick Share / Count */}
             <div className="flex items-center gap-3">
-              <button
+              <button suppressHydrationWarning
                 type="button"
                 onClick={handleShare}
                 className="inline-flex items-center gap-1.5 rounded-full border border-[#665038] bg-[#321B30] px-3.5 py-1.5 text-xs font-medium text-[#C9BBAF] transition-colors hover:border-[#B08D45] hover:text-[#D6B875]"
@@ -257,7 +257,7 @@ export default function DestinationWeddingsPage() {
 
             {/* Reset Filter Button */}
             {activeFiltersCount > 0 && (
-              <button
+              <button suppressHydrationWarning
                 type="button"
                 onClick={handleClearFilters}
                 className="inline-flex items-center justify-center gap-1 rounded-xl border border-[#665038] bg-[#241321] px-4 py-2 text-xs font-semibold text-[#D6B875] transition-colors hover:border-[#B08D45]"
@@ -327,7 +327,7 @@ export default function DestinationWeddingsPage() {
                         </div>
 
                         {/* Shortlist Heart Button */}
-                        <button
+                        <button suppressHydrationWarning
                           type="button"
                           onClick={(e) => {
                             e.preventDefault();
@@ -467,7 +467,7 @@ export default function DestinationWeddingsPage() {
                         Card Action Buttons: View Details & Enquire Now
                        ------------------------------------------------------------- */}
                     <div className="grid grid-cols-2 gap-2 p-5 pt-0">
-                      <button
+                      <button suppressHydrationWarning
                         type="button"
                         onClick={() => setEnquiryModalVenue(venue)}
                         className="flex items-center justify-center rounded-xl border border-[#B08D45] bg-[#241321] py-2.5 text-xs font-semibold text-[#F8F1E5] transition-all hover:bg-[#3A2638] hover:text-[#D6B875]"
@@ -503,7 +503,7 @@ export default function DestinationWeddingsPage() {
               <p className="mx-auto mt-2 max-w-md text-xs text-[#C9BBAF]">
                 Try adjusting your search criteria or resetting filters to browse all available heritage destination wedding resorts.
               </p>
-              <button
+              <button suppressHydrationWarning
                 type="button"
                 onClick={handleClearFilters}
                 className="mt-6 inline-flex items-center gap-2 rounded-xl bg-[#B08D45] px-5 py-2.5 text-xs font-bold text-[#241321] transition-all hover:bg-[#D6B875]"
@@ -526,7 +526,7 @@ export default function DestinationWeddingsPage() {
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 backdrop-blur-sm"
         >
           <div className="relative w-full max-w-lg rounded-2xl border border-[#B08D45] bg-[#321B30] p-6 shadow-2xl">
-            <button
+            <button suppressHydrationWarning
               type="button"
               onClick={closeEnquiryModal}
               className="absolute right-4 top-4 text-[#C9BBAF] transition-colors hover:text-[#F8F1E5]"
@@ -552,7 +552,7 @@ export default function DestinationWeddingsPage() {
                 <p className="mx-auto mt-2 max-w-sm text-xs text-[#C9BBAF]">
                   The heritage concierge team of {enquiryModalVenue.name} has received your destination wedding request and will contact you via Phone / WhatsApp within 2 hours.
                 </p>
-                <button
+                <button suppressHydrationWarning
                   type="button"
                   onClick={closeEnquiryModal}
                   className="mt-6 rounded-xl bg-[#B08D45] px-6 py-2.5 text-xs font-bold text-[#241321] hover:bg-[#D6B875]"
@@ -649,7 +649,7 @@ export default function DestinationWeddingsPage() {
                   </div>
 
                   <div className="pt-2">
-                    <button
+                    <button suppressHydrationWarning
                       type="submit"
                       className="w-full rounded-xl bg-[#B08D45] py-2.5 text-xs font-bold text-[#241321] transition-all hover:bg-[#D6B875]"
                     >

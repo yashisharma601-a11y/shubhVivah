@@ -65,14 +65,14 @@ function SathiAvatar({ size = "md", isOnline = true }) {
   );
 }
 
-// Quick action chips
+// Quick action chips tailored to Wedding Marketplace
 const QUICK_ACTIONS = [
-  { id: "match", label: "Find My Perfect Match", icon: Heart },
-  { id: "search", label: "Search Matrimonial Profiles", icon: Sparkles },
-  { id: "create", label: "How to Create a Profile?", icon: User },
-  { id: "auth", label: "Registration & Login Help", icon: ShieldCheck },
-  { id: "plans", label: "Membership Plans", icon: Calendar },
-  { id: "support", label: "Contact Support", icon: Phone },
+  { id: "venues", label: "Browse Wedding Venues", icon: Calendar },
+  { id: "vendors", label: "Find Wedding Vendors", icon: Sparkles },
+  { id: "suppliers", label: "Wedding Suppliers", icon: ShieldCheck },
+  { id: "e-invites", label: "Digital E-Invitations", icon: MessageCircle },
+  { id: "list", label: "List Your Business", icon: User },
+  { id: "support", label: "Contact Wedding Concierge", icon: Phone },
 ];
 
 export default function SathiChatbot() {
@@ -86,16 +86,17 @@ export default function SathiChatbot() {
     {
       id: "welcome-1",
       sender: "sathi",
-      text: "Namaste! 🙏 Welcome to Shubvivah.\n\nI'm **Sathi**, your personal matchmaking assistant.\n\nHow can I help you find your perfect life partner today?",
+      text: "Namaste! 🙏 Welcome to ShubhVivah.\n\nI'm **Sathi**, your personal AI Wedding Planning Assistant.\n\nHow can I help plan your dream wedding today? You can explore luxury heritage palaces, top banquet halls, photographers, makeup artists, and wedding suppliers.",
       timestamp: "Just now",
       actions: [
-        "Find My Perfect Match",
-        "Search Matrimonial Profiles",
-        "How to Create a Profile?",
-        "Membership Plans",
+        "Browse Wedding Venues",
+        "Find Wedding Vendors",
+        "Wedding Suppliers",
+        "List Your Business",
       ],
       navLinks: [
-        { label: "Create Free Matrimonial Profile", href: "/register?type=couple" },
+        { label: "Explore Wedding Venues", href: "/venues" },
+        { label: "Browse Wedding Vendors", href: "/wedding-vendors/wedding-photography" },
       ],
     },
   ]);
@@ -274,16 +275,16 @@ export default function SathiChatbot() {
         {
           id: generateMsgId("welcome"),
           sender: "sathi",
-          text: "Namaste! 🙏 Welcome back to Shubvivah.\n\nI'm **Sathi**, your personal matchmaking assistant.\n\nHow can I help you find your perfect life partner today?",
+          text: "Namaste! 🙏 Welcome back to Shubvivah.\n\nI'm **Sathi**, your personal wedding planning assistant.\n\nHow can I help you find your perfect wedding services today?",
           timestamp: getTimestamp(),
           actions: [
             "Find My Perfect Match",
-            "Search Matrimonial Profiles",
+            "Search Wedding Profiles",
             "How to Create a Profile?",
             "Membership Plans",
           ],
           navLinks: [
-            { label: "Create Free Matrimonial Profile", href: "/register?type=couple" },
+            { label: "Create Free Wedding Profile", href: "/register?type=couple" },
           ],
         },
       ];
@@ -353,10 +354,10 @@ export default function SathiChatbot() {
         const confirmationMessage = {
           id: generateMsgId("sathi-confirm"),
           sender: "sathi",
-          text: `${data.message}\n\nOur matchmaking advisor has received your request. In the meantime, you can also explore our verified vendor directory or create your free profile.`,
+          text: `${data.message}\n\nOur wedding planning advisor has received your request. In the meantime, you can also explore our verified vendor directory or create your free profile.`,
           timestamp: getTimestamp(),
           navLinks: [
-            { label: "Create Matrimonial Profile", href: "/register?type=couple" },
+            { label: "Create Wedding Profile", href: "/register?type=couple" },
             { label: "Explore Verified Vendors", href: "/vendors" },
           ],
         };
@@ -406,7 +407,7 @@ export default function SathiChatbot() {
           {/* Teaser Greeting Popup Bubble */}
           {showTeaser && (
             <div className="mb-3 max-w-[280px] p-4 rounded-2xl bg-[#1F0E1D] border border-[#B08D45]/60 text-xs shadow-2xl backdrop-blur-md animate-bounce-subtle relative">
-              <button
+              <button suppressHydrationWarning
                 onClick={(e) => {
                   e.stopPropagation();
                   setShowTeaser(false);
@@ -420,15 +421,15 @@ export default function SathiChatbot() {
                 <SathiAvatar size="sm" />
                 <div>
                   <p className="font-bold text-[#D6B875] text-[11px] uppercase tracking-wide">
-                    Sathi • Matchmaking AI
+                    Sathi • Wedding Planning AI
                   </p>
                   <p className="text-[#F8F1E5] text-xs mt-0.5 leading-snug">
-                    Namaste! Looking for a life partner or wedding vendor? Tap to chat with me! 🙏
+                    Namaste! Looking for a wedding services or wedding vendor? Tap to chat with me! 🙏
                   </p>
                 </div>
               </div>
               <div className="mt-2.5 flex justify-end">
-                <button
+                <button suppressHydrationWarning
                   onClick={() => {
                     setIsOpen(true);
                     setShowTeaser(false);
@@ -465,15 +466,15 @@ export default function SathiChatbot() {
             />
 
             {/* Layer 3: Main Glowing Floating Button */}
-            <button
+            <button suppressHydrationWarning
               onClick={() => {
                 setIsOpen(true);
                 setIsMinimized(false);
                 setShowTeaser(false);
               }}
               className="group relative flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 rounded-full sathi-golden-glow-btn transition-transform duration-300 hover:scale-110 active:scale-95 cursor-pointer z-10"
-              aria-label="Open Sathi Matrimonial Assistant"
-              title="Chat with Sathi - Matrimonial AI Assistant"
+              aria-label="Open Sathi Wedding Assistant"
+              title="Chat with Sathi - Wedding AI Assistant"
             >
               <div className="w-full h-full rounded-full bg-gradient-to-b from-[#2B1327] to-[#160814] border border-[#FFE29A]/70 flex items-center justify-center relative overflow-hidden group-hover:from-[#351831] group-hover:to-[#1F0E1D] transition-colors">
                 {/* Radial golden light burst from center */}
@@ -526,11 +527,11 @@ export default function SathiChatbot() {
                     Sathi
                   </h3>
                   <span className="text-[10px] font-bold px-2 py-0.2 rounded-full bg-[#B08D45]/20 text-[#D6B875] border border-[#B08D45]/30">
-                    AI Matrimonial Companion
+                    AI Wedding Concierge
                   </span>
                 </div>
                 <p className="text-[10px] text-[#C9BBAF] truncate max-w-[210px] sm:max-w-[240px]">
-                  Your Companion in Finding the Perfect Life Partner
+                  Your Personal Luxury Wedding Planning Guide
                 </p>
               </div>
             </div>
@@ -538,7 +539,7 @@ export default function SathiChatbot() {
             {/* Window Controls */}
             <div className="flex items-center gap-1">
               {/* Reset / Clear Chat */}
-              <button
+              <button suppressHydrationWarning
                 onClick={handleClearChat}
                 className="p-1.5 rounded-lg text-[#C9BBAF] hover:text-[#D6B875] hover:bg-[#321B30] transition-colors"
                 title="Clear Chat History"
@@ -547,7 +548,7 @@ export default function SathiChatbot() {
               </button>
 
               {/* Minimize / Expand */}
-              <button
+              <button suppressHydrationWarning
                 onClick={() => setIsMinimized(!isMinimized)}
                 className="p-1.5 rounded-lg text-[#C9BBAF] hover:text-[#D6B875] hover:bg-[#321B30] transition-colors"
                 title={isMinimized ? "Expand Chat" : "Minimize Chat"}
@@ -556,7 +557,7 @@ export default function SathiChatbot() {
               </button>
 
               {/* Close */}
-              <button
+              <button suppressHydrationWarning
                 onClick={() => setIsOpen(false)}
                 className="p-1.5 rounded-lg text-[#C9BBAF] hover:text-rose-400 hover:bg-[#321B30] transition-colors"
                 title="Close Chat"
@@ -643,12 +644,12 @@ export default function SathiChatbot() {
                   <div className="p-4 rounded-2xl bg-gradient-to-b from-[#241321] to-[#1A0B18] border border-[#B08D45]/60 shadow-xl space-y-3 animate-fadeIn">
                     <div className="flex items-center justify-between pb-2 border-b border-[#B08D45]/20">
                       <div className="flex items-center gap-1.5">
-                        <Heart size={14} className="text-[#D6B875] fill-[#D6B875]/30" />
+                        <Sparkles size={14} className="text-[#D6B875]" />
                         <h4 className="text-xs font-serif font-bold text-[#F8F1E5]">
-                          Shubvivah Personal Matchmaking Request
+                          ShubhVivah Wedding Concierge Request
                         </h4>
                       </div>
-                      <button
+                      <button suppressHydrationWarning
                         onClick={() => setShowInquiryForm(false)}
                         className="text-[#C9BBAF] hover:text-[#F8F1E5]"
                         title="Close Form"
@@ -658,7 +659,7 @@ export default function SathiChatbot() {
                     </div>
 
                     <p className="text-[11px] text-[#C9BBAF] leading-relaxed">
-                      Please share your details. Our verified relationship advisor will personally reach out with handpicked profiles.
+                      Please share your requirements. Our certified wedding coordinator will contact you with curated venues, quotations, and vendor availability.
                     </p>
 
                     {inquiryError && (
@@ -679,7 +680,7 @@ export default function SathiChatbot() {
                           required
                           value={inquiryForm.fullName}
                           onChange={(e) => setInquiryForm({ ...inquiryForm, fullName: e.target.value })}
-                          placeholder="e.g. Rahul Sharma / Ananya Verma"
+                          placeholder="e.g. Priya Sharma / Rohan Mehta"
                           className="w-full bg-[#140A13] border border-[#B08D45]/30 rounded-xl px-3 py-1.5 text-xs text-[#F8F1E5] placeholder-[#C9BBAF]/40 outline-none focus:border-[#D6B875]"
                         />
                       </div>
@@ -713,47 +714,35 @@ export default function SathiChatbot() {
                         </div>
                       </div>
 
-                      {/* Looking For & Age */}
+                      {/* Wedding Service Needed & Estimated Guests */}
                       <div className="grid grid-cols-2 gap-2">
                         <div>
                           <label className="block text-[10px] font-bold uppercase tracking-wider text-[#D6B875] mb-1">
-                            Looking For *
+                            Service Needed *
                           </label>
-                          <div className="grid grid-cols-2 gap-1">
-                            <button
-                              type="button"
-                              onClick={() => setInquiryForm({ ...inquiryForm, lookingFor: "Bride" })}
-                              className={`py-1.5 rounded-lg text-[11px] font-bold border transition-colors cursor-pointer ${
-                                inquiryForm.lookingFor === "Bride"
-                                  ? "bg-[#B08D45] text-[#1F0E1D] border-[#B08D45]"
-                                  : "bg-[#140A13] text-[#C9BBAF] border-[#B08D45]/30 hover:text-white"
-                              }`}
-                            >
-                              Bride (वधु)
-                            </button>
-                            <button
-                              type="button"
-                              onClick={() => setInquiryForm({ ...inquiryForm, lookingFor: "Groom" })}
-                              className={`py-1.5 rounded-lg text-[11px] font-bold border transition-colors cursor-pointer ${
-                                inquiryForm.lookingFor === "Groom"
-                                  ? "bg-[#B08D45] text-[#1F0E1D] border-[#B08D45]"
-                                  : "bg-[#140A13] text-[#C9BBAF] border-[#B08D45]/30 hover:text-white"
-                              }`}
-                            >
-                              Groom (वर)
-                            </button>
-                          </div>
+                          <select
+                            value={inquiryForm.lookingFor}
+                            onChange={(e) => setInquiryForm({ ...inquiryForm, lookingFor: e.target.value })}
+                            className="w-full bg-[#140A13] border border-[#B08D45]/30 rounded-xl px-2 py-1.5 text-xs text-[#F8F1E5] outline-none focus:border-[#D6B875]"
+                          >
+                            <option value="Wedding Venue">Wedding Venue</option>
+                            <option value="Photographer">Photographer</option>
+                            <option value="Makeup Artist">Makeup Artist</option>
+                            <option value="Decorator">Decorator</option>
+                            <option value="Wedding Planner">Wedding Planner</option>
+                            <option value="Bulk Supplier">Bulk Supplier</option>
+                          </select>
                         </div>
 
                         <div>
                           <label className="block text-[10px] font-bold uppercase tracking-wider text-[#D6B875] mb-1">
-                            Preferred Age / Range
+                            Guest Count
                           </label>
                           <input
                             type="text"
                             value={inquiryForm.age}
                             onChange={(e) => setInquiryForm({ ...inquiryForm, age: e.target.value })}
-                            placeholder="e.g. 25-28 Yrs"
+                            placeholder="e.g. 300 - 500 Guests"
                             className="w-full bg-[#140A13] border border-[#B08D45]/30 rounded-xl px-3 py-1.5 text-xs text-[#F8F1E5] placeholder-[#C9BBAF]/40 outline-none focus:border-[#D6B875]"
                           />
                         </div>
@@ -762,13 +751,13 @@ export default function SathiChatbot() {
                       {/* Preferred Location */}
                       <div>
                         <label className="block text-[10px] font-bold uppercase tracking-wider text-[#D6B875] mb-1">
-                          Preferred Location / City
+                          Wedding City / Destination
                         </label>
                         <input
                           type="text"
                           value={inquiryForm.preferredLocation}
                           onChange={(e) => setInquiryForm({ ...inquiryForm, preferredLocation: e.target.value })}
-                          placeholder="e.g. Delhi NCR, Jaipur, Mumbai, NRI, Pan-India"
+                          placeholder="e.g. Udaipur, Jaipur, Delhi NCR, Goa, Mumbai"
                           className="w-full bg-[#140A13] border border-[#B08D45]/30 rounded-xl px-3 py-1.5 text-xs text-[#F8F1E5] placeholder-[#C9BBAF]/40 outline-none focus:border-[#D6B875]"
                         />
                       </div>
@@ -776,30 +765,30 @@ export default function SathiChatbot() {
                       {/* Query / Requirements */}
                       <div>
                         <label className="block text-[10px] font-bold uppercase tracking-wider text-[#D6B875] mb-1">
-                          Match Requirements / Preferences *
+                          Wedding Date & Requirements *
                         </label>
                         <textarea
                           rows={2}
                           required
                           value={inquiryForm.query}
                           onChange={(e) => setInquiryForm({ ...inquiryForm, query: e.target.value })}
-                          placeholder="e.g. Looking for a vegetarian software engineer in Delhi NCR with good family values..."
+                          placeholder="e.g. Looking for a palace wedding lawn for 25th Dec 2026 with catering & drone shoot..."
                           className="w-full bg-[#140A13] border border-[#B08D45]/30 rounded-xl px-3 py-1.5 text-xs text-[#F8F1E5] placeholder-[#C9BBAF]/40 outline-none focus:border-[#D6B875]"
                         />
                       </div>
 
                       {/* Submit Button */}
-                      <button
+                      <button suppressHydrationWarning
                         type="submit"
                         disabled={inquirySubmitting}
                         className="w-full py-2.5 rounded-xl bg-gradient-to-r from-[#B08D45] to-[#D6B875] text-[#1F0E1D] font-bold text-xs shadow-md hover:brightness-110 active:scale-[0.99] transition-all disabled:opacity-60 flex items-center justify-center gap-1.5 cursor-pointer"
                       >
                         {inquirySubmitting ? (
-                          <span>Submitting Inquiry...</span>
+                          <span>Submitting Request...</span>
                         ) : (
                           <>
                             <CheckCircle2 size={14} />
-                            <span>Request Matchmaking Assistance</span>
+                            <span>Request Free Wedding Quotation</span>
                           </>
                         )}
                       </button>
@@ -815,7 +804,7 @@ export default function SathiChatbot() {
                 {QUICK_ACTIONS.map((action) => {
                   const Icon = action.icon;
                   return (
-                    <button
+                    <button suppressHydrationWarning
                       key={action.id}
                       onClick={() => handleQuickAction(action.label)}
                       className="px-2.5 py-1 rounded-full bg-[#241321] border border-[#B08D45]/30 text-[10px] font-medium text-[#D6B875] hover:bg-[#B08D45] hover:text-[#1F0E1D] whitespace-nowrap transition-all shrink-0 flex items-center gap-1 cursor-pointer"
@@ -844,7 +833,7 @@ export default function SathiChatbot() {
                   className="flex-1 bg-[#140A13] border border-[#B08D45]/40 rounded-xl px-3.5 py-2.5 text-xs text-[#F8F1E5] placeholder-[#C9BBAF]/50 outline-none focus:border-[#D6B875]"
                 />
 
-                <button
+                <button suppressHydrationWarning
                   type="submit"
                   disabled={!inputText.trim() || isTyping}
                   className="w-10 h-10 rounded-xl bg-gradient-to-r from-[#B08D45] to-[#D6B875] text-[#1F0E1D] flex items-center justify-center hover:brightness-110 active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed transition-all shadow-md cursor-pointer shrink-0"

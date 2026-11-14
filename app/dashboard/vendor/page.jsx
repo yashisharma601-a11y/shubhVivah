@@ -526,7 +526,7 @@ export default function VendorDashboardPage() {
             >
               Go to My {mismatchedRole.toUpperCase()} Dashboard
             </Link>
-            <button
+            <button suppressHydrationWarning
               onClick={handleLogout}
               className="w-full py-2.5 rounded-lg border border-[#B08D45]/40 text-[#C9BBAF] hover:text-[#F8F1E5] hover:bg-[#241321] transition-all text-sm"
             >
@@ -574,7 +574,7 @@ export default function VendorDashboardPage() {
                 </span>
               </div>
             </Link>
-            <button
+            <button suppressHydrationWarning
               onClick={() => setSidebarOpen(false)}
               className="md:hidden text-[#C9BBAF] hover:text-[#F8F1E5]"
             >
@@ -615,7 +615,7 @@ export default function VendorDashboardPage() {
               const Icon = item.icon;
               const isActive = activeTab === item.id;
               return (
-                <button
+                <button suppressHydrationWarning
                   key={item.id}
                   onClick={() => {
                     setActiveTab(item.id);
@@ -657,7 +657,7 @@ export default function VendorDashboardPage() {
             <Globe className="w-4 h-4" />
             <span>Visit ShubhVivah Home</span>
           </Link>
-          <button
+          <button suppressHydrationWarning
             onClick={handleLogout}
             className="flex items-center justify-center gap-2 w-full py-2.5 rounded-xl text-xs font-semibold text-rose-300 bg-rose-950/30 hover:bg-rose-950/60 border border-rose-800/40 transition-all"
           >
@@ -672,7 +672,7 @@ export default function VendorDashboardPage() {
         {/* Top Header */}
         <header className="sticky top-0 z-30 h-20 bg-[#1F0E1D]/90 backdrop-blur-md border-b border-[#B08D45]/25 px-4 md:px-8 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <button
+            <button suppressHydrationWarning
               onClick={() => setSidebarOpen(true)}
               className="md:hidden p-2 rounded-lg text-[#C9BBAF] hover:text-[#F8F1E5] hover:bg-[#241321]"
             >
@@ -692,7 +692,7 @@ export default function VendorDashboardPage() {
 
           <div className="flex items-center gap-4">
             {/* Quick Add Service Button */}
-            <button
+            <button suppressHydrationWarning
               onClick={handleOpenAddService}
               className="hidden sm:flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-gradient-to-r from-[#B08D45] to-[#D6B875] text-[#1F0E1D] text-xs font-bold shadow-md hover:brightness-110 transition-all"
             >
@@ -702,7 +702,7 @@ export default function VendorDashboardPage() {
 
             {/* Notifications Bell */}
             <div className="relative">
-              <button
+              <button suppressHydrationWarning
                 onClick={() => setNotificationsOpen(!notificationsOpen)}
                 className="relative p-2 rounded-full bg-[#241321] text-[#E5C583] hover:text-white border border-[#B08D45]/30"
               >
@@ -778,14 +778,14 @@ export default function VendorDashboardPage() {
                   </div>
 
                   <div className="flex flex-wrap gap-3">
-                    <button
+                    <button suppressHydrationWarning
                       onClick={handleOpenAddService}
                       className="px-4 py-2.5 rounded-xl bg-gradient-to-r from-[#B08D45] to-[#D6B875] text-[#1F0E1D] font-bold text-xs shadow-lg hover:brightness-110 flex items-center gap-2 transition-all"
                     >
                       <Plus className="w-4 h-4" />
                       <span>Add New Service</span>
                     </button>
-                    <button
+                    <button suppressHydrationWarning
                       onClick={() => setActiveTab("bookings")}
                       className="px-4 py-2.5 rounded-xl bg-[#241321] border border-[#B08D45]/40 text-[#E5C583] font-semibold text-xs hover:bg-[#2B1428] flex items-center gap-2 transition-all"
                     >
@@ -845,7 +845,7 @@ export default function VendorDashboardPage() {
                       <CalendarCheck className="w-4 h-4 text-[#B08D45]" />
                       <span>Recent Wedding Booking Requests</span>
                     </h3>
-                    <button
+                    <button suppressHydrationWarning
                       onClick={() => setActiveTab("bookings")}
                       className="text-xs text-[#E5C583] hover:underline flex items-center gap-1"
                     >
@@ -899,7 +899,7 @@ export default function VendorDashboardPage() {
                       <MessageSquare className="w-4 h-4 text-[#B08D45]" />
                       <span>Recent Client Enquiries</span>
                     </h3>
-                    <button
+                    <button suppressHydrationWarning
                       onClick={() => setActiveTab("enquiries")}
                       className="text-xs text-[#E5C583] hover:underline flex items-center gap-1"
                     >
@@ -955,7 +955,7 @@ export default function VendorDashboardPage() {
                   </p>
                 </div>
                 {!isEditingProfile ? (
-                  <button
+                  <button suppressHydrationWarning
                     onClick={() => setIsEditingProfile(true)}
                     className="px-4 py-2 rounded-xl bg-gradient-to-r from-[#B08D45] to-[#D6B875] text-[#1F0E1D] text-xs font-bold hover:brightness-110 flex items-center gap-2 shadow-md"
                   >
@@ -963,7 +963,7 @@ export default function VendorDashboardPage() {
                     <span>Edit Profile</span>
                   </button>
                 ) : (
-                  <button
+                  <button suppressHydrationWarning
                     onClick={() => setIsEditingProfile(false)}
                     className="px-4 py-2 rounded-xl bg-[#241321] border border-[#B08D45]/40 text-[#C9BBAF] text-xs font-semibold hover:text-white"
                   >
@@ -1161,14 +1161,14 @@ export default function VendorDashboardPage() {
                     </div>
 
                     <div className="flex justify-end gap-3 pt-4 border-t border-[#B08D45]/20">
-                      <button
+                      <button suppressHydrationWarning
                         type="button"
                         onClick={() => setIsEditingProfile(false)}
                         className="px-5 py-2.5 rounded-xl border border-[#B08D45]/40 text-[#C9BBAF] text-xs font-semibold hover:text-[#F8F1E5]"
                       >
                         Cancel
                       </button>
-                      <button
+                      <button suppressHydrationWarning
                         type="submit"
                         className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-[#B08D45] to-[#D6B875] text-[#1F0E1D] text-xs font-bold hover:brightness-110 shadow-lg flex items-center gap-2"
                       >
@@ -1278,7 +1278,7 @@ export default function VendorDashboardPage() {
                     Manage service catalogs, pricing tiers, coverage packages, and availability.
                   </p>
                 </div>
-                <button
+                <button suppressHydrationWarning
                   onClick={handleOpenAddService}
                   className="px-4 py-2 rounded-xl bg-gradient-to-r from-[#B08D45] to-[#D6B875] text-[#1F0E1D] text-xs font-bold hover:brightness-110 flex items-center gap-2 shadow-md w-fit"
                 >
@@ -1290,7 +1290,7 @@ export default function VendorDashboardPage() {
               {/* Filters */}
               <div className="flex flex-wrap items-center gap-2 pb-2">
                 {["all", "active", "pending", "rejected"].map((flt) => (
-                  <button
+                  <button suppressHydrationWarning
                     key={flt}
                     onClick={() => setServiceFilter(flt)}
                     className={`px-3 py-1.5 rounded-full text-xs font-medium capitalize transition-all ${
@@ -1310,7 +1310,7 @@ export default function VendorDashboardPage() {
                   <Briefcase className="w-12 h-12 text-[#B08D45]/40 mx-auto mb-3" />
                   <p className="text-[#C9BBAF] font-serif text-base">No services found in this category.</p>
                   <p className="text-xs text-[#C9BBAF]/60 mt-1">Add your wedding packages to start receiving bookings.</p>
-                  <button
+                  <button suppressHydrationWarning
                     onClick={handleOpenAddService}
                     className="mt-4 px-4 py-2 rounded-xl bg-[#B08D45] text-[#1F0E1D] text-xs font-bold"
                   >
@@ -1381,21 +1381,21 @@ export default function VendorDashboardPage() {
 
                           {/* Action Buttons */}
                           <div className="grid grid-cols-3 gap-2 pt-3">
-                            <button
+                            <button suppressHydrationWarning
                               onClick={() => setViewServiceModal(service)}
                               className="py-1.5 rounded-lg bg-[#241321] text-[#E5C583] hover:bg-[#2B1428] text-xs font-semibold border border-[#B08D45]/30 flex items-center justify-center gap-1"
                             >
                               <Eye className="w-3.5 h-3.5" />
                               <span>View</span>
                             </button>
-                            <button
+                            <button suppressHydrationWarning
                               onClick={() => handleOpenEditService(service)}
                               className="py-1.5 rounded-lg bg-[#241321] text-[#C9BBAF] hover:text-[#F8F1E5] hover:bg-[#2B1428] text-xs font-semibold border border-[#B08D45]/30 flex items-center justify-center gap-1"
                             >
                               <Edit className="w-3.5 h-3.5" />
                               <span>Edit</span>
                             </button>
-                            <button
+                            <button suppressHydrationWarning
                               onClick={() => handleDeleteService(service.id)}
                               className="py-1.5 rounded-lg bg-rose-950/40 text-rose-300 hover:bg-rose-950/80 text-xs font-semibold border border-rose-800/40 flex items-center justify-center gap-1"
                             >
@@ -1425,7 +1425,7 @@ export default function VendorDashboardPage() {
                 {/* Status Filter */}
                 <div className="flex flex-wrap items-center gap-2">
                   {["all", "pending", "confirmed", "completed", "cancelled"].map((flt) => (
-                    <button
+                    <button suppressHydrationWarning
                       key={flt}
                       onClick={() => setBookingFilter(flt)}
                       className={`px-3 py-1.5 rounded-full text-xs font-medium capitalize transition-all ${
@@ -1497,7 +1497,7 @@ export default function VendorDashboardPage() {
                             </td>
                             <td className="py-3.5 px-4 text-right">
                               <div className="flex items-center justify-end gap-1.5">
-                                <button
+                                <button suppressHydrationWarning
                                   onClick={() => setViewBookingModal(b)}
                                   className="p-1.5 rounded-lg bg-[#241321] text-[#E5C583] hover:bg-[#2B1428] border border-[#B08D45]/30"
                                   title="View Details"
@@ -1506,14 +1506,14 @@ export default function VendorDashboardPage() {
                                 </button>
                                 {(b.booking_status || "").toLowerCase() === "pending" && (
                                   <>
-                                    <button
+                                    <button suppressHydrationWarning
                                       onClick={() => handleUpdateBookingStatus(b.id, "Confirmed")}
                                       className="px-2 py-1 rounded-lg bg-emerald-700/80 hover:bg-emerald-600 text-white text-[11px] font-semibold"
                                       title="Confirm Booking"
                                     >
                                       Accept
                                     </button>
-                                    <button
+                                    <button suppressHydrationWarning
                                       onClick={() => handleUpdateBookingStatus(b.id, "Rejected")}
                                       className="px-2 py-1 rounded-lg bg-rose-800/60 hover:bg-rose-700 text-white text-[11px] font-semibold"
                                       title="Reject Booking"
@@ -1523,7 +1523,7 @@ export default function VendorDashboardPage() {
                                   </>
                                 )}
                                 {(b.booking_status || "").toLowerCase() === "confirmed" && (
-                                  <button
+                                  <button suppressHydrationWarning
                                     onClick={() => handleUpdateBookingStatus(b.id, "Completed")}
                                     className="px-2 py-1 rounded-lg bg-teal-700/80 hover:bg-teal-600 text-white text-[11px] font-semibold"
                                     title="Mark as Completed"
@@ -1531,7 +1531,7 @@ export default function VendorDashboardPage() {
                                     Complete
                                   </button>
                                 )}
-                                <button
+                                <button suppressHydrationWarning
                                   onClick={() => setContactCoupleModal(b)}
                                   className="p-1.5 rounded-lg bg-[#241321] text-[#C9BBAF] hover:text-[#F8F1E5] border border-[#B08D45]/30"
                                   title="Contact Couple"
@@ -1594,7 +1594,7 @@ export default function VendorDashboardPage() {
                       />
                     </div>
 
-                    <button
+                    <button suppressHydrationWarning
                       type="submit"
                       className="w-full py-2.5 rounded-xl bg-gradient-to-r from-amber-700 to-amber-600 hover:from-amber-600 hover:to-amber-500 text-white text-xs font-bold shadow-md transition-all flex items-center justify-center gap-2"
                     >
@@ -1650,7 +1650,7 @@ export default function VendorDashboardPage() {
                               {item.reason || "Unavailable"}
                             </span>
                           </div>
-                          <button
+                          <button suppressHydrationWarning
                             onClick={() => handleRemoveUnavailableDate(item.date)}
                             className="px-2.5 py-1 rounded-lg bg-emerald-950/60 text-emerald-300 border border-emerald-500/30 hover:bg-emerald-900 text-[11px] font-semibold"
                             title="Make Available"
@@ -1742,7 +1742,7 @@ export default function VendorDashboardPage() {
                       )}
 
                       <div className="flex justify-end pt-2">
-                        <button
+                        <button suppressHydrationWarning
                           onClick={() => {
                             setReplyEnquiryModal(enq);
                             setEnquiryReplyText(enq.reply_message || "");
@@ -1841,7 +1841,7 @@ export default function VendorDashboardPage() {
                                 className="w-full bg-[#140A13] border border-[#B08D45]/40 rounded-xl p-3 text-xs text-[#F8F1E5] focus:outline-none focus:border-[#D6B875]"
                               />
                               <div className="flex justify-end gap-2">
-                                <button
+                                <button suppressHydrationWarning
                                   onClick={() => {
                                     setReviewReplyId(null);
                                     setReviewReplyText("");
@@ -1850,7 +1850,7 @@ export default function VendorDashboardPage() {
                                 >
                                   Cancel
                                 </button>
-                                <button
+                                <button suppressHydrationWarning
                                   onClick={() => handleSendReviewReply(rev.id)}
                                   className="px-4 py-1 rounded-lg bg-[#B08D45] text-[#1F0E1D] text-xs font-bold hover:brightness-110"
                                 >
@@ -1859,7 +1859,7 @@ export default function VendorDashboardPage() {
                               </div>
                             </div>
                           ) : (
-                            <button
+                            <button suppressHydrationWarning
                               onClick={() => {
                                 setReviewReplyId(rev.id);
                                 setReviewReplyText("");
@@ -2042,7 +2042,7 @@ export default function VendorDashboardPage() {
                     />
                   </div>
 
-                  <button
+                  <button suppressHydrationWarning
                     type="submit"
                     className="w-full py-2.5 rounded-xl bg-gradient-to-r from-[#B08D45] to-[#D6B875] text-[#1F0E1D] text-xs font-bold hover:brightness-110 shadow-lg transition-all"
                   >
@@ -2065,7 +2065,7 @@ export default function VendorDashboardPage() {
               <h3 className="font-serif font-bold text-lg text-[#E5C583]">
                 {serviceForm.id ? "Edit Wedding Service Listing" : "Add New Wedding Service Listing"}
               </h3>
-              <button
+              <button suppressHydrationWarning
                 onClick={() => setServiceModal(false)}
                 className="text-[#C9BBAF] hover:text-white"
               >
@@ -2181,14 +2181,14 @@ export default function VendorDashboardPage() {
               </div>
 
               <div className="flex justify-end gap-3 pt-3 border-t border-[#B08D45]/20">
-                <button
+                <button suppressHydrationWarning
                   type="button"
                   onClick={() => setServiceModal(false)}
                   className="px-4 py-2 rounded-xl text-xs text-[#C9BBAF] hover:text-white"
                 >
                   Cancel
                 </button>
-                <button
+                <button suppressHydrationWarning
                   type="submit"
                   className="px-6 py-2 rounded-xl bg-gradient-to-r from-[#B08D45] to-[#D6B875] text-[#1F0E1D] text-xs font-bold hover:brightness-110 shadow"
                 >
@@ -2208,7 +2208,7 @@ export default function VendorDashboardPage() {
               <h3 className="font-serif font-bold text-base text-[#E5C583]">
                 Service Details
               </h3>
-              <button
+              <button suppressHydrationWarning
                 onClick={() => setViewServiceModal(null)}
                 className="text-[#C9BBAF] hover:text-white"
               >
@@ -2247,7 +2247,7 @@ export default function VendorDashboardPage() {
               {viewServiceModal.description || "Complete royal wedding coverage package."}
             </p>
             <div className="flex justify-end pt-2">
-              <button
+              <button suppressHydrationWarning
                 onClick={() => setViewServiceModal(null)}
                 className="px-5 py-1.5 rounded-xl bg-[#B08D45] text-[#1F0E1D] text-xs font-bold"
               >
@@ -2271,7 +2271,7 @@ export default function VendorDashboardPage() {
                   {viewBookingModal.booking_status}
                 </span>
               </div>
-              <button
+              <button suppressHydrationWarning
                 onClick={() => setViewBookingModal(null)}
                 className="text-[#C9BBAF] hover:text-white"
               >
@@ -2329,13 +2329,13 @@ export default function VendorDashboardPage() {
               <div className="flex gap-2">
                 {(viewBookingModal.booking_status || "").toLowerCase() === "pending" && (
                   <>
-                    <button
+                    <button suppressHydrationWarning
                       onClick={() => handleUpdateBookingStatus(viewBookingModal.id, "Confirmed")}
                       className="px-3 py-1.5 rounded-xl bg-emerald-600 text-white text-xs font-bold"
                     >
                       Accept Booking
                     </button>
-                    <button
+                    <button suppressHydrationWarning
                       onClick={() => handleUpdateBookingStatus(viewBookingModal.id, "Rejected")}
                       className="px-3 py-1.5 rounded-xl bg-rose-700 text-white text-xs font-bold"
                     >
@@ -2344,7 +2344,7 @@ export default function VendorDashboardPage() {
                   </>
                 )}
                 {(viewBookingModal.booking_status || "").toLowerCase() === "confirmed" && (
-                  <button
+                  <button suppressHydrationWarning
                     onClick={() => handleUpdateBookingStatus(viewBookingModal.id, "Completed")}
                     className="px-3 py-1.5 rounded-xl bg-teal-600 text-white text-xs font-bold"
                   >
@@ -2352,7 +2352,7 @@ export default function VendorDashboardPage() {
                   </button>
                 )}
               </div>
-              <button
+              <button suppressHydrationWarning
                 onClick={() => setViewBookingModal(null)}
                 className="px-4 py-1.5 rounded-xl bg-[#241321] text-[#C9BBAF] text-xs font-semibold"
               >
@@ -2371,7 +2371,7 @@ export default function VendorDashboardPage() {
               <h3 className="font-serif font-bold text-base text-[#E5C583]">
                 Contact {contactCoupleModal.couple_name}
               </h3>
-              <button
+              <button suppressHydrationWarning
                 onClick={() => setContactCoupleModal(null)}
                 className="text-[#C9BBAF] hover:text-white"
               >
@@ -2420,7 +2420,7 @@ export default function VendorDashboardPage() {
               </a>
             </div>
             <div className="flex justify-end pt-2">
-              <button
+              <button suppressHydrationWarning
                 onClick={() => setContactCoupleModal(null)}
                 className="px-4 py-1.5 rounded-xl bg-[#B08D45] text-[#1F0E1D] text-xs font-bold"
               >
@@ -2439,7 +2439,7 @@ export default function VendorDashboardPage() {
               <h3 className="font-serif font-bold text-base text-[#E5C583]">
                 Reply to {replyEnquiryModal.couple_name || "Couple"}
               </h3>
-              <button
+              <button suppressHydrationWarning
                 onClick={() => setReplyEnquiryModal(null)}
                 className="text-[#C9BBAF] hover:text-white"
               >
@@ -2465,14 +2465,14 @@ export default function VendorDashboardPage() {
                 />
               </div>
               <div className="flex justify-end gap-2 pt-2 border-t border-[#B08D45]/20">
-                <button
+                <button suppressHydrationWarning
                   type="button"
                   onClick={() => setReplyEnquiryModal(null)}
                   className="px-4 py-1.5 rounded-xl text-xs text-[#C9BBAF]"
                 >
                   Cancel
                 </button>
-                <button
+                <button suppressHydrationWarning
                   type="submit"
                   className="px-5 py-1.5 rounded-xl bg-gradient-to-r from-[#B08D45] to-[#D6B875] text-[#1F0E1D] text-xs font-bold hover:brightness-110 shadow"
                 >

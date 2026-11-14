@@ -741,7 +741,7 @@ function RegisterContent() {
         {/* Top Left Back Navigation (Visible when a role is selected / beyond Step 1) */}
         {currentStep > 1 && (
           <div className="mb-4 flex items-center justify-between">
-            <button
+            <button suppressHydrationWarning
               type="button"
               onClick={() => {
                 setErrorMsg("");
@@ -793,7 +793,7 @@ function RegisterContent() {
                 const isCurrent = currentStep === step.num;
                 return (
                   <div key={step.num} className="relative z-10 flex flex-col items-center">
-                    <button
+                    <button suppressHydrationWarning
                       type="button"
                       disabled={step.num > currentStep}
                       onClick={() => {
@@ -877,7 +877,7 @@ function RegisterContent() {
                   </p>
                 </div>
                 <div className="mt-6 pt-4 border-t border-[#665038]/40">
-                  <button
+                  <button suppressHydrationWarning
                     type="button"
                     onClick={(e) => {
                       e.stopPropagation();
@@ -916,7 +916,7 @@ function RegisterContent() {
                   </p>
                 </div>
                 <div className="mt-6 pt-4 border-t border-[#665038]/40">
-                  <button
+                  <button suppressHydrationWarning
                     type="button"
                     onClick={(e) => {
                       e.stopPropagation();
@@ -955,7 +955,7 @@ function RegisterContent() {
                   </p>
                 </div>
                 <div className="mt-6 pt-4 border-t border-[#665038]/40">
-                  <button
+                  <button suppressHydrationWarning
                     type="button"
                     onClick={(e) => {
                       e.stopPropagation();
@@ -1189,7 +1189,7 @@ function RegisterContent() {
                     }}
                     className="w-full px-4 py-2.5 pr-10 rounded-xl bg-[#241321] border border-[#665038] text-[#F8F1E5] placeholder-[#665038] focus:border-[#D6B875] focus:outline-none text-sm"
                   />
-                  <button
+                  <button suppressHydrationWarning
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
                     className="absolute right-3 top-1/2 -translate-y-1/2 text-[#C9BBAF] hover:text-[#D6B875]"
@@ -1223,7 +1223,7 @@ function RegisterContent() {
                     }}
                     className="w-full px-4 py-2.5 pr-10 rounded-xl bg-[#241321] border border-[#665038] text-[#F8F1E5] placeholder-[#665038] focus:border-[#D6B875] focus:outline-none text-sm"
                   />
-                  <button
+                  <button suppressHydrationWarning
                     type="button"
                     onClick={() => setShowConfirmPassword(!showConfirmPassword)}
                     className="absolute right-3 top-1/2 -translate-y-1/2 text-[#C9BBAF] hover:text-[#D6B875]"
@@ -1236,14 +1236,14 @@ function RegisterContent() {
 
             {/* Navigation Buttons */}
             <div className="flex items-center justify-between pt-6 border-t border-[#665038]/40">
-              <button
+              <button suppressHydrationWarning
                 type="button"
                 onClick={handleBack}
                 className="px-5 py-2.5 rounded-xl border border-[#665038] text-xs font-semibold text-[#F8F1E5] hover:bg-[#3A2638] flex items-center gap-2"
               >
                 <ArrowLeft className="w-4 h-4" /> Back to Role Selection
               </button>
-              <button
+              <button suppressHydrationWarning
                 type="button"
                 onClick={handleNext}
                 className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-[#B08D45] to-[#D6B875] text-[#241321] font-bold text-xs uppercase tracking-wider hover:opacity-95 shadow-md flex items-center gap-2"
@@ -1437,7 +1437,7 @@ function RegisterContent() {
                     {WEDDING_FUNCTIONS.map((fn) => {
                       const isSelected = coupleData.weddingFunctions.includes(fn);
                       return (
-                        <button
+                        <button suppressHydrationWarning
                           type="button"
                           key={fn}
                           onClick={() => {
@@ -1826,14 +1826,14 @@ function RegisterContent() {
 
             {/* Navigation Buttons */}
             <div className="flex items-center justify-between pt-6 border-t border-[#665038]/40">
-              <button
+              <button suppressHydrationWarning
                 type="button"
                 onClick={handleBack}
                 className="px-5 py-2.5 rounded-xl border border-[#665038] text-xs font-semibold text-[#F8F1E5] hover:bg-[#3A2638] flex items-center gap-2"
               >
                 <ArrowLeft className="w-4 h-4" /> Previous Step
               </button>
-              <button
+              <button suppressHydrationWarning
                 type="button"
                 onClick={handleNext}
                 className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-[#B08D45] to-[#D6B875] text-[#241321] font-bold text-xs uppercase tracking-wider hover:opacity-95 shadow-md flex items-center gap-2"
@@ -1873,7 +1873,7 @@ function RegisterContent() {
                     {WEDDING_SERVICES_OPTIONS.map((srv) => {
                       const isSelected = coupleData.servicesRequired.includes(srv);
                       return (
-                        <button
+                        <button suppressHydrationWarning
                           type="button"
                           key={srv}
                           onClick={() => {
@@ -1982,7 +1982,7 @@ function RegisterContent() {
                     {SELLER_CATEGORIES.map((cat) => {
                       const isSelected = sellerData.productCategories.includes(cat);
                       return (
-                        <button
+                        <button suppressHydrationWarning
                           type="button"
                           key={cat}
                           onClick={() => {
@@ -2144,7 +2144,7 @@ function RegisterContent() {
                           className="relative w-16 h-16 rounded-xl overflow-hidden border border-[#D6B875] group"
                         >
                           <Image src={imgUrl} alt={`Product ${i}`} fill className="object-cover" />
-                          <button
+                          <button suppressHydrationWarning
                             type="button"
                             onClick={() =>
                               setSellerData((prev) => ({
@@ -2392,14 +2392,14 @@ function RegisterContent() {
 
             {/* Navigation Buttons */}
             <div className="flex items-center justify-between pt-6 border-t border-[#665038]/40">
-              <button
+              <button suppressHydrationWarning
                 type="button"
                 onClick={handleBack}
                 className="px-5 py-2.5 rounded-xl border border-[#665038] text-xs font-semibold text-[#F8F1E5] hover:bg-[#3A2638] flex items-center gap-2"
               >
                 <ArrowLeft className="w-4 h-4" /> Previous Step
               </button>
-              <button
+              <button suppressHydrationWarning
                 type="button"
                 onClick={handleNext}
                 className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-[#B08D45] to-[#D6B875] text-[#241321] font-bold text-xs uppercase tracking-wider hover:opacity-95 shadow-md flex items-center gap-2"
@@ -2647,7 +2647,7 @@ function RegisterContent() {
                         className="relative w-20 h-20 rounded-xl overflow-hidden border border-[#D6B875] group"
                       >
                         <Image src={imgUrl} alt={`Portfolio ${i}`} fill className="object-cover" />
-                        <button
+                        <button suppressHydrationWarning
                           type="button"
                           onClick={() =>
                             setVendorData((prev) => ({
@@ -2755,14 +2755,14 @@ function RegisterContent() {
 
             {/* Navigation Buttons */}
             <div className="flex items-center justify-between pt-6 border-t border-[#665038]/40">
-              <button
+              <button suppressHydrationWarning
                 type="button"
                 onClick={handleBack}
                 className="px-5 py-2.5 rounded-xl border border-[#665038] text-xs font-semibold text-[#F8F1E5] hover:bg-[#3A2638] flex items-center gap-2"
               >
                 <ArrowLeft className="w-4 h-4" /> Previous Step
               </button>
-              <button
+              <button suppressHydrationWarning
                 type="button"
                 onClick={handleNext}
                 className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-[#B08D45] to-[#D6B875] text-[#241321] font-bold text-xs uppercase tracking-wider hover:opacity-95 shadow-md flex items-center gap-2"
@@ -2796,7 +2796,7 @@ function RegisterContent() {
                 <span className="text-xs font-bold uppercase tracking-wider text-[#D6B875]">
                   1. Account & Contact
                 </span>
-                <button
+                <button suppressHydrationWarning
                   type="button"
                   onClick={() => setCurrentStep(2)}
                   className="text-xs text-[#D6B875] hover:underline"
@@ -2848,7 +2848,7 @@ function RegisterContent() {
                 <span className="text-xs font-bold uppercase tracking-wider text-[#D6B875]">
                   2. {selectedRole === "couple" ? "Wedding Specifics" : "Business Profile"}
                 </span>
-                <button
+                <button suppressHydrationWarning
                   type="button"
                   onClick={() => setCurrentStep(3)}
                   className="text-xs text-[#D6B875] hover:underline"
@@ -2925,7 +2925,7 @@ function RegisterContent() {
                 <span className="text-xs font-bold uppercase tracking-wider text-[#D6B875]">
                   3. Location & Coverage
                 </span>
-                <button
+                <button suppressHydrationWarning
                   type="button"
                   onClick={() => setCurrentStep(5)}
                   className="text-xs text-[#D6B875] hover:underline"
@@ -2983,7 +2983,7 @@ function RegisterContent() {
 
             {/* Submit Button */}
             <div className="flex items-center justify-between pt-6 border-t border-[#665038]/40">
-              <button
+              <button suppressHydrationWarning
                 type="button"
                 onClick={handleBack}
                 disabled={loading}
@@ -2991,7 +2991,7 @@ function RegisterContent() {
               >
                 <ArrowLeft className="w-4 h-4" /> Edit Details
               </button>
-              <button
+              <button suppressHydrationWarning
                 type="button"
                 onClick={handleSubmit}
                 disabled={loading}

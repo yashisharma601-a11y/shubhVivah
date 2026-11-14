@@ -625,7 +625,7 @@ function VendorsContent() {
         <div className="mx-auto max-w-7xl">
           <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none">
             {CATEGORY_TABS.map((cat) => (
-              <button
+              <button suppressHydrationWarning
                 key={cat}
                 onClick={() => setSelectedCategory(cat)}
                 className={`whitespace-nowrap px-4 py-2 rounded-full text-xs font-semibold transition-all duration-200 cursor-pointer ${
@@ -691,7 +691,7 @@ function VendorsContent() {
 
             {/* Clear Filters */}
             {(searchQuery || selectedCity !== "All Cities" || selectedCategory !== "All Vendors") && (
-              <button
+              <button suppressHydrationWarning
                 onClick={handleClearFilters}
                 className="px-3.5 py-2 rounded-xl bg-[#241321] text-xs font-semibold text-[#D6B875] border border-[#B08D45]/40 hover:bg-[#2B1428] flex items-center gap-1.5 whitespace-nowrap"
               >
@@ -713,7 +713,7 @@ function VendorsContent() {
               <Search className="w-12 h-12 text-[#B08D45]/40 mx-auto" />
               <h3 className="font-serif text-lg font-bold text-[#F8F1E5]">No vendors match your search criteria</h3>
               <p className="text-xs text-[#C9BBAF]">Try resetting your search query or selecting &quot;All Vendors&quot; and &quot;All Cities&quot;.</p>
-              <button
+              <button suppressHydrationWarning
                 onClick={handleClearFilters}
                 className="mt-3 px-5 py-2 rounded-xl bg-gradient-to-r from-[#B08D45] to-[#D6B875] text-[#1F0E1D] text-xs font-bold shadow"
               >
@@ -755,7 +755,7 @@ function VendorsContent() {
                       </div>
 
                       {/* Wishlist Heart Button */}
-                      <button
+                      <button suppressHydrationWarning
                         onClick={() => toggleShortlist(vendor.id)}
                         className={`absolute top-3 right-3 p-2 rounded-full backdrop-blur-md border transition-all ${
                           isShortlisted
@@ -837,7 +837,7 @@ function VendorsContent() {
 
                         {/* Buttons Grid */}
                         <div className="grid grid-cols-2 gap-2 pt-1">
-                          <button
+                          <button suppressHydrationWarning
                             onClick={() => setProfileModalVendor(vendor)}
                             className="py-2 rounded-xl bg-[#241321] border border-[#B08D45]/40 text-[#E5C583] hover:bg-[#2B1428] text-xs font-semibold flex items-center justify-center gap-1.5 transition-all cursor-pointer"
                           >
@@ -845,7 +845,7 @@ function VendorsContent() {
                             <span>View Profile</span>
                           </button>
 
-                          <button
+                          <button suppressHydrationWarning
                             onClick={() => setQuoteModalVendor(vendor)}
                             className="py-2 rounded-xl bg-gradient-to-r from-[#B08D45] to-[#D6B875] text-[#1F0E1D] hover:brightness-110 text-xs font-bold flex items-center justify-center gap-1.5 shadow-md transition-all cursor-pointer"
                           >
@@ -878,7 +878,7 @@ function VendorsContent() {
                   Verified ShubhVivah Vendor Profile
                 </span>
               </div>
-              <button
+              <button suppressHydrationWarning
                 onClick={() => setProfileModalVendor(null)}
                 className="text-[#C9BBAF] hover:text-white p-1 rounded-lg"
               >
@@ -970,7 +970,7 @@ function VendorsContent() {
                 </div>
 
                 <div className="flex items-center gap-2">
-                  <button
+                  <button suppressHydrationWarning
                     onClick={() => {
                       setProfileModalVendor(null);
                       setQuoteModalVendor(profileModalVendor);
@@ -1001,7 +1001,7 @@ function VendorsContent() {
                   Inquiry for <span className="text-[#F8F1E5] font-semibold">{quoteModalVendor.name}</span>
                 </p>
               </div>
-              <button
+              <button suppressHydrationWarning
                 onClick={() => setQuoteModalVendor(null)}
                 className="text-[#C9BBAF] hover:text-white"
               >
@@ -1096,14 +1096,14 @@ function VendorsContent() {
               </div>
 
               <div className="flex justify-end gap-3 pt-3 border-t border-[#B08D45]/20">
-                <button
+                <button suppressHydrationWarning
                   type="button"
                   onClick={() => setQuoteModalVendor(null)}
                   className="px-4 py-2 rounded-xl text-xs text-[#C9BBAF] hover:text-white"
                 >
                   Cancel
                 </button>
-                <button
+                <button suppressHydrationWarning
                   type="submit"
                   className="px-6 py-2 rounded-xl bg-gradient-to-r from-[#B08D45] to-[#D6B875] text-[#1F0E1D] text-xs font-bold hover:brightness-110 shadow flex items-center gap-1.5"
                 >

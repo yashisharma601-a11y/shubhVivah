@@ -435,7 +435,7 @@ export default function MyProfilePage() {
             <span className="px-3 py-1 rounded-full text-xs font-mono font-bold bg-[#B08D45]/20 text-[#D6B875] border border-[#B08D45]/40">
               ID: {profile.profile_id}
             </span>
-            <button
+            <button suppressHydrationWarning
               onClick={handleLogout}
               className="inline-flex items-center gap-1.5 text-xs text-[#C9BBAF] hover:text-rose-400 transition-colors"
               title="Logout from session"
@@ -481,7 +481,7 @@ export default function MyProfilePage() {
               </div>
 
               {/* Photo Upload Floating Button */}
-              <button
+              <button suppressHydrationWarning
                 type="button"
                 onClick={() => fileInputRef.current?.click()}
                 className="absolute bottom-1 right-1 p-2.5 rounded-full bg-[#B08D45] text-[#1F0E1D] hover:bg-[#D6B875] hover:scale-110 active:scale-95 transition-all shadow-lg cursor-pointer"
@@ -565,7 +565,7 @@ export default function MyProfilePage() {
               {/* Profile Photo Remove Link if photo exists */}
               {profile.avatar_url && (
                 <div className="pt-1">
-                  <button
+                  <button suppressHydrationWarning
                     type="button"
                     onClick={handleRemovePhoto}
                     className="text-[11px] text-rose-400 hover:text-rose-300 underline inline-flex items-center gap-1"
@@ -618,7 +618,7 @@ export default function MyProfilePage() {
                 const isActive = activeTab === tab.id;
 
                 return (
-                  <button
+                  <button suppressHydrationWarning
                     key={tab.id}
                     onClick={() => setActiveTab(tab.id)}
                     className={`w-full flex items-center justify-between px-3.5 py-3 rounded-2xl text-xs font-semibold transition-all duration-200 cursor-pointer ${
@@ -669,7 +669,7 @@ export default function MyProfilePage() {
                         </p>
                       </div>
                     </div>
-                    <button
+                    <button suppressHydrationWarning
                       onClick={() => openEditor("personal")}
                       className="px-3.5 py-1.5 rounded-xl border border-[#B08D45] text-[#D6B875] hover:bg-[#B08D45] hover:text-[#1F0E1D] text-xs font-semibold flex items-center gap-1.5 transition-all cursor-pointer"
                     >
@@ -708,7 +708,7 @@ export default function MyProfilePage() {
                         <p className="text-xs text-[#C9BBAF]">Academic and employment credentials</p>
                       </div>
                     </div>
-                    <button
+                    <button suppressHydrationWarning
                       onClick={() => openEditor("education")}
                       className="px-3.5 py-1.5 rounded-xl border border-[#B08D45] text-[#D6B875] hover:bg-[#B08D45] hover:text-[#1F0E1D] text-xs font-semibold flex items-center gap-1.5 transition-all cursor-pointer"
                     >
@@ -741,7 +741,7 @@ export default function MyProfilePage() {
                         <p className="text-xs text-[#C9BBAF]">Criteria used by Sathi & Matchmaking Concierge</p>
                       </div>
                     </div>
-                    <button
+                    <button suppressHydrationWarning
                       onClick={() => openEditor("preferences")}
                       className="px-3.5 py-1.5 rounded-xl border border-[#B08D45] text-[#D6B875] hover:bg-[#B08D45] hover:text-[#1F0E1D] text-xs font-semibold flex items-center gap-1.5 transition-all cursor-pointer"
                     >
@@ -774,7 +774,7 @@ export default function MyProfilePage() {
                     <h2 className="font-serif font-bold text-xl text-[#F8F1E5]">Personal Information</h2>
                     <p className="text-xs text-[#C9BBAF]">Basic identification, biological details, and roots</p>
                   </div>
-                  <button
+                  <button suppressHydrationWarning
                     onClick={() => openEditor("personal")}
                     className="px-4 py-2 rounded-xl bg-[#B08D45] text-[#1F0E1D] hover:bg-[#D6B875] text-xs font-bold flex items-center gap-1.5 shadow-md transition-all cursor-pointer"
                   >
@@ -810,7 +810,7 @@ export default function MyProfilePage() {
                     <h2 className="font-serif font-bold text-xl text-[#F8F1E5]">Education & Career</h2>
                     <p className="text-xs text-[#C9BBAF]">Academic degrees, occupation, company, and annual income</p>
                   </div>
-                  <button
+                  <button suppressHydrationWarning
                     onClick={() => openEditor("education")}
                     className="px-4 py-2 rounded-xl bg-[#B08D45] text-[#1F0E1D] hover:bg-[#D6B875] text-xs font-bold flex items-center gap-1.5 shadow-md transition-all cursor-pointer"
                   >
@@ -840,7 +840,7 @@ export default function MyProfilePage() {
                     <h2 className="font-serif font-bold text-xl text-[#F8F1E5]">Family Background</h2>
                     <p className="text-xs text-[#C9BBAF]">Parents, siblings, family status and traditional values</p>
                   </div>
-                  <button
+                  <button suppressHydrationWarning
                     onClick={() => openEditor("family")}
                     className="px-4 py-2 rounded-xl bg-[#B08D45] text-[#1F0E1D] hover:bg-[#D6B875] text-xs font-bold flex items-center gap-1.5 shadow-md transition-all cursor-pointer"
                   >
@@ -881,7 +881,7 @@ export default function MyProfilePage() {
                     <h2 className="font-serif font-bold text-xl text-[#F8F1E5]">Lifestyle & Habits</h2>
                     <p className="text-xs text-[#C9BBAF]">Dietary preferences, personal habits, interests and languages</p>
                   </div>
-                  <button
+                  <button suppressHydrationWarning
                     onClick={() => openEditor("lifestyle")}
                     className="px-4 py-2 rounded-xl bg-[#B08D45] text-[#1F0E1D] hover:bg-[#D6B875] text-xs font-bold flex items-center gap-1.5 shadow-md transition-all cursor-pointer"
                   >
@@ -908,7 +908,7 @@ export default function MyProfilePage() {
                     <h2 className="font-serif font-bold text-xl text-[#F8F1E5]">Partner Preferences</h2>
                     <p className="text-xs text-[#C9BBAF]">Define what you seek in an ideal life companion</p>
                   </div>
-                  <button
+                  <button suppressHydrationWarning
                     onClick={() => openEditor("preferences")}
                     className="px-4 py-2 rounded-xl bg-[#B08D45] text-[#1F0E1D] hover:bg-[#D6B875] text-xs font-bold flex items-center gap-1.5 shadow-md transition-all cursor-pointer"
                   >
@@ -952,7 +952,7 @@ export default function MyProfilePage() {
                     <h2 className="font-serif font-bold text-xl text-[#F8F1E5]">Contact & Privacy Controls</h2>
                     <p className="text-xs text-[#C9BBAF]">Manage who can view your phone number and private contact info</p>
                   </div>
-                  <button
+                  <button suppressHydrationWarning
                     onClick={() => openEditor("contact")}
                     className="px-4 py-2 rounded-xl bg-[#B08D45] text-[#1F0E1D] hover:bg-[#D6B875] text-xs font-bold flex items-center gap-1.5 shadow-md transition-all cursor-pointer"
                   >
@@ -1025,7 +1025,7 @@ export default function MyProfilePage() {
                           className="w-full px-4 py-2.5 rounded-xl bg-[#1A0B18] border border-[#665038] text-xs text-[#F8F1E5] focus:outline-none focus:border-[#D6B875]"
                           placeholder="Enter your existing password"
                         />
-                        <button
+                        <button suppressHydrationWarning
                           type="button"
                           onClick={() => setShowCurrentPw(!showCurrentPw)}
                           className="absolute right-3 top-2.5 text-[#C9BBAF] hover:text-[#F8F1E5]"
@@ -1051,7 +1051,7 @@ export default function MyProfilePage() {
                           className="w-full px-4 py-2.5 rounded-xl bg-[#1A0B18] border border-[#665038] text-xs text-[#F8F1E5] focus:outline-none focus:border-[#D6B875]"
                           placeholder="Create strong new password"
                         />
-                        <button
+                        <button suppressHydrationWarning
                           type="button"
                           onClick={() => setShowNewPw(!showNewPw)}
                           className="absolute right-3 top-2.5 text-[#C9BBAF] hover:text-[#F8F1E5]"
@@ -1077,7 +1077,7 @@ export default function MyProfilePage() {
                       />
                     </div>
 
-                    <button
+                    <button suppressHydrationWarning
                       type="submit"
                       disabled={passwordLoading}
                       className="px-6 py-2.5 rounded-xl bg-[#B08D45] text-[#1F0E1D] font-bold text-xs hover:bg-[#D6B875] transition-all disabled:opacity-50 cursor-pointer shadow-md"
@@ -1095,7 +1095,7 @@ export default function MyProfilePage() {
                   <p className="text-xs text-[#C9BBAF] leading-relaxed">
                     Temporarily hide your profile from search results if you have found your life partner or want to take a break from matchmaking.
                   </p>
-                  <button
+                  <button suppressHydrationWarning
                     onClick={() => {
                       if (window.confirm("Do you want to submit a profile deactivation request to the Shubvivah relationship team?")) {
                         showToast("Deactivation request submitted. Our support team will confirm with you.");
@@ -1125,7 +1125,7 @@ export default function MyProfilePage() {
                 </h3>
                 <p className="text-xs text-[#C9BBAF]">Update your verified matrimonial records</p>
               </div>
-              <button
+              <button suppressHydrationWarning
                 onClick={() => setEditSection(null)}
                 className="p-1.5 rounded-lg text-[#C9BBAF] hover:text-[#F8F1E5] hover:bg-[#321B30]"
               >
@@ -1777,14 +1777,14 @@ export default function MyProfilePage() {
 
               {/* Modal Buttons */}
               <div className="flex items-center justify-end gap-3 pt-4 border-t border-[#665038]/50">
-                <button
+                <button suppressHydrationWarning
                   type="button"
                   onClick={() => setEditSection(null)}
                   className="px-4 py-2 rounded-xl text-xs text-[#C9BBAF] hover:text-[#F8F1E5] hover:bg-[#321B30] transition-colors"
                 >
                   Cancel
                 </button>
-                <button
+                <button suppressHydrationWarning
                   type="submit"
                   disabled={saving}
                   className="px-6 py-2 rounded-xl bg-[#B08D45] text-[#1F0E1D] text-xs font-bold hover:bg-[#D6B875] transition-all disabled:opacity-50 cursor-pointer shadow-md flex items-center gap-1.5"
@@ -1820,7 +1820,7 @@ function InfoBox({ label, value, onAdd, isBadge = false }) {
         <div className="flex items-center justify-between pt-0.5">
           <span className="text-[11px] text-[#7A5B28] italic">Not Added</span>
           {onAdd && (
-            <button
+            <button suppressHydrationWarning
               type="button"
               onClick={onAdd}
               className="text-[11px] font-bold text-[#D6B875] hover:text-white underline cursor-pointer"

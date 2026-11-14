@@ -195,7 +195,7 @@ function ForgotPasswordForm() {
                 </div>
               </div>
 
-              <button
+              <button suppressHydrationWarning
                 type="submit"
                 disabled={loading}
                 className="w-full mt-2 flex items-center justify-center gap-2 rounded-xl bg-[#B08D45] py-3 text-sm font-bold text-[#241321] transition-all duration-200 hover:bg-[#D6B875] disabled:opacity-60 shadow-lg shadow-[#B08D45]/20 cursor-pointer"
@@ -245,7 +245,7 @@ function ForgotPasswordForm() {
                     required
                     className="w-full rounded-xl border border-[#665038] bg-[#241321] py-2.5 pl-10 pr-10 text-sm text-[#F8F1E5] placeholder-[#C9BBAF]/50 outline-none transition-colors focus:border-[#D6B875] focus:ring-1 focus:ring-[#D6B875]"
                   />
-                  <button
+                  <button suppressHydrationWarning
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
                     className="absolute inset-y-0 right-0 flex items-center pr-3 text-[#C9BBAF] hover:text-[#D6B875]"
@@ -276,7 +276,7 @@ function ForgotPasswordForm() {
               </div>
 
               <div className="flex items-center justify-between text-xs pt-1">
-                <button
+                <button suppressHydrationWarning
                   type="button"
                   onClick={() => {
                     setStep(1);
@@ -288,7 +288,7 @@ function ForgotPasswordForm() {
                   Change Email / Mobile
                 </button>
 
-                <button
+                <button suppressHydrationWarning
                   type="button"
                   onClick={handleRequestOtp}
                   className="text-[#D6B875] hover:text-white underline font-semibold"
@@ -297,7 +297,7 @@ function ForgotPasswordForm() {
                 </button>
               </div>
 
-              <button
+              <button suppressHydrationWarning
                 type="submit"
                 disabled={loading}
                 className="w-full mt-2 flex items-center justify-center gap-2 rounded-xl bg-[#B08D45] py-3 text-sm font-bold text-[#241321] transition-all duration-200 hover:bg-[#D6B875] disabled:opacity-60 shadow-lg shadow-[#B08D45]/20 cursor-pointer"

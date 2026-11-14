@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import VenueDetailClient from "./VenueDetailClient";
 import { ALL_VENUES, getVenueBySlug } from "@/data/venuesData";
 
@@ -47,8 +48,25 @@ export async function generateMetadata({ params }) {
   };
 }
 
-export default async function VenuePortfolioDetailPage({ params }) {
+async function VenueContent({ params }) {
   const { slug } = await params;
   const venue = getVenueBySlug(slug);
   return <VenueDetailClient venue={venue} slug={slug} />;
+}
+
+export default function VenuePortfolioDetailPage({ params }) {
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-screen bg-[#241321] flex items-center justify-center text-[#D6B875]">
+          <div className="flex flex-col items-center gap-3">
+            <div className="h-8 w-8 animate-spin rounded-full border-2 border-[#B08D45] border-t-transparent" />
+            <span className="text-xs tracking-wider uppercase">Loading Royal Venue...</span>
+          </div>
+        </div>
+      }
+    >
+      <VenueContent params={params} />
+    </Suspense>
+  );
 }

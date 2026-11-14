@@ -413,7 +413,7 @@ export default function SuperAdminPage() {
             >
               Go to My {unauthorizedUser.user_type.toUpperCase()} Dashboard
             </Link>
-            <button
+            <button suppressHydrationWarning
               onClick={handleAdminLogout}
               className="block w-full py-2.5 px-4 rounded-xl border border-[#665038] text-xs text-[#C9BBAF] hover:text-white hover:bg-[#321B30] transition-colors cursor-pointer"
             >
@@ -512,7 +512,7 @@ export default function SuperAdminPage() {
                     placeholder="Enter admin password"
                     className="w-full rounded-xl border border-[#665038] bg-[#1A0B18] py-2.5 pl-10 pr-11 text-xs text-[#F8F1E5] placeholder-[#C9BBAF]/40 outline-none transition-colors focus:border-[#D6B875] focus:ring-1 focus:ring-[#D6B875]"
                   />
-                  <button
+                  <button suppressHydrationWarning
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
                     className="absolute inset-y-0 right-0 flex items-center pr-3.5 text-[#C9BBAF] hover:text-[#D6B875] transition-colors cursor-pointer"
@@ -535,7 +535,7 @@ export default function SuperAdminPage() {
                 <span className="text-[11px] text-[#C9BBAF]">Port 3000 / SSL Encrypted</span>
               </div>
 
-              <button
+              <button suppressHydrationWarning
                 type="submit"
                 disabled={loginLoading}
                 className="w-full mt-2 flex items-center justify-center gap-2 rounded-xl bg-[#B08D45] py-3 text-xs font-bold text-[#1F0E1D] transition-all hover:bg-[#D6B875] disabled:opacity-60 shadow-lg shadow-[#B08D45]/20 cursor-pointer"
@@ -617,7 +617,7 @@ export default function SuperAdminPage() {
               const Icon = tab.icon;
               const isActive = activeTab === tab.id;
               return (
-                <button
+                <button suppressHydrationWarning
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id)}
                   className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl transition-all cursor-pointer ${
@@ -661,7 +661,7 @@ export default function SuperAdminPage() {
               <ExternalLink size={14} />
             </Link>
           </div>
-          <button
+          <button suppressHydrationWarning
             onClick={handleAdminLogout}
             className="w-full flex items-center justify-center gap-2 py-2 px-3 rounded-xl bg-red-950/60 border border-red-800/40 text-xs font-bold text-red-200 hover:bg-red-900/80 transition-colors cursor-pointer"
           >
@@ -684,7 +684,7 @@ export default function SuperAdminPage() {
                 System Live
               </span>
               {stats.newChatbotInquiries > 0 && (
-                <button
+                <button suppressHydrationWarning
                   onClick={() => {
                     setActiveTab("enquiries");
                     setEnquirySourceFilter("Sathi AI Chatbot");
@@ -703,7 +703,7 @@ export default function SuperAdminPage() {
           </div>
 
           <div className="flex items-center gap-3">
-            <button
+            <button suppressHydrationWarning
               onClick={fetchAdminData}
               disabled={refreshing}
               className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl border border-[#665038] bg-[#241321] text-xs font-semibold text-[#D6B875] hover:bg-[#321B30] transition-colors cursor-pointer disabled:opacity-50"
@@ -932,7 +932,7 @@ export default function SuperAdminPage() {
                 </select>
               </div>
 
-              <button
+              <button suppressHydrationWarning
                 onClick={exportUsersCSV}
                 className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-[#321B30] border border-[#665038] text-xs font-semibold text-[#D6B875] hover:bg-[#B08D45] hover:text-[#1F0E1D] transition-colors cursor-pointer shrink-0"
               >
@@ -1019,7 +1019,7 @@ export default function SuperAdminPage() {
                             <td className="py-3 px-4 text-[#C9BBAF]">{u.city || "Pan India"}</td>
                             <td className="py-3 px-4 text-right">
                               <div className="flex items-center justify-end gap-1.5">
-                                <button
+                                <button suppressHydrationWarning
                                   onClick={() => setSelectedUserModal(u)}
                                   title="View User Details"
                                   className="p-1.5 rounded-lg bg-[#321B30] text-[#D6B875] hover:bg-[#B08D45] hover:text-[#1F0E1D] transition-colors"
@@ -1030,7 +1030,7 @@ export default function SuperAdminPage() {
                                 {u.user_type !== "admin" && (
                                   <>
                                     {isPending && (
-                                      <button
+                                      <button suppressHydrationWarning
                                         onClick={() =>
                                           executeAdminAction({
                                             action: "update_user_status",
@@ -1047,7 +1047,7 @@ export default function SuperAdminPage() {
                                     )}
 
                                     {isActive ? (
-                                      <button
+                                      <button suppressHydrationWarning
                                         onClick={() => {
                                           const reason = prompt("Enter suspension reason:", "Account under compliance review");
                                           if (reason !== null) {
@@ -1065,7 +1065,7 @@ export default function SuperAdminPage() {
                                         <Ban size={14} />
                                       </button>
                                     ) : (
-                                      <button
+                                      <button suppressHydrationWarning
                                         onClick={() =>
                                           executeAdminAction({
                                             action: "update_user_status",
@@ -1081,7 +1081,7 @@ export default function SuperAdminPage() {
                                       </button>
                                     )}
 
-                                    <button
+                                    <button suppressHydrationWarning
                                       onClick={() => {
                                         if (confirm(`Delete account for ${u.name}? This action is irreversible.`)) {
                                           executeAdminAction({
@@ -1171,13 +1171,13 @@ export default function SuperAdminPage() {
                       </div>
 
                       <div className="flex items-center gap-2 pt-2 border-t border-[#665038]/30">
-                        <button
+                        <button suppressHydrationWarning
                           onClick={() => setSelectedUserModal(couple)}
                           className="flex-1 py-1.5 rounded-xl bg-[#321B30] text-xs font-semibold text-[#D6B875] hover:bg-[#B08D45] hover:text-[#1F0E1D] transition-colors"
                         >
                           View Full Profile
                         </button>
-                        <button
+                        <button suppressHydrationWarning
                           onClick={() => {
                             const newStatus = couple.status === "active" ? "suspended" : "active";
                             executeAdminAction({
@@ -1269,13 +1269,13 @@ export default function SuperAdminPage() {
                       </div>
 
                       <div className="flex items-center gap-2 pt-2 border-t border-[#665038]/30">
-                        <button
+                        <button suppressHydrationWarning
                           onClick={() => setSelectedUserModal(seller)}
                           className="flex-1 py-1.5 rounded-xl bg-[#321B30] text-xs font-semibold text-[#D6B875] hover:bg-[#B08D45] hover:text-[#1F0E1D] transition-colors"
                         >
                           Seller Details
                         </button>
-                        <button
+                        <button suppressHydrationWarning
                           onClick={() => {
                             const newStatus = seller.status === "active" ? "suspended" : "active";
                             executeAdminAction({
@@ -1372,13 +1372,13 @@ export default function SuperAdminPage() {
                       </div>
 
                       <div className="flex items-center gap-2 pt-2 border-t border-[#665038]/30">
-                        <button
+                        <button suppressHydrationWarning
                           onClick={() => setSelectedUserModal(vendor)}
                           className="flex-1 py-1.5 rounded-xl bg-[#321B30] text-xs font-semibold text-[#D6B875] hover:bg-[#B08D45] hover:text-[#1F0E1D] transition-colors"
                         >
                           Vendor Portfolio
                         </button>
-                        <button
+                        <button suppressHydrationWarning
                           onClick={() => {
                             const newStatus = vendor.status === "active" ? "suspended" : "active";
                             executeAdminAction({
@@ -1524,7 +1524,7 @@ export default function SuperAdminPage() {
 
                       <div className="p-4 bg-[#1A0B18]/60 border-t border-[#665038]/40 flex items-center justify-between gap-2">
                         {isPending && (
-                          <button
+                          <button suppressHydrationWarning
                             onClick={() =>
                               executeAdminAction({
                                 action: "update_listing_status",
@@ -1541,7 +1541,7 @@ export default function SuperAdminPage() {
                         )}
 
                         {!isPending && isApproved && (
-                          <button
+                          <button suppressHydrationWarning
                             onClick={() => {
                               setRejectRemarksModal({
                                 type: item.listing_type,
@@ -1556,7 +1556,7 @@ export default function SuperAdminPage() {
                         )}
 
                         {item.status === "rejected" && (
-                          <button
+                          <button suppressHydrationWarning
                             onClick={() =>
                               executeAdminAction({
                                 action: "update_listing_status",
@@ -1572,7 +1572,7 @@ export default function SuperAdminPage() {
                           </button>
                         )}
 
-                        <button
+                        <button suppressHydrationWarning
                           onClick={() => {
                             if (confirm(`Permanently delete this listing: "${item.name}"?`)) {
                               executeAdminAction({
@@ -1884,7 +1884,7 @@ export default function SuperAdminPage() {
                             </>
                           )}
 
-                          <button
+                          <button suppressHydrationWarning
                             onClick={() => setReplyEnquiryModal(enq)}
                             className="px-3 py-1.5 rounded-xl bg-[#321B30] border border-[#665038] text-xs font-semibold text-[#D6B875] hover:bg-[#B08D45] hover:text-[#1F0E1D] transition-colors cursor-pointer"
                           >
@@ -1894,7 +1894,7 @@ export default function SuperAdminPage() {
 
                         {/* Status Actions */}
                         <div className="flex flex-wrap items-center gap-1.5">
-                          <button
+                          <button suppressHydrationWarning
                             onClick={() =>
                               executeAdminAction({
                                 action: "update_enquiry_status",
@@ -1909,7 +1909,7 @@ export default function SuperAdminPage() {
                             Mark Contacted
                           </button>
 
-                          <button
+                          <button suppressHydrationWarning
                             onClick={() =>
                               executeAdminAction({
                                 action: "update_enquiry_status",
@@ -1924,7 +1924,7 @@ export default function SuperAdminPage() {
                             In Progress
                           </button>
 
-                          <button
+                          <button suppressHydrationWarning
                             onClick={() =>
                               executeAdminAction({
                                 action: "update_enquiry_status",
@@ -1939,7 +1939,7 @@ export default function SuperAdminPage() {
                             Resolve
                           </button>
 
-                          <button
+                          <button suppressHydrationWarning
                             onClick={() =>
                               executeAdminAction({
                                 action: "update_enquiry_status",
@@ -1974,7 +1974,7 @@ export default function SuperAdminPage() {
                 <p className="text-xs text-[#C9BBAF]">All booking deposits, product checkout orders & settlements</p>
               </div>
 
-              <button
+              <button suppressHydrationWarning
                 onClick={exportTransactionsCSV}
                 className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-[#321B30] border border-[#665038] text-xs font-semibold text-[#D6B875] hover:bg-[#B08D45] hover:text-[#1F0E1D] transition-colors cursor-pointer"
               >
@@ -2097,7 +2097,7 @@ export default function SuperAdminPage() {
 
                       <div className="flex items-center gap-2">
                         {rev.status !== "rejected" ? (
-                          <button
+                          <button suppressHydrationWarning
                             onClick={() =>
                               executeAdminAction({
                                 action: "update_review_status",
@@ -2110,7 +2110,7 @@ export default function SuperAdminPage() {
                             Hide Review
                           </button>
                         ) : (
-                          <button
+                          <button suppressHydrationWarning
                             onClick={() =>
                               executeAdminAction({
                                 action: "update_review_status",
@@ -2124,7 +2124,7 @@ export default function SuperAdminPage() {
                           </button>
                         )}
 
-                        <button
+                        <button suppressHydrationWarning
                           onClick={() => {
                             if (confirm("Delete this review permanently?")) {
                               executeAdminAction({
@@ -2161,7 +2161,7 @@ export default function SuperAdminPage() {
                 </span>
                 <h3 className="text-lg font-serif font-bold text-[#F8F1E5]">User #{selectedUserModal.id}</h3>
               </div>
-              <button
+              <button suppressHydrationWarning
                 onClick={() => setSelectedUserModal(null)}
                 className="p-1 rounded-lg text-[#C9BBAF] hover:text-[#F8F1E5] cursor-pointer"
               >
@@ -2215,7 +2215,7 @@ export default function SuperAdminPage() {
             </div>
 
             <div className="flex justify-end gap-2 pt-2 border-t border-[#665038]/40">
-              <button
+              <button suppressHydrationWarning
                 onClick={() => setSelectedUserModal(null)}
                 className="px-4 py-2 rounded-xl bg-[#321B30] text-xs font-semibold text-[#D6B875] hover:bg-[#B08D45] hover:text-[#1F0E1D] transition-colors cursor-pointer"
               >
@@ -2248,7 +2248,7 @@ export default function SuperAdminPage() {
             />
 
             <div className="flex justify-end gap-2">
-              <button
+              <button suppressHydrationWarning
                 onClick={() => {
                   setRejectRemarksModal(null);
                   setRemarksText("");
@@ -2257,7 +2257,7 @@ export default function SuperAdminPage() {
               >
                 Cancel
               </button>
-              <button
+              <button suppressHydrationWarning
                 onClick={async () => {
                   await executeAdminAction({
                     action: "update_listing_status",
@@ -2300,7 +2300,7 @@ export default function SuperAdminPage() {
             />
 
             <div className="flex justify-end gap-2">
-              <button
+              <button suppressHydrationWarning
                 onClick={() => {
                   setReplyEnquiryModal(null);
                   setRemarksText("");
@@ -2309,7 +2309,7 @@ export default function SuperAdminPage() {
               >
                 Cancel
               </button>
-              <button
+              <button suppressHydrationWarning
                 onClick={async () => {
                   await executeAdminAction({
                     action: "update_enquiry_status",

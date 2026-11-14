@@ -571,7 +571,7 @@ export default function BridalMakeupPage() {
               </div>
 
               {/* Find Button */}
-              <button
+              <button suppressHydrationWarning
                 type="button"
                 onClick={() => {}}
                 className="flex items-center justify-center gap-1.5 rounded-xl bg-[#B08D45] px-6 py-2.5 text-xs font-semibold text-[#241321] transition-all hover:bg-[#D6B875] sm:text-sm"
@@ -591,7 +591,7 @@ export default function BridalMakeupPage() {
         <div className="mx-auto max-w-7xl">
           {/* Mobile Filter Toggle Button */}
           <div className="mb-6 flex items-center justify-between lg:hidden">
-            <button
+            <button suppressHydrationWarning
               type="button"
               onClick={() => setMobileFilterOpen(!mobileFilterOpen)}
               className="flex items-center gap-2 rounded-xl border border-[#665038] bg-[#321B30] px-4 py-2.5 text-xs font-semibold text-[#F8F1E5]"
@@ -628,7 +628,7 @@ export default function BridalMakeupPage() {
                   </div>
 
                   {activeFiltersCount > 0 && (
-                    <button
+                    <button suppressHydrationWarning
                       type="button"
                       onClick={handleClearFilters}
                       className="flex items-center gap-1 text-[11px] font-semibold text-[#D6B875] hover:underline"
@@ -719,7 +719,7 @@ export default function BridalMakeupPage() {
 
                 {/* Clear Filters Button at bottom */}
                 <div className="pt-2">
-                  <button
+                  <button suppressHydrationWarning
                     type="button"
                     onClick={handleClearFilters}
                     className="flex w-full items-center justify-center gap-2 rounded-xl border border-[#665038] bg-[#241321] py-2.5 text-xs font-semibold text-[#F8F1E5] transition-colors hover:border-[#B08D45] hover:text-[#D6B875]"
@@ -795,7 +795,7 @@ export default function BridalMakeupPage() {
                     We couldn&apos;t find any bridal makeup artists matching your selected city,
                     services, or budget range.
                   </p>
-                  <button
+                  <button suppressHydrationWarning
                     type="button"
                     onClick={handleClearFilters}
                     className="mt-6 inline-flex items-center gap-2 rounded-full bg-[#B08D45] px-6 py-2.5 text-xs font-semibold text-[#241321] transition-all hover:bg-[#D6B875]"
@@ -834,7 +834,7 @@ export default function BridalMakeupPage() {
                             </div>
 
                             {/* Heart Shortlist Toggle */}
-                            <button
+                            <button suppressHydrationWarning
                               type="button"
                               onClick={() => toggleShortlist(artist.id)}
                               aria-label={
@@ -925,7 +925,7 @@ export default function BridalMakeupPage() {
 
                         {/* Action Buttons */}
                         <div className="grid grid-cols-2 gap-2 p-5 pt-0">
-                          <button
+                          <button suppressHydrationWarning
                             type="button"
                             onClick={() => setDetailsModalVendor(artist)}
                             className="flex items-center justify-center gap-1 rounded-xl border border-[#B08D45] bg-[#321B30] py-2.5 text-xs font-medium text-[#F8F1E5] transition-all hover:bg-[#241321] hover:text-[#D6B875]"
@@ -934,7 +934,7 @@ export default function BridalMakeupPage() {
                             View Details
                           </button>
 
-                          <button
+                          <button suppressHydrationWarning
                             type="button"
                             onClick={() => setEnquiryModalVendor(artist)}
                             className="flex items-center justify-center gap-1 rounded-xl bg-[#B08D45] py-2.5 text-xs font-semibold text-[#241321] transition-all hover:bg-[#D6B875]"
@@ -977,7 +977,7 @@ export default function BridalMakeupPage() {
                   key={faq.q}
                   className="rounded-2xl border border-[#665038]/60 bg-[#241321] transition-colors"
                 >
-                  <button
+                  <button suppressHydrationWarning
                     type="button"
                     onClick={() =>
                       setOpenFaqIndex(isOpen ? null : index)
@@ -1053,7 +1053,7 @@ export default function BridalMakeupPage() {
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 backdrop-blur-sm"
         >
           <div className="relative w-full max-w-lg rounded-2xl border border-[#665038] bg-[#321B30] p-6 shadow-2xl sm:p-8">
-            <button
+            <button suppressHydrationWarning
               type="button"
               onClick={closeEnquiryModal}
               className="absolute right-4 top-4 flex h-8 w-8 items-center justify-center rounded-full border border-[#665038] bg-[#241321] text-[#F8F1E5] transition-colors hover:bg-[#3A2638]"
@@ -1088,7 +1088,7 @@ export default function BridalMakeupPage() {
                     <span className="font-semibold text-[#E8D9B5]">Phone:</span> {formData.phone}
                   </p>
                 </div>
-                <button
+                <button suppressHydrationWarning
                   type="button"
                   onClick={closeEnquiryModal}
                   className="mt-6 rounded-full bg-[#B08D45] px-6 py-2 text-xs font-semibold text-[#241321] transition-all hover:bg-[#D6B875]"
@@ -1254,7 +1254,7 @@ export default function BridalMakeupPage() {
                   </div>
 
                   <div className="pt-2">
-                    <button
+                    <button suppressHydrationWarning
                       type="submit"
                       className="w-full rounded-full bg-[#B08D45] py-2.5 text-xs font-semibold text-[#241321] transition-all hover:bg-[#D6B875]"
                     >
@@ -1278,7 +1278,7 @@ export default function BridalMakeupPage() {
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 backdrop-blur-sm"
         >
           <div className="relative max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-2xl border border-[#665038] bg-[#321B30] p-6 shadow-2xl sm:p-8">
-            <button
+            <button suppressHydrationWarning
               type="button"
               onClick={() => setDetailsModalVendor(null)}
               className="absolute right-4 top-4 flex h-8 w-8 items-center justify-center rounded-full border border-[#665038] bg-[#241321] text-[#F8F1E5] transition-colors hover:bg-[#3A2638]"
@@ -1349,7 +1349,7 @@ export default function BridalMakeupPage() {
                   </p>
                 </div>
 
-                <button
+                <button suppressHydrationWarning
                   type="button"
                   onClick={() => {
                     const v = detailsModalVendor;

@@ -698,7 +698,7 @@ export default function WeddingDecorationPage() {
               </div>
 
               {/* Find Button */}
-              <button
+              <button suppressHydrationWarning
                 type="button"
                 onClick={() => {}}
                 className="flex items-center justify-center gap-1.5 rounded-xl bg-gradient-to-r from-[#B08D45] to-[#D6B875] px-6 py-2.5 text-xs font-semibold text-[#241321] shadow-md transition-all hover:brightness-105 sm:text-sm"
@@ -718,7 +718,7 @@ export default function WeddingDecorationPage() {
         <div className="mx-auto max-w-7xl">
           {/* Mobile Filter Toggle Button */}
           <div className="mb-6 flex items-center justify-between lg:hidden">
-            <button
+            <button suppressHydrationWarning
               type="button"
               onClick={() => setMobileFilterOpen(!mobileFilterOpen)}
               className="flex items-center gap-2 rounded-xl border border-[#665038] bg-[#321B30] px-4 py-2.5 text-xs font-semibold text-[#F8F1E5]"
@@ -755,7 +755,7 @@ export default function WeddingDecorationPage() {
                   </div>
 
                   {activeFiltersCount > 0 && (
-                    <button
+                    <button suppressHydrationWarning
                       type="button"
                       onClick={handleClearFilters}
                       className="flex items-center gap-1 text-[11px] font-semibold text-[#D6B875] hover:underline"
@@ -846,7 +846,7 @@ export default function WeddingDecorationPage() {
 
                 {/* Bottom Clear Button */}
                 <div className="pt-2">
-                  <button
+                  <button suppressHydrationWarning
                     type="button"
                     onClick={handleClearFilters}
                     className="flex w-full items-center justify-center gap-2 rounded-xl border border-[#665038] bg-[#241321] py-2.5 text-xs font-semibold text-[#F8F1E5] transition-colors hover:border-[#B08D45] hover:text-[#D6B875]"
@@ -922,7 +922,7 @@ export default function WeddingDecorationPage() {
                     We couldn&apos;t find any wedding decorators matching your selected
                     city, service type, or budget. Try resetting your filters.
                   </p>
-                  <button
+                  <button suppressHydrationWarning
                     type="button"
                     onClick={handleClearFilters}
                     className="mt-6 inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#B08D45] to-[#D6B875] px-6 py-2.5 text-xs font-semibold text-[#241321] transition-all hover:brightness-105"
@@ -962,7 +962,7 @@ export default function WeddingDecorationPage() {
                             </div>
 
                             {/* Top Right: Shortlist Button */}
-                            <button
+                            <button suppressHydrationWarning
                               type="button"
                               onClick={() => toggleShortlist(vendor.id)}
                               aria-pressed={isShortlisted}
@@ -1061,7 +1061,7 @@ export default function WeddingDecorationPage() {
 
                         {/* Action Buttons (View Details + Send Enquiry) */}
                         <div className="grid grid-cols-2 gap-2 p-5 pt-0">
-                          <button
+                          <button suppressHydrationWarning
                             type="button"
                             onClick={() => setDetailsModalVendor(vendor)}
                             className="flex items-center justify-center gap-1.5 rounded-xl border border-[#B08D45] bg-[#321B30] py-2.5 text-xs font-semibold text-[#F8F1E5] transition-all hover:bg-[#241321] hover:text-[#D6B875]"
@@ -1070,7 +1070,7 @@ export default function WeddingDecorationPage() {
                             <span>View Details</span>
                           </button>
 
-                          <button
+                          <button suppressHydrationWarning
                             type="button"
                             onClick={() => setEnquiryModalVendor(vendor)}
                             className="flex items-center justify-center gap-1.5 rounded-xl bg-gradient-to-r from-[#B08D45] to-[#D6B875] py-2.5 text-xs font-semibold text-[#241321] shadow-md transition-all hover:brightness-105"
@@ -1162,7 +1162,7 @@ export default function WeddingDecorationPage() {
                   key={faq.q}
                   className="rounded-2xl border border-[#665038]/60 bg-[#321B30] transition-colors"
                 >
-                  <button
+                  <button suppressHydrationWarning
                     type="button"
                     onClick={() =>
                       setOpenFaqIndex(isOpen ? null : index)
@@ -1238,7 +1238,7 @@ export default function WeddingDecorationPage() {
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 backdrop-blur-sm"
         >
           <div className="relative max-h-[90vh] w-full max-w-3xl overflow-y-auto rounded-2xl border border-[#665038] bg-[#321B30] p-6 shadow-2xl sm:p-8">
-            <button
+            <button suppressHydrationWarning
               type="button"
               onClick={() => setDetailsModalVendor(null)}
               className="absolute right-4 top-4 flex h-8 w-8 items-center justify-center rounded-full border border-[#665038] bg-[#241321] text-[#F8F1E5] transition-colors hover:bg-[#3A2638]"
@@ -1371,7 +1371,7 @@ export default function WeddingDecorationPage() {
                   <p className="text-xs text-[#D6B875]">No commission fees charged</p>
                 </div>
 
-                <button
+                <button suppressHydrationWarning
                   type="button"
                   onClick={() => {
                     const v = detailsModalVendor;
@@ -1399,7 +1399,7 @@ export default function WeddingDecorationPage() {
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 backdrop-blur-sm"
         >
           <div className="relative w-full max-w-lg rounded-2xl border border-[#665038] bg-[#321B30] p-6 shadow-2xl sm:p-8">
-            <button
+            <button suppressHydrationWarning
               type="button"
               onClick={closeEnquiryModal}
               className="absolute right-4 top-4 flex h-8 w-8 items-center justify-center rounded-full border border-[#665038] bg-[#241321] text-[#F8F1E5] transition-colors hover:bg-[#3A2638]"
@@ -1434,7 +1434,7 @@ export default function WeddingDecorationPage() {
                     <span className="font-semibold text-[#E8D9B5]">Budget Range:</span> {formData.budget || enquiryModalVendor.priceRange}
                   </p>
                 </div>
-                <button
+                <button suppressHydrationWarning
                   type="button"
                   onClick={closeEnquiryModal}
                   className="mt-6 rounded-full bg-gradient-to-r from-[#B08D45] to-[#D6B875] px-6 py-2 text-xs font-semibold text-[#241321] transition-all hover:brightness-105"
@@ -1647,7 +1647,7 @@ export default function WeddingDecorationPage() {
                   </div>
 
                   <div className="pt-2">
-                    <button
+                    <button suppressHydrationWarning
                       type="submit"
                       className="w-full rounded-full bg-gradient-to-r from-[#B08D45] to-[#D6B875] py-2.5 text-xs font-semibold text-[#241321] shadow-md transition-all hover:brightness-105"
                     >
