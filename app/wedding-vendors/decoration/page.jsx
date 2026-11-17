@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import Link from "next/link";
 import {
   Search,
@@ -332,6 +332,7 @@ const DECORATORS_DATA = [
 const CITIES = [
   "All Cities",
   "Delhi",
+  "New Delhi",
   "Jaipur",
   "Udaipur",
   "Lucknow",
@@ -423,6 +424,28 @@ const DECORATION_FAQS = [
 ];
 
 export default function WeddingDecorationPage() {
+  // Dynamic backend registered listings
+  const [dynamicVendors, setDynamicVendors] = useState([]);
+
+  useEffect(() => {
+    let isMounted = true;
+    async function loadVendors() {
+      try {
+        const res = await fetch("/api/vendors?category=decoration");
+        const data = await res.json();
+        if (isMounted && data.success && Array.isArray(data.listings)) {
+          setDynamicVendors(data.listings);
+        }
+      } catch (err) {
+        console.error("Failed to load registered vendors:", err);
+      }
+    }
+    loadVendors();
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
   // Filter States
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCity, setSelectedCity] = useState("All Cities");
@@ -481,8 +504,12 @@ export default function WeddingDecorationPage() {
     (selectedBudget !== "all" ? 1 : 0);
 
   // Client-Side Filter & Sort Logic
+  const allDecoratorsList = useMemo(() => {
+    return [...dynamicVendors, ...DECORATORS_DATA];
+  }, [dynamicVendors]);
+
   const filteredDecorators = useMemo(() => {
-    let result = DECORATORS_DATA.filter((vendor) => {
+    let result = allDecoratorsList.filter((vendor) => {
       // Search term
       if (searchTerm.trim()) {
         const query = searchTerm.toLowerCase().trim();
@@ -508,7 +535,11 @@ export default function WeddingDecorationPage() {
       }
 
       // City filter
-      if (selectedCity !== "All Cities" && vendor.city !== selectedCity) {
+      if (
+        selectedCity !== "All Cities" &&
+        !vendor.city?.toLowerCase().includes(selectedCity.toLowerCase()) &&
+        !vendor.location?.toLowerCase().includes(selectedCity.toLowerCase())
+      ) {
         return false;
       }
 
@@ -566,7 +597,7 @@ export default function WeddingDecorationPage() {
     });
 
     return result;
-  }, [searchTerm, selectedCity, selectedService, selectedBudget, sortBy]);
+  }, [allDecoratorsList, searchTerm, selectedCity, selectedService, selectedBudget, sortBy]);
 
   // Form Submit Handler
   const handleEnquirySubmit = (e) => {

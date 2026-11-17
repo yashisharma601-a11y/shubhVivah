@@ -12,13 +12,15 @@ export default function GuestSignupPopup() {
   const [isAuthenticated, setIsAuthenticated] = useState(null); // null = checking, true/false = known
   const timerRef = useRef(null);
 
-  // Do not show popup on login, register, or forgot-password pages
-  const isAuthPage =
+  // Do not show popup on login, register, forgot-password, or admin panel pages
+  const isExcludedPage =
     pathname === "/login" ||
     pathname.startsWith("/login/") ||
     pathname === "/register" ||
     pathname.startsWith("/register/") ||
-    pathname === "/forgot-password";
+    pathname === "/forgot-password" ||
+    pathname === "/admin" ||
+    pathname.startsWith("/admin/");
 
   // 1. Verify actual server session directly with backend API
   useEffect(() => {
@@ -32,6 +34,7 @@ export default function GuestSignupPopup() {
         });
         const data = await res.json();
         if (isMounted) {
+          // If authenticated as ANY valid user (admin, couple, vendor, seller)
           if (data.authenticated && data.user) {
             setIsAuthenticated(true);
             setIsOpen(false);
@@ -48,15 +51,22 @@ export default function GuestSignupPopup() {
 
     checkAuthStatus();
 
+    // Also listen to storage or window focus events to sync auth status immediately
+    const handleSync = () => {
+      checkAuthStatus();
+    };
+    window.addEventListener("focus", handleSync);
+
     return () => {
       isMounted = false;
+      window.removeEventListener("focus", handleSync);
     };
-  }, []);
+  }, [pathname]);
 
   // 2. Schedule recurring 10s popup timer for unauthenticated visitors
   useEffect(() => {
-    // If on auth pages (/login, /register, etc.), do not show popup or run timer
-    if (isAuthPage) {
+    // If on excluded pages (/login, /register, /admin, etc.), do not show popup or run timer
+    if (isExcludedPage) {
       setIsOpen(false);
       if (timerRef.current) {
         clearTimeout(timerRef.current);
@@ -90,7 +100,7 @@ export default function GuestSignupPopup() {
         clearTimeout(timerRef.current);
       }
     };
-  }, [isAuthenticated, isOpen, isAuthPage]);
+  }, [isAuthenticated, isOpen, isExcludedPage]);
 
   // 3. Escape key keyboard support
   useEffect(() => {
@@ -107,8 +117,8 @@ export default function GuestSignupPopup() {
     setIsOpen(false);
   };
 
-  // If authenticated, on an auth page, or still verifying, do not render popup DOM
-  if (isAuthenticated !== false || isAuthPage || !isOpen) {
+  // If authenticated, on an excluded page (/admin, /login, /register, etc.), or still verifying, do not render popup DOM
+  if (isAuthenticated !== false || isExcludedPage || !isOpen) {
     return null;
   }
 

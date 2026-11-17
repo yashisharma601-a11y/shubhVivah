@@ -1,10 +1,33 @@
 [
   {
-    "userId": 1,
-    "businessName": "Pooja Bridal Couture",
-    "businessCategory": "Bridal Lehengas",
-    "sellerType": "Individual",
-    "updated_at": "2026-11-12T11:12:29.000Z",
-    "created_at": "2026-11-12T11:12:29.000Z"
+    "userId": 103,
+    "ownerFirstName": "Satish",
+    "ownerLastName": "Kumar",
+    "fullName": "Satish Kumar",
+    "businessName": "SK Decor",
+    "sellerType": "Proprietorship",
+    "businessCategory": "Wedding Decorations",
+    "businessDescription": "Designer bridal wear couture and handcrafted heritage wedding ensembles.",
+    "yearOfEstablishment": "2018",
+    "gstNumber": "",
+    "panNumber": "",
+    "websiteUrl": "",
+    "instagramUrl": "",
+    "facebookUrl": "",
+    "productCategories": [
+      "Customized Products",
+      "Wedding Decorations",
+      "Return Gifts",
+      "Wedding Accessories"
+    ],
+    "country": "India",
+    "state": "Delhi",
+    "city": "New Delhi",
+    "fullAddress": "Plot 42, Johari Bazar, Heritage Craft Complex",
+    "pincode": "302003",
+    "storeAddress": "Store #12, First Floor, Johari Bazar, Jaipur",
+    "businessLogoUrl": null,
+    "updated_at": "2026-11-17T10:45:13.405Z",
+    "created_at": "2026-11-17T10:45:13.405Z"
   }
 ]

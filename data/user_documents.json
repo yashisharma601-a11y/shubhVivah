@@ -1,0 +1,21 @@
+[
+  {
+    "id": 1,
+    "userId": 103,
+    "idProofUrl": "/uploads/reg-1794912222406-z44df9.jpg",
+    "businessProofUrl": "/uploads/reg-1794912229241-nnfi5h.jpg",
+    "gstCertificateUrl": null,
+    "documentType": "Seller Verification",
+    "created_at": "2026-11-17T10:45:13.415Z"
+  },
+  {
+    "id": 2,
+    "userId": 104,
+    "idProofUrl": "/uploads/reg-1794914672247-ri2v75.jpg",
+    "businessProofUrl": "/uploads/reg-1794914675881-rcwn89.jpg",
+    "gstCertificateUrl": null,
+    "addressProofUrl": null,
+    "documentType": "Vendor Verification",
+    "created_at": "2026-11-17T11:24:50.389Z"
+  }
+]

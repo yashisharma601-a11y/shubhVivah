@@ -1,18 +1,1 @@
-[
-  {
-    "id": 1,
-    "couple_id": 1,
-    "target_type": "vendor",
-    "target_id": 2,
-    "target_name": "Royal Heritage Captures",
-    "user_name": "Aditi & Aarav",
-    "user_email": "aditi.aarav@example.com",
-    "user_phone": "9876543211",
-    "service_or_product": "Royal Royal Palace Wedding Cinematography",
-    "message": "Are you available for drone shoots on 27th & 28th November in Udaipur?",
-    "status": "Replied",
-    "reply_message": "Yes Aditi & Aarav, our drone crew is available. Looking forward to capturing your wedding!",
-    "replied_at": "2026-10-31T10:10:20.881Z",
-    "created_at": "2026-10-29T10:10:20.881Z"
-  }
-]
+[]

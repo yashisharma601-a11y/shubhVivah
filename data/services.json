@@ -1,47 +1,17 @@
 [
   {
-    "id": 3,
-    "vendor_id": 1,
-    "name": "Royal Candid Wedding Cinematography",
-    "starting_price": "65000",
-    "status": "active",
-    "created_at": "2026-11-12T11:12:36.950Z"
-  },
-  {
     "id": 1,
-    "vendor_id": 2,
-    "vendor_name": "Royal Heritage Captures",
-    "name": "Royal Royal Palace Wedding Cinematography",
-    "category": "Photographer",
-    "description": "Complete pre-wedding, candid photography, 4K cinematic film with drone shoots.",
-    "price": "₹85,000 / day",
-    "pricing_type": "Starting From",
-    "location": "Udaipur & Pan India",
-    "city": "Udaipur",
-    "images": [
-      "https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=80"
-    ],
+    "vendor_id": 104,
+    "name": "Royal caterer",
+    "category": "Caterer",
+    "starting_price": "90000",
+    "max_price": "250000",
+    "price_type": "Per Event",
+    "description": "Comprehensive wedding coverage including pre-wedding teaser, drone shots, traditional rituals and candid moments.",
+    "customization_available": true,
+    "advance_booking_amount": "25% at booking confirmation",
+    "cancellation_policy": "Full refund if cancelled 45+ days prior; 50% refund if cancelled 20+ days prior.",
     "status": "active",
-    "availability": "Available",
-    "created_at": "2026-10-31T10:10:20.846Z"
-  },
-  {
-    "id": 2,
-    "vendor_id": 4,
-    "vendor_name": "Sunita Mehandi Artistry",
-    "name": "Bridal Marwari & Arabic Mehndi Package",
-    "category": "Mehndi Artist",
-    "description": "Organic bridal henna with intricate storytelling designs, Radha-Krishna motifs and guest artists.",
-    "price": "₹15,000",
-    "pricing_type": "Fixed Price",
-    "location": "Jaipur",
-    "city": "Jaipur",
-    "images": [
-      "https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=800&q=80"
-    ],
-    "status": "active",
-    "availability": "Available",
-    "created_at": "2026-10-31T10:10:20.846Z"
+    "created_at": "2026-11-17T11:24:50.368Z"
   }
 ]

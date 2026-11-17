@@ -1,42 +1,24 @@
 [
   {
-    "id": 3,
-    "seller_id": 1,
-    "name": "Royal Velvet Lehenga",
-    "price": 85000,
-    "status": "active",
-    "created_at": "2026-11-12T11:12:29.004Z"
-  },
-  {
     "id": 1,
-    "seller_id": 3,
-    "seller_name": "Shree Krishna Water & Dairy Supplies",
-    "name": "20L RO Chilled Water Camper (Bulk Wedding Supply)",
-    "category": "Water Camper Supplier",
-    "description": "Hygienic 20-litre purified water campers delivered with dispenser stands directly to banquet halls and lawns.",
-    "price": 45,
-    "discount_price": 35,
-    "stock": 500,
+    "seller_id": 103,
+    "name": "Decorators",
+    "category": "Wedding Decorations",
+    "description": "Connect with Couples Looking for Their Perfect Wedding Decorator",
+    "price": 85000,
+    "discount_price": 72000,
+    "stock": 10,
+    "variants": "Hall,Entrance,Exit",
+    "customization_available": true,
+    "made_to_order": true,
+    "delivery_available": true,
+    "delivery_locations": "Pan India & Worldwide Express Shipping",
+    "return_policy": "7 Days exchange for size alterations or defect",
     "images": [
-      "https://images.unsplash.com/photo-1548839140-29a749e1bc4e?auto=format&fit=crop&w=800&q=80"
+      "/uploads/reg-1794912193837-98fodo.jpg",
+      "/uploads/reg-1794912198868-n3h1pa.jpg"
     ],
     "status": "active",
-    "created_at": "2026-10-31T10:10:20.862Z"
-  },
-  {
-    "id": 2,
-    "seller_id": 3,
-    "seller_name": "Shree Krishna Water & Dairy Supplies",
-    "name": "Fresh Malai Paneer & Desi Ghee (Per 10 Kg Pack)",
-    "category": "Dairy Products",
-    "description": "100% pure cow ghee tins and fresh malai paneer packed for high-volume wedding catering feasts.",
-    "price": 3800,
-    "discount_price": 3450,
-    "stock": 80,
-    "images": [
-      "https://images.unsplash.com/photo-1631452180519-c014fe946bc7?auto=format&fit=crop&w=800&q=80"
-    ],
-    "status": "active",
-    "created_at": "2026-10-31T10:10:20.862Z"
+    "created_at": "2026-11-17T10:45:13.410Z"
   }
 ]

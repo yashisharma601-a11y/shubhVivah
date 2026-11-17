@@ -35,6 +35,7 @@ const PUBLIC_APIS = [
   "/api/sathi-chat/inquiry",
   "/api/contact/register",
   "/api/vendors/register",
+  "/api/vendors",
 ];
 
 function isPublicApi(pathname) {
