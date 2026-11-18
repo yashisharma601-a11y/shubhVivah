@@ -436,7 +436,7 @@ export default function BridalMakeupPage() {
   }, [searchTerm, selectedCity, selectedService, selectedBudget, sortBy]);
 
   // Form Submit Handler
-  const handleEnquirySubmit = (e) => {
+  const handleEnquirySubmit = async (e) => {
     e.preventDefault();
     const errors = {};
 
@@ -452,6 +452,29 @@ export default function BridalMakeupPage() {
     }
 
     setFormErrors({});
+    try {
+      await fetch("/api/enquiry", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: formData.name,
+          phone: formData.phone,
+          date: formData.date,
+          location: formData.location,
+          service: formData.service || enquiryModalVendor?.category || "Bridal Makeup",
+          message: formData.message,
+          target_id: enquiryModalVendor?.id || null,
+          target_type: "vendor",
+          target_name: enquiryModalVendor?.company || enquiryModalVendor?.name || "Bridal Makeup Artist",
+          service_or_product: enquiryModalVendor?.name || formData.service || "Bridal Makeup",
+          budget: enquiryModalVendor?.priceDisplay || "₹35,000",
+          source: "Bridal Makeup Page",
+          is_booking: true,
+        }),
+      });
+    } catch (err) {
+      console.error("Error submitting makeup enquiry:", err);
+    }
     setFormSubmitted(true);
   };
 

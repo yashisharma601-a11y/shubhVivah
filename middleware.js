@@ -36,6 +36,8 @@ const PUBLIC_APIS = [
   "/api/contact/register",
   "/api/vendors/register",
   "/api/vendors",
+  "/api/enquiry",
+  "/api/dashboard/enquiries",
 ];
 
 function isPublicApi(pathname) {

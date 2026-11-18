@@ -1,1 +1,22 @@
-[]
+[
+  {
+    "id": 1,
+    "couple_id": null,
+    "couple_name": "Priya & Rohan",
+    "couple_email": "yashisharma601@gmail.com",
+    "couple_phone": "7983075757",
+    "target_id": 104,
+    "target_type": "vendor",
+    "target_name": "Manish Caterer",
+    "service_or_product": "Royal caterer",
+    "message": "Need catering menu and quotation for grand wedding reception in Lucknow.",
+    "event_date": "2027-02-22",
+    "budget": "₹90,000 – ₹2,50,000",
+    "guest_count": "350",
+    "location": "Lucknow",
+    "source": "Wedding Caterers Page",
+    "status": "New",
+    "reply_message": null,
+    "created_at": "2026-11-18T08:17:53.799Z"
+  }
+]

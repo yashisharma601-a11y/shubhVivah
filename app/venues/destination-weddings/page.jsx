@@ -116,8 +116,29 @@ export default function DestinationWeddingsPage() {
     return result;
   }, [searchQuery, selectedCity, sortBy]);
 
-  const handleEnquirySubmit = (e) => {
+  const handleEnquirySubmit = async (e) => {
     e.preventDefault();
+    try {
+      await fetch("/api/enquiry", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: formData.name,
+          phone: formData.phone,
+          date: formData.date,
+          guests: formData.guests,
+          message: formData.message,
+          target_id: enquiryModalVenue?.id || null,
+          target_type: "venue",
+          target_name: enquiryModalVenue?.name || "Destination Wedding Resort",
+          service_or_product: "Destination Wedding Venue",
+          budget: enquiryModalVenue?.pricing?.veg || "₹3,500 / plate",
+          location: enquiryModalVenue?.city || "India",
+          source: "Destination Weddings Page",
+          is_booking: true,
+        }),
+      });
+    } catch {}
     setFormSubmitted(true);
   };
 

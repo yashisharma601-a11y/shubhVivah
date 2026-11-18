@@ -398,7 +398,7 @@ export default function WeddingPhotographyPage() {
   }, [searchTerm, selectedCity, selectedService, selectedBudget, sortBy]);
 
   // Handle Enquiry Form Submit
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
     const errors = {};
 
@@ -415,6 +415,29 @@ export default function WeddingPhotographyPage() {
     }
 
     setFormErrors({});
+    try {
+      await fetch("/api/enquiry", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          date: formData.date,
+          location: formData.location || enquiryModalVendor?.city || "India",
+          message: formData.message,
+          target_id: enquiryModalVendor?.id || null,
+          target_type: "vendor",
+          target_name: enquiryModalVendor?.company || enquiryModalVendor?.name || "Wedding Photographer",
+          service_or_product: enquiryModalVendor?.name || "Wedding Photography",
+          budget: enquiryModalVendor?.priceDisplay || "₹1,20,000",
+          source: "Wedding Photography Page",
+          is_booking: true,
+        }),
+      });
+    } catch (err) {
+      console.error("Error submitting photography enquiry:", err);
+    }
     setFormSubmitted(true);
   };
 

@@ -600,7 +600,7 @@ export default function WeddingDecorationPage() {
   }, [allDecoratorsList, searchTerm, selectedCity, selectedService, selectedBudget, sortBy]);
 
   // Form Submit Handler
-  const handleEnquirySubmit = (e) => {
+  const handleEnquirySubmit = async (e) => {
     e.preventDefault();
     const errors = {};
 
@@ -617,6 +617,30 @@ export default function WeddingDecorationPage() {
     }
 
     setFormErrors({});
+    try {
+      await fetch("/api/enquiry", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: formData.name,
+          phone: formData.phone,
+          email: formData.email,
+          date: formData.date,
+          location: formData.location,
+          budget: formData.budget || enquiryModalVendor?.priceDisplay || "₹1,50,000",
+          message: formData.message,
+          service: formData.service || enquiryModalVendor?.categoryType || "Wedding Decoration",
+          target_id: enquiryModalVendor?.dbId || enquiryModalVendor?.id || null,
+          target_type: "vendor",
+          target_name: enquiryModalVendor?.company || enquiryModalVendor?.name || "Wedding Decorator",
+          service_or_product: enquiryModalVendor?.name || formData.service || "Wedding Decorator",
+          source: "Wedding Decoration Page",
+          is_booking: true,
+        }),
+      });
+    } catch (err) {
+      console.error("Error submitting decoration enquiry:", err);
+    }
     setFormSubmitted(true);
   };
 

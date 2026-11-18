@@ -1,8 +1,8 @@
 "use client";
 
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, Suspense } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import {
   Store,
   Package,
@@ -44,13 +44,40 @@ import {
 } from "lucide-react";
 
 export default function SellerDashboardPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-screen bg-[#1F0E1D] flex items-center justify-center text-[#D6B875]">
+          <Sparkles className="animate-spin text-[#D6B875]" size={36} />
+        </div>
+      }
+    >
+      <SellerDashboardContent />
+    </Suspense>
+  );
+}
+
+function SellerDashboardContent() {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [mismatchedRole, setMismatchedRole] = useState(null);
 
-  // Active Tab & Layout
-  const [activeTab, setActiveTab] = useState("overview");
+  // Active Tab & Layout (reads from ?tab= if present)
+  const initialTab = searchParams.get("tab");
+  const [activeTab, setActiveTab] = useState(
+    ["overview", "profile", "products", "orders", "enquiries", "payments", "settings"].includes(initialTab)
+      ? initialTab
+      : "overview"
+  );
+
+  useEffect(() => {
+    const tabParam = searchParams.get("tab");
+    if (tabParam && ["overview", "profile", "products", "orders", "enquiries", "payments", "settings"].includes(tabParam)) {
+      setActiveTab(tabParam);
+    }
+  }, [searchParams]);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [notificationsOpen, setNotificationsOpen] = useState(false);
 

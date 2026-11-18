@@ -1,8 +1,8 @@
 "use client";
 
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, Suspense } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import {
   Heart,
   Calendar,
@@ -45,13 +45,40 @@ import {
 } from "lucide-react";
 
 export default function CoupleDashboardPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-screen bg-[#1F0E1D] flex items-center justify-center text-[#D6B875]">
+          <Sparkles className="animate-spin text-[#D6B875]" size={36} />
+        </div>
+      }
+    >
+      <CoupleDashboardContent />
+    </Suspense>
+  );
+}
+
+function CoupleDashboardContent() {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [mismatchedRole, setMismatchedRole] = useState(null);
 
-  // Active Section
-  const [activeTab, setActiveTab] = useState("overview");
+  // Active Section (reads from ?tab= if present)
+  const initialTab = searchParams.get("tab");
+  const [activeTab, setActiveTab] = useState(
+    ["overview", "profile", "planning", "bookings", "wishlist", "enquiries", "notifications", "settings"].includes(initialTab)
+      ? initialTab
+      : "overview"
+  );
+
+  useEffect(() => {
+    const tabParam = searchParams.get("tab");
+    if (tabParam && ["overview", "profile", "planning", "bookings", "wishlist", "enquiries", "notifications", "settings"].includes(tabParam)) {
+      setActiveTab(tabParam);
+    }
+  }, [searchParams]);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [notificationsOpen, setNotificationsOpen] = useState(false);
 

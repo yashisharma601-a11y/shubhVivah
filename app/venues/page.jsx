@@ -146,8 +146,31 @@ export default function AllVenuesPage() {
     return result;
   }, [searchQuery, selectedCity, selectedCategory, sortBy]);
 
-  const handleEnquirySubmit = (e) => {
+  const handleEnquirySubmit = async (e) => {
     e.preventDefault();
+    try {
+      await fetch("/api/enquiry", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: formData.name,
+          phone: formData.phone,
+          date: formData.date,
+          guests: formData.guests,
+          message: formData.message,
+          target_id: enquiryModalVenue?.id || null,
+          target_type: "venue",
+          target_name: enquiryModalVenue?.name || "Wedding Venue",
+          service_or_product: enquiryModalVenue?.type || "Wedding Venue",
+          budget: enquiryModalVenue?.pricing?.veg || "Custom Venue Quote",
+          location: enquiryModalVenue?.city || "India",
+          source: "Wedding Venues Page",
+          is_booking: true,
+        }),
+      });
+    } catch (err) {
+      console.error("Error submitting venue enquiry:", err);
+    }
     setFormSubmitted(true);
   };
 

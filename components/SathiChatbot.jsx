@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import {
   X,
   Minus,
@@ -76,10 +77,39 @@ const QUICK_ACTIONS = [
 ];
 
 export default function SathiChatbot() {
+  const pathname = usePathname();
+  const [isAdmin, setIsAdmin] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [isMinimized, setIsMinimized] = useState(false);
   const [showTeaser, setShowTeaser] = useState(false);
   const [hasInteracted, setHasInteracted] = useState(false);
+
+  // Check if current user is admin
+  useEffect(() => {
+    let isMounted = true;
+    async function checkAdmin() {
+      try {
+        const res = await fetch("/api/auth/me", {
+          cache: "no-store",
+          headers: { Pragma: "no-cache" },
+        });
+        const data = await res.json();
+        if (isMounted) {
+          if (data.authenticated && data.user?.user_type === "admin") {
+            setIsAdmin(true);
+          } else {
+            setIsAdmin(false);
+          }
+        }
+      } catch {
+        if (isMounted) setIsAdmin(false);
+      }
+    }
+    checkAdmin();
+    return () => {
+      isMounted = false;
+    };
+  }, [pathname]);
 
   // Messages state
   const [messages, setMessages] = useState([
@@ -396,6 +426,12 @@ export default function SathiChatbot() {
       );
     });
   };
+
+  // Hide AI chatbot completely if logged in as Admin or if currently on /admin route
+  const isOnAdminRoute = pathname === "/admin" || pathname.startsWith("/admin/");
+  if (isAdmin || isOnAdminRoute) {
+    return null;
+  }
 
   return (
     <>

@@ -856,6 +856,28 @@ export default function MehndiArtistPage() {
     }
 
     setFormErrors({});
+    try {
+      fetch("/api/enquiry", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: formData.name,
+          phone: formData.phone,
+          email: formData.email,
+          date: formData.weddingDate,
+          location: formData.city,
+          message: formData.message,
+          service: formData.packageSelected || enquiryArtist?.name || "Mehndi Artist",
+          target_id: enquiryArtist?.id || null,
+          target_type: "vendor",
+          target_name: enquiryArtist?.studio || enquiryArtist?.name || "Mehndi Artist",
+          service_or_product: enquiryArtist?.name || "Bridal Mehndi",
+          budget: enquiryArtist?.priceStarting ? `₹${Number(enquiryArtist.priceStarting).toLocaleString("en-IN")}` : "₹25,000",
+          source: "Mehndi Artist Page",
+          is_booking: true,
+        }),
+      }).catch((e) => console.error(e));
+    } catch {}
     setFormSubmitted(true);
   };
 

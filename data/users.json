@@ -4,8 +4,8 @@
     "name": "Priya & Rohan",
     "email": "yashisharma601@gmail.com",
     "phone": "7983075757",
-    "password_hash": "21bd699c02b95236bc2ec75429195b709259327f2313f964934b7216617f8529966b69a06f72c8753ad2ca058412a24548d77c4b4b0c4f02898848ecb450e9ee",
-    "salt": "b01eb8980afdd006b74540c48663f9b4",
+    "password_hash": "88630a3d825ad7b9fcb54f08fd98aea16468851e210acc6da6e7a1ff4e8fc8e8cfb85a1a59fe4b167590bd91987c9dd146544b256b6a67637e98bb441295b3b2",
+    "salt": "c2b56bc64be17c5c5373f053a5828f2d",
     "user_type": "couple",
     "business_name": null,
     "category": null,
@@ -27,7 +27,7 @@
     "reset_otp_expires": null,
     "terms_accepted": true,
     "created_at": "2026-11-05T10:47:16.705Z",
-    "updated_at": "2026-11-12T11:45:00.000Z",
+    "updated_at": "2026-11-18T07:27:03.217Z",
     "admin_remarks": "Status updated by Admin to active",
     "status_updated_at": "2026-11-12T11:46:48.602Z"
   },
@@ -36,8 +36,8 @@
     "name": "ShubhVivah Super Admin",
     "email": "admin@shubhvivah.com",
     "phone": "9999999999",
-    "password_hash": "e6d2838d7a7bb7454df142d3cdca07b6435a0a6d703002f44bf90f96c22f71894b81b388e36186ca2a5ce1005756b30a62f4642f791ced433afeb03242a56d16",
-    "salt": "8acaeeb0e0f442a960e033427f3cdd12",
+    "password_hash": "4d2cf8233656eb32764905c603df1ac7f32de0fcbae26c238331d906161f3ddc7be2082d72f552871c880c9ff063147a55b62677cf865a99d19f43aeb31fc3b8",
+    "salt": "6dc0bce0c33ac5b907439b8a63167ffd",
     "user_type": "admin",
     "business_name": "ShubhVivah Corporate",
     "category": "Platform Administration",
@@ -47,7 +47,7 @@
     "reset_otp_expires": null,
     "terms_accepted": true,
     "created_at": "2026-11-12T11:26:23.768Z",
-    "updated_at": "2026-11-17T10:46:35.508Z"
+    "updated_at": "2026-11-18T07:03:19.328Z"
   },
   {
     "id": 103,

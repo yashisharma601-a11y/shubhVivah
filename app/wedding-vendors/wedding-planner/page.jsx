@@ -722,6 +722,28 @@ export default function WeddingPlannerPage() {
     }
 
     setFormErrors({});
+    try {
+      fetch("/api/enquiry", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: formData.name,
+          phone: formData.phone,
+          email: formData.email,
+          date: formData.date,
+          location: formData.city,
+          message: formData.message,
+          service: formData.packageSelected || enquiryPlanner?.name || "Wedding Planner",
+          target_id: enquiryPlanner?.id || null,
+          target_type: "vendor",
+          target_name: enquiryPlanner?.company || enquiryPlanner?.name || "Wedding Planner",
+          service_or_product: enquiryPlanner?.name || "Wedding Planning & Coordination",
+          budget: formData.budget || enquiryPlanner?.priceStarting ? `₹${Number(enquiryPlanner.priceStarting).toLocaleString("en-IN")}` : "₹2,50,000",
+          source: "Wedding Planner Page",
+          is_booking: true,
+        }),
+      }).catch((e) => console.error(e));
+    } catch {}
     setFormSubmitted(true);
   };
 

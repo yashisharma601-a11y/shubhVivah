@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import {
   Menu,
   X,
@@ -24,9 +25,19 @@ import {
   Mail,
   Video,
   User,
+  Calendar,
+  LogOut,
+  LayoutDashboard,
+  ShieldCheck,
+  Package,
+  ShoppingBag,
+  Clock,
+  CheckSquare,
+  UtensilsCrossed,
 } from "lucide-react";
 
 const vendorLinks = [
+  { name: "Wedding Caterers", href: "/wedding-vendors/caterers", icon: UtensilsCrossed },
   { name: "Wedding Photographers", href: "/wedding-vendors/wedding-photography", icon: Camera },
   { name: "Bridal Makeup Artists", href: "/wedding-vendors/bridal-makeup-artist", icon: Sparkles },
   { name: "Wedding Decorators", href: "/wedding-vendors/decoration", icon: Flower2 },
@@ -56,25 +67,35 @@ const eInviteLinks = [
 ];
 
 export default function Navbar() {
+  const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState(null);
   const [currentUser, setCurrentUser] = useState(null);
   const timeoutRef = useRef(null);
 
   useEffect(() => {
-    fetch("/api/auth/me")
+    let isMounted = true;
+    fetch("/api/auth/me", {
+      cache: "no-store",
+      headers: { Pragma: "no-cache" },
+    })
       .then((res) => res.json())
       .then((data) => {
-        if (data.authenticated && data.user) {
-          setCurrentUser(data.user);
-        } else {
-          setCurrentUser(null);
+        if (isMounted) {
+          if (data.authenticated && data.user) {
+            setCurrentUser(data.user);
+          } else {
+            setCurrentUser(null);
+          }
         }
       })
       .catch(() => {
-        setCurrentUser(null);
+        if (isMounted) setCurrentUser(null);
       });
-  }, []);
+    return () => {
+      isMounted = false;
+    };
+  }, [pathname]);
 
   const handleLogout = async () => {
     try {
@@ -239,21 +260,130 @@ export default function Navbar() {
           </Link>
 
           {currentUser && currentUser.user_type !== "admin" ? (
-            <div className="flex items-center gap-3">
-              <Link
-                href={`/dashboard/${currentUser.user_type}`}
-                className="flex items-center gap-1.5 rounded-full border border-[#B08D45]/60 bg-[#321B30] px-4 py-1.5 text-xs font-semibold text-[#D6B875] hover:bg-[#3A2638] hover:text-[#FFE29A] transition-all shadow-sm"
-              >
-                <User size={13} />
-                <span>Account</span>
-              </Link>
+            <div
+              className="relative"
+              onMouseEnter={() => handleMouseEnter("profile-menu")}
+              onMouseLeave={handleMouseLeave}
+            >
               <button
                 type="button"
-                onClick={handleLogout}
-                className="text-xs font-semibold text-[#C9BBAF] hover:text-red-400 transition-colors cursor-pointer"
+                onClick={() => toggleDropdown("profile-menu")}
+                className="flex items-center gap-2 rounded-full border border-[#B08D45] bg-[#321B30] px-4 py-1.5 text-xs font-semibold text-[#D6B875] shadow-md shadow-[#B08D45]/15 transition-all duration-200 hover:border-[#FFE29A] hover:bg-[#3A2638] hover:text-[#FFE29A]"
               >
-                Logout
+                <div className="flex h-5 w-5 items-center justify-center rounded-full bg-[#B08D45] text-[#241321] text-[10px] font-bold">
+                  {(currentUser.name || currentUser.user_type || "U").charAt(0).toUpperCase()}
+                </div>
+                <span>Profile</span>
+                <ChevronDown
+                  size={13}
+                  className={`transition-transform duration-200 ${
+                    activeDropdown === "profile-menu" ? "rotate-180 text-[#FFE29A]" : "text-[#B08D45]"
+                  }`}
+                />
               </button>
+
+              {/* Profile Dropdown Menu */}
+              {activeDropdown === "profile-menu" && (
+                <div
+                  className="absolute right-0 top-full z-50 mt-1 w-64 rounded-2xl border border-[#B08D45]/50 bg-[#2A1325] p-2 shadow-2xl shadow-black/70 animate-in fade-in zoom-in-95 duration-150 backdrop-blur-xl"
+                  onMouseEnter={() => handleMouseEnter("profile-menu")}
+                  onMouseLeave={handleMouseLeave}
+                >
+                  {/* User Header Summary */}
+                  <div className="border-b border-[#665038]/40 px-3 py-2.5">
+                    <p className="font-serif text-sm font-bold text-[#F8F1E5] truncate">
+                      {currentUser.name || "Wedding User"}
+                    </p>
+                    <p className="text-[11px] text-[#C9BBAF] truncate">{currentUser.email}</p>
+                    <div className="mt-1 flex items-center gap-1.5">
+                      <span className="rounded-full bg-[#B08D45]/20 border border-[#B08D45]/40 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-[#D6B875]">
+                        {currentUser.user_type}
+                      </span>
+                      {currentUser.city && (
+                        <span className="text-[10px] text-[#C9BBAF]/80 flex items-center gap-0.5">
+                          <MapPin size={9} /> {currentUser.city}
+                        </span>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Role Specific Actions */}
+                  <div className="py-1 text-xs">
+                    <Link
+                      href={`/dashboard/${currentUser.user_type}?tab=profile`}
+                      onClick={closeMenu}
+                      className="flex items-center gap-2.5 rounded-lg px-3 py-2 text-[#F8F1E5] transition-colors hover:bg-[#3A2638] hover:text-[#D6B875]"
+                    >
+                      <User size={14} className="text-[#B08D45]" />
+                      <span>My Profile & Details</span>
+                    </Link>
+
+                    {currentUser.user_type === "couple" && (
+                      <>
+                        <Link
+                          href="/dashboard/couple?tab=bookings"
+                          onClick={closeMenu}
+                          className="flex items-center gap-2.5 rounded-lg px-3 py-2 text-[#F8F1E5] transition-colors hover:bg-[#3A2638] hover:text-[#D6B875]"
+                        >
+                          <Calendar size={14} className="text-[#B08D45]" />
+                          <span>My Bookings</span>
+                        </Link>
+                        <Link
+                          href="/dashboard/couple?tab=planning"
+                          onClick={closeMenu}
+                          className="flex items-center gap-2.5 rounded-lg px-3 py-2 text-[#F8F1E5] transition-colors hover:bg-[#3A2638] hover:text-[#D6B875]"
+                        >
+                          <CheckSquare size={14} className="text-[#B08D45]" />
+                          <span>Wedding Planning</span>
+                        </Link>
+                      </>
+                    )}
+
+                    {currentUser.user_type === "vendor" && (
+                      <Link
+                        href="/dashboard/vendor?tab=bookings"
+                        onClick={closeMenu}
+                        className="flex items-center gap-2.5 rounded-lg px-3 py-2 text-[#F8F1E5] transition-colors hover:bg-[#3A2638] hover:text-[#D6B875]"
+                      >
+                        <Calendar size={14} className="text-[#B08D45]" />
+                        <span>Client Bookings</span>
+                      </Link>
+                    )}
+
+                    {currentUser.user_type === "seller" && (
+                      <Link
+                        href="/dashboard/seller?tab=orders"
+                        onClick={closeMenu}
+                        className="flex items-center gap-2.5 rounded-lg px-3 py-2 text-[#F8F1E5] transition-colors hover:bg-[#3A2638] hover:text-[#D6B875]"
+                      >
+                        <ShoppingBag size={14} className="text-[#B08D45]" />
+                        <span>My Orders</span>
+                      </Link>
+                    )}
+
+                    <Link
+                      href={`/dashboard/${currentUser.user_type}`}
+                      onClick={closeMenu}
+                      className="flex items-center gap-2.5 rounded-lg px-3 py-2 text-[#F8F1E5] transition-colors hover:bg-[#3A2638] hover:text-[#D6B875]"
+                    >
+                      <LayoutDashboard size={14} className="text-[#B08D45]" />
+                      <span>Full Dashboard</span>
+                    </Link>
+                  </div>
+
+                  {/* Logout Button */}
+                  <div className="border-t border-[#665038]/40 pt-1">
+                    <button
+                      type="button"
+                      onClick={handleLogout}
+                      className="flex w-full items-center gap-2.5 rounded-lg px-3 py-2 text-xs font-semibold text-rose-300 transition-colors hover:bg-rose-950/40 hover:text-rose-200 cursor-pointer"
+                    >
+                      <LogOut size={14} />
+                      <span>Logout</span>
+                    </button>
+                  </div>
+                </div>
+              )}
             </div>
           ) : (
             <div className="flex items-center gap-2.5">
@@ -338,28 +468,100 @@ export default function Navbar() {
             </Link>
 
             {currentUser && currentUser.user_type !== "admin" ? (
-              <>
-                <Link
-                  href={`/dashboard/${currentUser.user_type}`}
-                  onClick={closeMenu}
-                  className="border-b border-[#665038]/40 py-3 text-sm font-semibold text-[#D6B875] hover:text-[#FFE29A] flex items-center justify-between"
-                >
-                  <span className="flex items-center gap-2">
-                    <User size={15} />
-                    <span>Account ({currentUser.name?.split(" ")[0] || currentUser.user_type})</span>
-                  </span>
-                  <span className="text-xs rounded-full bg-[#B08D45] text-[#241321] px-2.5 py-0.5 font-bold capitalize">
+              <div className="border-b border-[#665038]/40 py-3 space-y-2">
+                {/* Profile Overview Card */}
+                <div className="rounded-xl bg-[#321B30] p-3 border border-[#B08D45]/40 flex items-center justify-between">
+                  <div className="flex items-center gap-2.5">
+                    <div className="flex h-8 w-8 items-center justify-center rounded-full bg-[#B08D45] text-[#241321] text-xs font-bold">
+                      {(currentUser.name || currentUser.user_type || "U").charAt(0).toUpperCase()}
+                    </div>
+                    <div>
+                      <p className="text-xs font-bold text-[#F8F1E5] truncate max-w-[160px]">
+                        {currentUser.name || "Wedding User"}
+                      </p>
+                      <p className="text-[10px] text-[#C9BBAF] truncate max-w-[160px]">
+                        {currentUser.email}
+                      </p>
+                    </div>
+                  </div>
+                  <span className="text-[10px] rounded-full bg-[#B08D45] text-[#241321] px-2 py-0.5 font-bold uppercase">
                     {currentUser.user_type}
                   </span>
-                </Link>
-                <button
-                  type="button"
-                  onClick={handleLogout}
-                  className="w-full text-left border-b border-[#665038]/40 py-3 text-sm font-medium text-red-400 hover:text-red-300"
-                >
-                  Logout
-                </button>
-              </>
+                </div>
+
+                {/* Profile Links */}
+                <div className="space-y-1 pt-1">
+                  <Link
+                    href={`/dashboard/${currentUser.user_type}?tab=profile`}
+                    onClick={closeMenu}
+                    className="flex items-center gap-2.5 rounded-lg px-3 py-2 text-xs font-medium text-[#F8F1E5] hover:bg-[#3A2638] hover:text-[#D6B875]"
+                  >
+                    <User size={15} className="text-[#B08D45]" />
+                    <span>My Profile &amp; Details</span>
+                  </Link>
+
+                  {currentUser.user_type === "couple" && (
+                    <>
+                      <Link
+                        href="/dashboard/couple?tab=bookings"
+                        onClick={closeMenu}
+                        className="flex items-center gap-2.5 rounded-lg px-3 py-2 text-xs font-medium text-[#F8F1E5] hover:bg-[#3A2638] hover:text-[#D6B875]"
+                      >
+                        <Calendar size={15} className="text-[#B08D45]" />
+                        <span>My Bookings</span>
+                      </Link>
+                      <Link
+                        href="/dashboard/couple?tab=planning"
+                        onClick={closeMenu}
+                        className="flex items-center gap-2.5 rounded-lg px-3 py-2 text-xs font-medium text-[#F8F1E5] hover:bg-[#3A2638] hover:text-[#D6B875]"
+                      >
+                        <CheckSquare size={15} className="text-[#B08D45]" />
+                        <span>Wedding Planning</span>
+                      </Link>
+                    </>
+                  )}
+
+                  {currentUser.user_type === "vendor" && (
+                    <Link
+                      href="/dashboard/vendor?tab=bookings"
+                      onClick={closeMenu}
+                      className="flex items-center gap-2.5 rounded-lg px-3 py-2 text-xs font-medium text-[#F8F1E5] hover:bg-[#3A2638] hover:text-[#D6B875]"
+                    >
+                      <Calendar size={15} className="text-[#B08D45]" />
+                      <span>Client Bookings</span>
+                    </Link>
+                  )}
+
+                  {currentUser.user_type === "seller" && (
+                    <Link
+                      href="/dashboard/seller?tab=orders"
+                      onClick={closeMenu}
+                      className="flex items-center gap-2.5 rounded-lg px-3 py-2 text-xs font-medium text-[#F8F1E5] hover:bg-[#3A2638] hover:text-[#D6B875]"
+                    >
+                      <ShoppingBag size={15} className="text-[#B08D45]" />
+                      <span>My Orders</span>
+                    </Link>
+                  )}
+
+                  <Link
+                    href={`/dashboard/${currentUser.user_type}`}
+                    onClick={closeMenu}
+                    className="flex items-center gap-2.5 rounded-lg px-3 py-2 text-xs font-medium text-[#F8F1E5] hover:bg-[#3A2638] hover:text-[#D6B875]"
+                  >
+                    <LayoutDashboard size={15} className="text-[#B08D45]" />
+                    <span>Full Dashboard</span>
+                  </Link>
+
+                  <button
+                    type="button"
+                    onClick={handleLogout}
+                    className="flex w-full items-center gap-2.5 rounded-lg px-3 py-2 text-xs font-semibold text-rose-300 hover:bg-rose-950/40 hover:text-rose-200 cursor-pointer pt-2"
+                  >
+                    <LogOut size={15} />
+                    <span>Logout</span>
+                  </button>
+                </div>
+              </div>
             ) : (
               <div className="space-y-2 border-b border-[#665038]/40 py-3">
                 <Link

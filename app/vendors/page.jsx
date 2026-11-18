@@ -434,6 +434,7 @@ const ALL_VERIFIED_VENDORS = [
 
 const CATEGORY_TABS = [
   "All Vendors",
+  "Caterers",
   "Photographers",
   "Makeup Artists",
   "Decorators",
@@ -444,6 +445,7 @@ const CATEGORY_TABS = [
 
 const CITY_OPTIONS = [
   "All Cities",
+  "Lucknow",
   "Delhi NCR",
   "Mumbai",
   "Jaipur",
@@ -456,6 +458,7 @@ function VendorsContent() {
   const cityParam = searchParams?.get("city") || "";
 
   const initialCategory = useMemo(() => {
+    if (serviceParam.includes("cater")) return "Caterers";
     if (serviceParam.includes("photo")) return "Photographers";
     if (serviceParam.includes("makeup")) return "Makeup Artists";
     if (serviceParam.includes("decor")) return "Decorators";
@@ -511,9 +514,71 @@ function VendorsContent() {
     setSortBy("recommended");
   };
 
+  const [dynamicVendors, setDynamicVendors] = useState([]);
+
+  useEffect(() => {
+    let isMounted = true;
+    fetch("/api/vendors")
+      .then((res) => res.json())
+      .then((data) => {
+        if (isMounted && data.success && Array.isArray(data.listings)) {
+          const mapped = data.listings.map((l) => {
+            const rawCat = (l.categoryType || "").toLowerCase();
+            let cat = "Other";
+            if (rawCat.includes("cater")) cat = "Caterers";
+            else if (rawCat.includes("photo")) cat = "Photographers";
+            else if (rawCat.includes("makeup")) cat = "Makeup Artists";
+            else if (rawCat.includes("decor")) cat = "Decorators";
+            else if (rawCat.includes("plan")) cat = "Wedding Planners";
+            else if (rawCat.includes("wear") || rawCat.includes("bridal") || rawCat.includes("groom")) cat = "Bridal & Groom Wear";
+            else if (rawCat.includes("mehndi")) cat = "Mehndi Artists";
+
+            return {
+              id: l.id,
+              name: l.name,
+              company: l.company || l.name,
+              category: cat,
+              categoryLabel: l.categoryType || cat,
+              categoryRoute: cat === "Caterers" ? "/wedding-vendors/caterers" : (cat === "Decorators" ? "/wedding-vendors/decoration" : "/vendors"),
+              location: l.location || `${l.city}, India`,
+              city: l.city || "Lucknow",
+              priceStarting: l.priceStarting || 0,
+              priceDisplay: l.priceDisplay || "Custom Quote",
+              pricingType: "Package",
+              rating: l.rating || 5.0,
+              reviewCount: l.reviewCount || 1,
+              badge: l.badge || "Verified Vendor",
+              verified: true,
+              image: l.image || "/images/decoration/royal-wedding-stage.jpg",
+              gallery: l.gallery || ["/images/decoration/royal-wedding-stage.jpg"],
+              services: l.services || [l.name],
+              about: l.about || "",
+              phone: l.vendorContact?.phone || l.sellerContact?.phone || "",
+              email: l.vendorContact?.email || l.sellerContact?.email || "",
+            };
+          });
+          setDynamicVendors(mapped);
+        }
+      })
+      .catch((err) => console.error("Error loading dynamic vendors:", err));
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
   // Filter & Sort Logic
+  const allVendorsCombined = useMemo(() => {
+    const map = new Map();
+    dynamicVendors.forEach((v) => map.set(v.company?.toLowerCase() || v.name?.toLowerCase() || v.id, v));
+    ALL_VERIFIED_VENDORS.forEach((v) => {
+      const key = v.company?.toLowerCase() || v.name?.toLowerCase() || v.id;
+      if (!map.has(key)) map.set(key, v);
+    });
+    return Array.from(map.values());
+  }, [dynamicVendors]);
+
   const filteredVendors = useMemo(() => {
-    let result = ALL_VERIFIED_VENDORS.filter((vendor) => {
+    let result = allVendorsCombined.filter((vendor) => {
       // Category Filter
       if (selectedCategory !== "All Vendors" && vendor.category !== selectedCategory) {
         return false;
@@ -551,8 +616,32 @@ function VendorsContent() {
     return result;
   }, [selectedCategory, selectedCity, searchQuery, sortBy]);
 
-  const handleQuoteSubmit = (e) => {
+  const handleQuoteSubmit = async (e) => {
     e.preventDefault();
+    try {
+      await fetch("/api/enquiry", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: quoteForm.name,
+          phone: quoteForm.phone,
+          email: quoteForm.email,
+          date: quoteForm.date,
+          city: quoteForm.city,
+          guestCount: quoteForm.guestCount,
+          message: quoteForm.message,
+          target_id: quoteModalVendor?.dbId || quoteModalVendor?.id || null,
+          target_type: "vendor",
+          target_name: quoteModalVendor?.company || quoteModalVendor?.name || "Wedding Vendor",
+          service_or_product: quoteModalVendor?.categoryLabel || quoteModalVendor?.category || "Wedding Service",
+          budget: quoteModalVendor?.priceDisplay || "Custom Quote",
+          source: "All Vendors Directory",
+          is_booking: true,
+        }),
+      });
+    } catch (err) {
+      console.error("Error submitting quote enquiry:", err);
+    }
     showToast(`Quotation inquiry sent successfully to ${quoteModalVendor?.name}!`);
     setQuoteModalVendor(null);
     setQuoteForm({

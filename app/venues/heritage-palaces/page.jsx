@@ -124,8 +124,29 @@ export default function HeritagePalacesPage() {
     return result;
   }, [searchQuery, selectedCity, sortBy]);
 
-  const handleEnquirySubmit = (e) => {
+  const handleEnquirySubmit = async (e) => {
     e.preventDefault();
+    try {
+      await fetch("/api/enquiry", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: formData.name,
+          phone: formData.phone,
+          date: formData.date,
+          guests: formData.guests,
+          message: formData.message,
+          target_id: enquiryModalVenue?.id || null,
+          target_type: "venue",
+          target_name: enquiryModalVenue?.name || "Heritage Palace",
+          service_or_product: "Heritage Palace & Fort Venue",
+          budget: enquiryModalVenue?.pricing?.veg || "₹4,500 / plate",
+          location: enquiryModalVenue?.city || "Rajasthan",
+          source: "Heritage Palaces Page",
+          is_booking: true,
+        }),
+      });
+    } catch {}
     setFormSubmitted(true);
   };
 
