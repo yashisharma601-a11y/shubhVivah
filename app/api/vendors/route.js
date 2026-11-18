@@ -264,6 +264,9 @@ export async function GET(request) {
       listings: results,
     });
   } catch (error) {
+    if (error?.digest === "NEXT_PRERENDER_INTERRUPTED") {
+      throw error;
+    }
     console.error("Error fetching vendor listings:", error);
     return NextResponse.json(
       { success: false, message: "Failed to fetch vendor listings" },

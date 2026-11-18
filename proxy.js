@@ -44,7 +44,7 @@ function isPublicApi(pathname) {
   return PUBLIC_APIS.some((route) => pathname === route || pathname.startsWith(route + "/"));
 }
 
-export async function middleware(request) {
+export async function proxy(request) {
   const { pathname, search } = request.nextUrl;
 
   // 1. Admin Panel has dedicated role-based security & login handled on /admin
@@ -126,4 +126,3 @@ export const config = {
     "/((?!_next/static|_next/image|favicon\\.ico|sitemap\\.xml|robots\\.txt|.*\\.(?:svg|png|jpg|jpeg|gif|webp|ico|woff|woff2|ttf|css|js)$).*)",
   ],
 };
-

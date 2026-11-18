@@ -147,6 +147,9 @@ export async function GET(request) {
       notifications,
     });
   } catch (error) {
+    if (error?.digest === "NEXT_PRERENDER_INTERRUPTED") {
+      throw error;
+    }
     console.error("Couple dashboard API error:", error);
     return NextResponse.json({ success: false, message: error.message }, { status: 500 });
   }
