@@ -156,6 +156,7 @@ export default function Navbar() {
           type="button"
           onClick={() => toggleDropdown(id)}
           aria-expanded={isOpen}
+          suppressHydrationWarning
           className={`flex w-full items-center justify-between gap-1.5 py-2 text-sm font-medium transition-colors ${isOpen ? "text-[#D6B875]" : "text-[#F8F1E5] hover:text-[#B08D45]"
             }`}
         >
@@ -268,6 +269,7 @@ export default function Navbar() {
               <button
                 type="button"
                 onClick={() => toggleDropdown("profile-menu")}
+                suppressHydrationWarning
                 className="flex items-center gap-2 rounded-full border border-[#B08D45] bg-[#321B30] px-4 py-1.5 text-xs font-semibold text-[#D6B875] shadow-md shadow-[#B08D45]/15 transition-all duration-200 hover:border-[#FFE29A] hover:bg-[#3A2638] hover:text-[#FFE29A]"
               >
                 <div className="flex h-5 w-5 items-center justify-center rounded-full bg-[#B08D45] text-[#241321] text-[10px] font-bold">
@@ -376,6 +378,7 @@ export default function Navbar() {
                     <button
                       type="button"
                       onClick={handleLogout}
+                      suppressHydrationWarning
                       className="flex w-full items-center gap-2.5 rounded-lg px-3 py-2 text-xs font-semibold text-rose-300 transition-colors hover:bg-rose-950/40 hover:text-rose-200 cursor-pointer"
                     >
                       <LogOut size={14} />
@@ -407,6 +410,7 @@ export default function Navbar() {
         <button
           type="button"
           onClick={() => setMobileOpen(!mobileOpen)}
+          suppressHydrationWarning
           className="flex h-10 w-10 items-center justify-center rounded-lg border border-[#665038] bg-[#321B30] text-[#F8F1E5] transition-colors hover:bg-[#3A2638] lg:hidden"
           aria-label={mobileOpen ? "Close menu" : "Open menu"}
           aria-expanded={mobileOpen}
