@@ -24,6 +24,7 @@
     ],
     "paths": {
       "@/*": [
+        "./src/*",
         "./*"
       ]
     }
@@ -32,11 +33,13 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
+    "src/**/*.js",
+    "src/**/*.jsx",
+    "src/**/*.ts",
+    "src/**/*.tsx",
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts",
-    "**/*.mts",
-    "app/layout.jsx",
-    "app/page.jsx"
+    "**/*.mts"
   ],
   "exclude": [
     "node_modules"

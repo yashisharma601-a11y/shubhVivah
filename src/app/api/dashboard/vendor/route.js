@@ -6,7 +6,7 @@ import path from "path";
 
 async function readDataFile(filename, fallback = []) {
   try {
-    const filePath = path.join(process.cwd(), "data", filename);
+    const filePath = path.join(process.cwd(), "src", "data", filename);
     const content = await fs.readFile(filePath, "utf-8");
     return JSON.parse(content);
   } catch {

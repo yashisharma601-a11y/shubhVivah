@@ -31,9 +31,13 @@ let tablesInitialized = false;
 // -------------------------------------------------------------
 // JSON Storage Helpers
 // -------------------------------------------------------------
+function getDataDir() {
+  return path.join(process.cwd(), "src", "data");
+}
+
 async function readJsonFile(filename, defaultData = []) {
   try {
-    const backupDir = path.join(process.cwd(), "data");
+    const backupDir = getDataDir();
     await fs.mkdir(backupDir, { recursive: true });
     const filePath = path.join(backupDir, filename);
     const content = await fs.readFile(filePath, "utf-8");
@@ -45,7 +49,7 @@ async function readJsonFile(filename, defaultData = []) {
 
 async function writeJsonFile(filename, data) {
   try {
-    const backupDir = path.join(process.cwd(), "data");
+    const backupDir = getDataDir();
     await fs.mkdir(backupDir, { recursive: true });
     const filePath = path.join(backupDir, filename);
     await fs.writeFile(filePath, JSON.stringify(data, null, 2), "utf-8");
@@ -908,7 +912,7 @@ export async function updateVendorRegistrationStatus(id, status) {
 }
 
 export async function saveVendorRegistration(vendorData) {
-  const backupDir = path.join(process.cwd(), "data");
+  const backupDir = getDataDir();
   await fs.mkdir(backupDir, { recursive: true });
   const backupFile = path.join(backupDir, "vendor_registrations.json");
 
@@ -933,7 +937,7 @@ export async function saveVendorRegistration(vendorData) {
 }
 
 export async function saveContactInquiry(inquiryData) {
-  const backupDir = path.join(process.cwd(), "data");
+  const backupDir = getDataDir();
   await fs.mkdir(backupDir, { recursive: true });
   const backupFile = path.join(backupDir, "contact_inquiries.json");
 
@@ -965,7 +969,7 @@ export async function getChatbotInquiries() {
 }
 
 export async function saveChatbotInquiry(data) {
-  const backupDir = path.join(process.cwd(), "data");
+  const backupDir = getDataDir();
   await fs.mkdir(backupDir, { recursive: true });
 
   const chatbotFile = path.join(backupDir, "chatbot_inquiries.json");
@@ -1078,7 +1082,7 @@ export async function saveChatbotInquiry(data) {
 }
 
 export async function updateChatbotInquiryStatus(id, status, remarks = "") {
-  const backupDir = path.join(process.cwd(), "data");
+  const backupDir = getDataDir();
   const chatbotFile = path.join(backupDir, "chatbot_inquiries.json");
   const contactFile = path.join(backupDir, "contact_inquiries.json");
 

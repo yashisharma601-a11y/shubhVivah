@@ -5,7 +5,7 @@ import path from "path";
 
 async function readAvailability() {
   try {
-    const filePath = path.join(process.cwd(), "data", "vendor_availability.json");
+    const filePath = path.join(process.cwd(), "src", "data", "vendor_availability.json");
     const content = await fs.readFile(filePath, "utf-8");
     return JSON.parse(content);
   } catch {
@@ -15,7 +15,7 @@ async function readAvailability() {
 
 async function writeAvailability(data) {
   try {
-    const backupDir = path.join(process.cwd(), "data");
+    const backupDir = path.join(process.cwd(), "src", "data");
     await fs.mkdir(backupDir, { recursive: true });
     const filePath = path.join(backupDir, "vendor_availability.json");
     await fs.writeFile(filePath, JSON.stringify(data, null, 2), "utf-8");

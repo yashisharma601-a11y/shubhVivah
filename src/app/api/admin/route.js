@@ -26,7 +26,7 @@ import path from "path";
 
 async function readDataFile(filename, fallback = []) {
   try {
-    const filePath = path.join(process.cwd(), "data", filename);
+    const filePath = path.join(process.cwd(), "src", "data", filename);
     const content = await fs.readFile(filePath, "utf-8");
     return JSON.parse(content);
   } catch {
@@ -36,7 +36,7 @@ async function readDataFile(filename, fallback = []) {
 
 async function writeDataFile(filename, data) {
   try {
-    const backupDir = path.join(process.cwd(), "data");
+    const backupDir = path.join(process.cwd(), "src", "data");
     await fs.mkdir(backupDir, { recursive: true });
     const filePath = path.join(backupDir, filename);
     await fs.writeFile(filePath, JSON.stringify(data, null, 2), "utf-8");
