@@ -1,5 +1,5 @@
 @import "tailwindcss";
-
+@source "../../";
 :root {
   --plum-primary: #241321;
   --plum-dark: #321B30;
