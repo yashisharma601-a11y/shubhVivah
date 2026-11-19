@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { getCurrentUser } from "@/lib/auth";
 import { findUserById, updateUser } from "@/lib/db";
+import { validateName, validatePhone, validateEmail } from "@/lib/validations/formValidation";
 
 /**
  * Calculates Age dynamically from Date of Birth
@@ -161,6 +162,33 @@ export async function PUT(request) {
       created_at,
       ...allowedUpdates
     } = body;
+
+    // Validate name if provided
+    if (allowedUpdates.name !== undefined) {
+      const nameVal = validateName(allowedUpdates.name);
+      if (!nameVal.isValid) {
+        return NextResponse.json({ success: false, message: nameVal.error }, { status: 400 });
+      }
+      allowedUpdates.name = nameVal.value;
+    }
+
+    // Validate phone if provided
+    if (allowedUpdates.phone !== undefined) {
+      const phoneVal = validatePhone(allowedUpdates.phone);
+      if (!phoneVal.isValid) {
+        return NextResponse.json({ success: false, message: phoneVal.error }, { status: 400 });
+      }
+      allowedUpdates.phone = phoneVal.value;
+    }
+
+    // Validate email if provided
+    if (allowedUpdates.email !== undefined) {
+      const emailVal = validateEmail(allowedUpdates.email);
+      if (!emailVal.isValid) {
+        return NextResponse.json({ success: false, message: emailVal.error }, { status: 400 });
+      }
+      allowedUpdates.email = emailVal.value;
+    }
 
     // Auto calculate age if dob provided
     if (allowedUpdates.dob) {

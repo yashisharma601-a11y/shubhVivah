@@ -4,6 +4,14 @@ import { useState, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import {
+  validateName,
+  validatePhone,
+  validateEmail,
+  sanitizePhoneInput,
+  sanitizeNameInput,
+  VALIDATION_MESSAGES,
+} from "@/lib/validations/formValidation";
+import {
   Store,
   Sparkles,
   Building2,
@@ -146,7 +154,12 @@ export default function VendorRegisterPage() {
 
   // Handle Input Changes
   const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
+    let { name, value, type, checked } = e.target;
+    if (name === "phone" || name === "whatsapp") {
+      value = sanitizePhoneInput(value);
+    } else if (name === "owner_name") {
+      value = sanitizeNameInput(value);
+    }
     setFormData((prev) => ({
       ...prev,
       [name]: type === "checkbox" ? checked : value,
@@ -158,6 +171,23 @@ export default function VendorRegisterPage() {
         delete updated[name];
         return updated;
       });
+    }
+  };
+
+  const handleBlur = (e) => {
+    const { name, value } = e.target;
+    if (name === "owner_name") {
+      const v = validateName(value);
+      if (!v.isValid) setErrors((prev) => ({ ...prev, owner_name: v.error }));
+    } else if (name === "phone") {
+      const v = validatePhone(value);
+      if (!v.isValid) setErrors((prev) => ({ ...prev, phone: v.error }));
+    } else if (name === "whatsapp" && value) {
+      const v = validatePhone(value);
+      if (!v.isValid) setErrors((prev) => ({ ...prev, whatsapp: v.error }));
+    } else if (name === "email") {
+      const v = validateEmail(value);
+      if (!v.isValid) setErrors((prev) => ({ ...prev, email: v.error }));
     }
   };
 
@@ -236,25 +266,26 @@ export default function VendorRegisterPage() {
 
     if (!formData.business_name.trim()) errs.business_name = "Business name is required.";
     if (!formData.category) errs.category = "Please select a business category.";
-    if (!formData.owner_name.trim()) errs.owner_name = "Owner's full name is required.";
 
-    if (!formData.email.trim()) {
-      errs.email = "Email address is required.";
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email.trim())) {
-      errs.email = "Enter a valid email address (e.g. name@business.com).";
+    const nameValidation = validateName(formData.owner_name);
+    if (!nameValidation.isValid) {
+      errs.owner_name = nameValidation.error;
     }
 
-    const cleanPhone = formData.phone.replace(/[\s-]/g, "");
-    if (!formData.phone.trim()) {
-      errs.phone = "Contact number is required.";
-    } else if (!/^[6-9]\d{9}$/.test(cleanPhone)) {
-      errs.phone = "Enter a valid 10-digit Indian mobile number (e.g. 9876543210).";
+    const emailValidation = validateEmail(formData.email);
+    if (!emailValidation.isValid) {
+      errs.email = emailValidation.error;
+    }
+
+    const phoneValidation = validatePhone(formData.phone);
+    if (!phoneValidation.isValid) {
+      errs.phone = phoneValidation.error;
     }
 
     if (formData.whatsapp) {
-      const cleanWa = formData.whatsapp.replace(/[\s-]/g, "");
-      if (!/^[6-9]\d{9}$/.test(cleanWa)) {
-        errs.whatsapp = "Enter a valid 10-digit Indian WhatsApp number.";
+      const waValidation = validatePhone(formData.whatsapp);
+      if (!waValidation.isValid) {
+        errs.whatsapp = waValidation.error;
       }
     }
 
@@ -605,9 +636,10 @@ export default function VendorRegisterPage() {
                       name="owner_name"
                       value={formData.owner_name}
                       onChange={handleChange}
+                      onBlur={handleBlur}
                       placeholder="e.g. Vikramaditya Rathore"
                       className={`w-full rounded-xl border bg-[#241321] px-4 py-2.5 text-sm text-[#F8F1E5] placeholder-[#C9BBAF]/50 shadow-sm outline-none transition-colors ${
-                        errors.owner_name ? "border-red-500" : "border-[#665038] focus:border-[#D6B875]"
+                        errors.owner_name ? "border-rose-500" : "border-[#665038] focus:border-[#D6B875]"
                       }`}
                     />
                     {errors.owner_name && (
@@ -629,15 +661,16 @@ export default function VendorRegisterPage() {
                         name="email"
                         value={formData.email}
                         onChange={handleChange}
+                        onBlur={handleBlur}
                         placeholder="business@example.com"
                         className={`w-full rounded-xl border bg-[#241321] px-4 py-2.5 pl-10 text-sm text-[#F8F1E5] placeholder-[#C9BBAF]/50 shadow-sm outline-none transition-colors ${
-                          errors.email ? "border-red-500" : "border-[#665038] focus:border-[#D6B875]"
+                          errors.email ? "border-rose-500" : "border-[#665038] focus:border-[#D6B875]"
                         }`}
                       />
                       <Mail size={16} className="absolute left-3.5 top-3 text-[#B08D45]" />
                     </div>
                     {errors.email && (
-                      <p className="mt-1 text-xs text-red-400 flex items-center gap-1">
+                      <p className="mt-1 text-xs text-rose-400 flex items-center gap-1">
                         <AlertCircle size={12} /> {errors.email}
                       </p>
                     )}
@@ -655,16 +688,17 @@ export default function VendorRegisterPage() {
                         name="phone"
                         value={formData.phone}
                         onChange={handleChange}
+                        onBlur={handleBlur}
                         placeholder="10-digit mobile number"
                         maxLength={10}
                         className={`w-full rounded-xl border bg-[#241321] px-4 py-2.5 pl-10 text-sm text-[#F8F1E5] placeholder-[#C9BBAF]/50 shadow-sm outline-none transition-colors ${
-                          errors.phone ? "border-red-500" : "border-[#665038] focus:border-[#D6B875]"
+                          errors.phone ? "border-rose-500" : "border-[#665038] focus:border-[#D6B875]"
                         }`}
                       />
                       <Phone size={16} className="absolute left-3.5 top-3 text-[#B08D45]" />
                     </div>
                     {errors.phone && (
-                      <p className="mt-1 text-xs text-red-400 flex items-center gap-1">
+                      <p className="mt-1 text-xs text-rose-400 flex items-center gap-1">
                         <AlertCircle size={12} /> {errors.phone}
                       </p>
                     )}
@@ -693,16 +727,17 @@ export default function VendorRegisterPage() {
                         name="whatsapp"
                         value={formData.whatsapp}
                         onChange={handleChange}
+                        onBlur={handleBlur}
                         placeholder="WhatsApp number for couple leads"
                         maxLength={10}
                         className={`w-full rounded-xl border bg-[#241321] px-4 py-2.5 pl-10 text-sm text-[#F8F1E5] placeholder-[#C9BBAF]/50 shadow-sm outline-none transition-colors ${
-                          errors.whatsapp ? "border-red-500" : "border-[#665038] focus:border-[#D6B875]"
+                          errors.whatsapp ? "border-rose-500" : "border-[#665038] focus:border-[#D6B875]"
                         }`}
                       />
                       <MessageSquare size={16} className="absolute left-3.5 top-3 text-[#B08D45]" />
                     </div>
                     {errors.whatsapp && (
-                      <p className="mt-1 text-xs text-red-400 flex items-center gap-1">
+                      <p className="mt-1 text-xs text-rose-400 flex items-center gap-1">
                         <AlertCircle size={12} /> {errors.whatsapp}
                       </p>
                     )}

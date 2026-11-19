@@ -115,7 +115,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/login"
-                  className="text-[#D6B875] font-semibold transition-colors hover:text-[#FFE29A]"
+                  className="text-[#C9BBAF] transition-colors hover:text-[#D6B875]"
                 >
                   Member Login
                 </Link>
@@ -204,10 +204,10 @@ export default function Footer() {
               <li>
                 <Link
                   href="/vendors/register"
-                  className="inline-flex items-center gap-1 font-semibold text-[#D6B875] transition-colors hover:text-[#E8D9B5]"
+                  className="inline-flex items-center gap-1 text-[#C9BBAF] transition-colors hover:text-[#D6B875]"
                 >
-                  <Sparkles size={14} />
-                  Join as a Vendor
+                  <Sparkles size={14} className="text-[#C9BBAF]" />
+                  <span>Join as a Vendor</span>
                 </Link>
               </li>
             </ul>
@@ -220,15 +220,15 @@ export default function Footer() {
             </h3>
             <ul className="mt-4 space-y-3 text-sm text-[#C9BBAF]">
               <li className="flex items-start gap-2.5">
-                <MapPin size={17} className="mt-0.5 shrink-0 text-[#B08D45]" />
+                <MapPin size={17} className="mt-0.5 shrink-0 text-[#C9BBAF]" />
                 <span>Connaught Place, New Delhi &amp; BKC, Mumbai</span>
               </li>
               <li className="flex items-center gap-2.5">
-                <Phone size={17} className="shrink-0 text-[#B08D45]" />
+                <Phone size={17} className="shrink-0 text-[#C9BBAF]" />
                 <span>+91 00000 0000</span>
               </li>
               <li className="flex items-center gap-2.5">
-                <Mail size={17} className="shrink-0 text-[#B08D45]" />
+                <Mail size={17} className="shrink-0 text-[#C9BBAF]" />
                 <span>shubhvivah171@gmail.com</span>
               </li>
             </ul>

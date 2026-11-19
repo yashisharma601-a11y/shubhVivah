@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { getCurrentUser } from "@/lib/auth";
 import { saveEnquiry, saveBooking, getEnquiries, getBookings } from "@/lib/db";
+import { validateName, validatePhone, validateEmail } from "@/lib/validations/formValidation";
 
 export async function GET(request) {
   try {
@@ -26,9 +27,29 @@ export async function POST(request) {
     const body = await request.json();
 
     // Determine sender identity: either from logged-in user or from submitted form fields
-    const senderName = user?.name || body.name || body.couple_name || "Guest Couple";
-    const senderEmail = user?.email || body.email || body.couple_email || "guest@shubhvivah.com";
-    const senderPhone = user?.phone || body.phone || body.couple_phone || "";
+    const rawName = user?.name || body.name || body.couple_name || "";
+    const rawEmail = user?.email || body.email || body.couple_email || "";
+    const rawPhone = user?.phone || body.phone || body.couple_phone || "";
+
+    // Validate inputs
+    const nameVal = validateName(rawName);
+    if (!nameVal.isValid) {
+      return NextResponse.json({ success: false, message: nameVal.error }, { status: 400 });
+    }
+
+    const phoneVal = validatePhone(rawPhone);
+    if (!phoneVal.isValid) {
+      return NextResponse.json({ success: false, message: phoneVal.error }, { status: 400 });
+    }
+
+    const emailVal = validateEmail(rawEmail);
+    if (!emailVal.isValid) {
+      return NextResponse.json({ success: false, message: emailVal.error }, { status: 400 });
+    }
+
+    const senderName = nameVal.value;
+    const senderEmail = emailVal.value;
+    const senderPhone = phoneVal.value;
     const coupleId = user?.id || body.couple_id || null;
 
     // Check if this is a direct booking request or an enquiry

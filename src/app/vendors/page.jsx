@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useMemo, useEffect, Suspense } from "react";
+import UniversalEnquiryModal from "@/components/ui/UniversalEnquiryModal";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import {
@@ -673,7 +674,7 @@ function VendorsContent() {
 
         <div className="mx-auto max-w-7xl relative z-10">
           {/* Breadcrumbs */}
-          <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-xs text-[#C9BBAF]">
+          <nav aria-label="Breadcrumb" className="hidden lg:flex items-center gap-2 text-xs text-[#C9BBAF]">
             <Link href="/" className="transition-colors hover:text-[#D6B875]">
               Home
             </Link>
@@ -1076,134 +1077,15 @@ function VendorsContent() {
       )}
 
       {/* =========================================================================
-          6. REQUEST QUOTE MODAL
+          6. REQUEST QUOTE MODAL (Universal with strict validation)
          ========================================================================= */}
-      {quoteModalVendor && (
-        <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-[#1F0E1D] border border-[#B08D45]/40 rounded-3xl w-full max-w-lg p-6 md:p-8 shadow-2xl space-y-4 animate-scale-up">
-            <div className="flex items-center justify-between pb-3 border-b border-[#B08D45]/20">
-              <div>
-                <h3 className="font-serif font-bold text-lg text-[#E5C583]">
-                  Request Quotation &amp; Availability
-                </h3>
-                <p className="text-xs text-[#C9BBAF]">
-                  Inquiry for <span className="text-[#F8F1E5] font-semibold">{quoteModalVendor.name}</span>
-                </p>
-              </div>
-              <button suppressHydrationWarning
-                onClick={() => setQuoteModalVendor(null)}
-                className="text-[#C9BBAF] hover:text-white"
-              >
-                <X size={20} />
-              </button>
-            </div>
-
-            <form onSubmit={handleQuoteSubmit} className="space-y-4">
-              <div>
-                <label className="block text-xs font-medium text-[#C9BBAF] mb-1">
-                  Full Name *
-                </label>
-                <input
-                  type="text"
-                  required
-                  placeholder="e.g. Aditi & Aarav"
-                  value={quoteForm.name}
-                  onChange={(e) => setQuoteForm({ ...quoteForm, name: e.target.value })}
-                  className="w-full bg-[#140A13] border border-[#B08D45]/30 rounded-xl px-4 py-2.5 text-xs text-[#F8F1E5] focus:outline-none focus:border-[#D6B875]"
-                />
-              </div>
-
-              <div className="grid grid-cols-2 gap-3">
-                <div>
-                  <label className="block text-xs font-medium text-[#C9BBAF] mb-1">
-                    Phone / WhatsApp *
-                  </label>
-                  <input
-                    type="tel"
-                    required
-                    placeholder="+91 98765 43210"
-                    value={quoteForm.phone}
-                    onChange={(e) => setQuoteForm({ ...quoteForm, phone: e.target.value })}
-                    className="w-full bg-[#140A13] border border-[#B08D45]/30 rounded-xl px-4 py-2.5 text-xs text-[#F8F1E5] focus:outline-none focus:border-[#D6B875]"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-xs font-medium text-[#C9BBAF] mb-1">
-                    Email Address *
-                  </label>
-                  <input
-                    type="email"
-                    required
-                    placeholder="couple@example.com"
-                    value={quoteForm.email}
-                    onChange={(e) => setQuoteForm({ ...quoteForm, email: e.target.value })}
-                    className="w-full bg-[#140A13] border border-[#B08D45]/30 rounded-xl px-4 py-2.5 text-xs text-[#F8F1E5] focus:outline-none focus:border-[#D6B875]"
-                  />
-                </div>
-              </div>
-
-              <div className="grid grid-cols-2 gap-3">
-                <div>
-                  <label className="block text-xs font-medium text-[#C9BBAF] mb-1">
-                    Wedding Date *
-                  </label>
-                  <input
-                    type="date"
-                    required
-                    value={quoteForm.date}
-                    onChange={(e) => setQuoteForm({ ...quoteForm, date: e.target.value })}
-                    className="w-full bg-[#140A13] border border-[#B08D45]/30 rounded-xl px-4 py-2.5 text-xs text-[#F8F1E5] focus:outline-none focus:border-[#D6B875]"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-xs font-medium text-[#C9BBAF] mb-1">
-                    Wedding Destination City
-                  </label>
-                  <input
-                    type="text"
-                    placeholder="e.g. Udaipur, Jaipur"
-                    value={quoteForm.city}
-                    onChange={(e) => setQuoteForm({ ...quoteForm, city: e.target.value })}
-                    className="w-full bg-[#140A13] border border-[#B08D45]/30 rounded-xl px-4 py-2.5 text-xs text-[#F8F1E5] focus:outline-none focus:border-[#D6B875]"
-                  />
-                </div>
-              </div>
-
-              <div>
-                <label className="block text-xs font-medium text-[#C9BBAF] mb-1">
-                  Wedding Event Requirements &amp; Notes
-                </label>
-                <textarea
-                  rows={3}
-                  placeholder="Tell the vendor about your event dates, ceremonies (Sangeet, Wedding, Reception), and custom package preferences..."
-                  value={quoteForm.message}
-                  onChange={(e) => setQuoteForm({ ...quoteForm, message: e.target.value })}
-                  className="w-full bg-[#140A13] border border-[#B08D45]/30 rounded-xl px-4 py-2.5 text-xs text-[#F8F1E5] focus:outline-none focus:border-[#D6B875]"
-                />
-              </div>
-
-              <div className="flex justify-end gap-3 pt-3 border-t border-[#B08D45]/20">
-                <button suppressHydrationWarning
-                  type="button"
-                  onClick={() => setQuoteModalVendor(null)}
-                  className="px-4 py-2 rounded-xl text-xs text-[#C9BBAF] hover:text-white"
-                >
-                  Cancel
-                </button>
-                <button suppressHydrationWarning
-                  type="submit"
-                  className="px-6 py-2 rounded-xl bg-gradient-to-r from-[#B08D45] to-[#D6B875] text-[#1F0E1D] text-xs font-bold hover:brightness-110 shadow flex items-center gap-1.5"
-                >
-                  <Send size={13} />
-                  <span>Send Quotation Request</span>
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      )}
+      <UniversalEnquiryModal
+        isOpen={!!quoteModalVendor}
+        onClose={() => setQuoteModalVendor(null)}
+        target={quoteModalVendor}
+        targetType="vendor"
+        source="All Vendors Directory"
+      />
     </div>
   );
 }

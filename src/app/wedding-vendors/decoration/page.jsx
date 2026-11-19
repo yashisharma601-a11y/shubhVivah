@@ -2,6 +2,7 @@
 
 import { useState, useMemo, useEffect } from "react";
 import Link from "next/link";
+import UniversalEnquiryModal from "@/components/UniversalEnquiryModal";
 import {
   Search,
   MapPin,
@@ -682,7 +683,7 @@ export default function WeddingDecorationPage() {
           {/* Breadcrumb Navigation */}
           <nav
             aria-label="Breadcrumb"
-            className="mb-5 flex items-center gap-2 text-xs text-[#C9BBAF]"
+            className="hidden lg:flex mb-5 items-center gap-2 text-xs text-[#C9BBAF]"
           >
             <Link href="/" className="transition-colors hover:text-[#D6B875]">
               Home
@@ -1445,276 +1446,15 @@ export default function WeddingDecorationPage() {
       )}
 
       {/* =========================================================================
-          SEND ENQUIRY MODAL
+          SEND ENQUIRY MODAL (Universal with strict validation)
          ========================================================================= */}
-      {enquiryModalVendor && (
-        <div
-          role="dialog"
-          aria-modal="true"
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 backdrop-blur-sm"
-        >
-          <div className="relative w-full max-w-lg rounded-2xl border border-[#665038] bg-[#321B30] p-6 shadow-2xl sm:p-8">
-            <button suppressHydrationWarning
-              type="button"
-              onClick={closeEnquiryModal}
-              className="absolute right-4 top-4 flex h-8 w-8 items-center justify-center rounded-full border border-[#665038] bg-[#241321] text-[#F8F1E5] transition-colors hover:bg-[#3A2638]"
-              aria-label="Close modal"
-            >
-              <X size={18} />
-            </button>
-
-            {formSubmitted ? (
-              <div className="py-8 text-center">
-                <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-[#B08D45] text-[#241321]">
-                  <CheckCircle2 size={32} />
-                </div>
-                <h3 className="mt-4 font-serif text-2xl font-bold text-[#F8F1E5]">
-                  Enquiry Sent Successfully
-                </h3>
-                <p className="mx-auto mt-2 max-w-sm text-xs leading-relaxed text-[#C9BBAF]">
-                  Thank you, <strong className="text-[#F8F1E5]">{formData.name}</strong>. Your decoration requirements for{" "}
-                  <strong className="text-[#D6B875]">{enquiryModalVendor.name}</strong> have been recorded.
-                </p>
-                <div className="mt-4 rounded-xl border border-[#665038]/60 bg-[#241321] p-3 text-left text-xs text-[#C9BBAF]">
-                  <p>
-                    <span className="font-semibold text-[#E8D9B5]">Date:</span> {formData.date}
-                  </p>
-                  <p className="mt-1">
-                    <span className="font-semibold text-[#E8D9B5]">Venue / Location:</span> {formData.location}
-                  </p>
-                  <p className="mt-1">
-                    <span className="font-semibold text-[#E8D9B5]">Decoration Service:</span> {formData.service}
-                  </p>
-                  <p className="mt-1">
-                    <span className="font-semibold text-[#E8D9B5]">Budget Range:</span> {formData.budget || enquiryModalVendor.priceRange}
-                  </p>
-                </div>
-                <button suppressHydrationWarning
-                  type="button"
-                  onClick={closeEnquiryModal}
-                  className="mt-6 rounded-full bg-gradient-to-r from-[#B08D45] to-[#D6B875] px-6 py-2 text-xs font-semibold text-[#241321] transition-all hover:brightness-105"
-                >
-                  Close Window
-                </button>
-              </div>
-            ) : (
-              <div>
-                <span className="text-xs font-semibold uppercase tracking-wider text-[#D6B875]">
-                  Direct Decorator Enquiry
-                </span>
-                <h3 className="mt-1 font-serif text-2xl font-bold text-[#F8F1E5]">
-                  {enquiryModalVendor.name}
-                </h3>
-                <p className="mt-1 text-xs text-[#C9BBAF]">
-                  {enquiryModalVendor.location} • Price:{" "}
-                  <span className="font-semibold text-[#D6B875]">
-                    {enquiryModalVendor.priceRange}
-                  </span>
-                </p>
-
-                <form onSubmit={handleEnquirySubmit} className="mt-5 space-y-3.5">
-                  <div>
-                    <label
-                      htmlFor="decor-enquiry-name"
-                      className="block text-xs font-medium text-[#E8D9B5]"
-                    >
-                      Your Full Name *
-                    </label>
-                    <input
-                      id="decor-enquiry-name"
-                      type="text"
-                      value={formData.name}
-                      onChange={(e) =>
-                        setFormData({ ...formData, name: e.target.value })
-                      }
-                      placeholder="e.g. Rohan Mehra"
-                      className="mt-1 w-full rounded-xl border border-[#665038] bg-[#241321] px-3.5 py-2 text-xs text-[#F8F1E5] placeholder-[#C9BBAF]/50 outline-none focus:border-[#B08D45]"
-                    />
-                    {formErrors.name && (
-                      <p className="mt-1 text-[11px] text-rose-400">
-                        {formErrors.name}
-                      </p>
-                    )}
-                  </div>
-
-                  <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-                    <div>
-                      <label
-                        htmlFor="decor-enquiry-phone"
-                        className="block text-xs font-medium text-[#E8D9B5]"
-                      >
-                        Mobile Number *
-                      </label>
-                      <input
-                        id="decor-enquiry-phone"
-                        type="tel"
-                        value={formData.phone}
-                        onChange={(e) =>
-                          setFormData({ ...formData, phone: e.target.value })
-                        }
-                        placeholder="9876543210"
-                        className="mt-1 w-full rounded-xl border border-[#665038] bg-[#241321] px-3.5 py-2 text-xs text-[#F8F1E5] placeholder-[#C9BBAF]/50 outline-none focus:border-[#B08D45]"
-                      />
-                      {formErrors.phone && (
-                        <p className="mt-1 text-[11px] text-rose-400">
-                          {formErrors.phone}
-                        </p>
-                      )}
-                    </div>
-
-                    <div>
-                      <label
-                        htmlFor="decor-enquiry-email"
-                        className="block text-xs font-medium text-[#E8D9B5]"
-                      >
-                        Email Address (Optional)
-                      </label>
-                      <input
-                        id="decor-enquiry-email"
-                        type="email"
-                        value={formData.email}
-                        onChange={(e) =>
-                          setFormData({ ...formData, email: e.target.value })
-                        }
-                        placeholder="rohan@example.com"
-                        className="mt-1 w-full rounded-xl border border-[#665038] bg-[#241321] px-3.5 py-2 text-xs text-[#F8F1E5] placeholder-[#C9BBAF]/50 outline-none focus:border-[#B08D45]"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-                    <div>
-                      <label
-                        htmlFor="decor-enquiry-date"
-                        className="block text-xs font-medium text-[#E8D9B5]"
-                      >
-                        Wedding / Event Date *
-                      </label>
-                      <input
-                        id="decor-enquiry-date"
-                        type="date"
-                        value={formData.date}
-                        onChange={(e) =>
-                          setFormData({ ...formData, date: e.target.value })
-                        }
-                        className="mt-1 w-full rounded-xl border border-[#665038] bg-[#241321] px-3.5 py-2 text-xs text-[#F8F1E5] outline-none focus:border-[#B08D45]"
-                      />
-                      {formErrors.date && (
-                        <p className="mt-1 text-[11px] text-rose-400">
-                          {formErrors.date}
-                        </p>
-                      )}
-                    </div>
-
-                    <div>
-                      <label
-                        htmlFor="decor-enquiry-location"
-                        className="block text-xs font-medium text-[#E8D9B5]"
-                      >
-                        Venue or Event City *
-                      </label>
-                      <input
-                        id="decor-enquiry-location"
-                        type="text"
-                        value={formData.location}
-                        onChange={(e) =>
-                          setFormData({ ...formData, location: e.target.value })
-                        }
-                        placeholder="e.g. Radisson Blu, Jaipur"
-                        className="mt-1 w-full rounded-xl border border-[#665038] bg-[#241321] px-3.5 py-2 text-xs text-[#F8F1E5] placeholder-[#C9BBAF]/50 outline-none focus:border-[#B08D45]"
-                      />
-                      {formErrors.location && (
-                        <p className="mt-1 text-[11px] text-rose-400">
-                          {formErrors.location}
-                        </p>
-                      )}
-                    </div>
-                  </div>
-
-                  <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-                    <div>
-                      <label
-                        htmlFor="decor-enquiry-service"
-                        className="block text-xs font-medium text-[#E8D9B5]"
-                      >
-                        Decoration Requirement
-                      </label>
-                      <select
-                        id="decor-enquiry-service"
-                        value={formData.service}
-                        onChange={(e) =>
-                          setFormData({ ...formData, service: e.target.value })
-                        }
-                        className="mt-1 w-full cursor-pointer rounded-xl border border-[#665038] bg-[#241321] px-3 py-2 text-xs text-[#F8F1E5] outline-none focus:border-[#B08D45]"
-                      >
-                        <option value="Royal Wedding Stage">Royal Wedding Stage</option>
-                        <option value="Floral Mandap Decoration">Floral Mandap</option>
-                        <option value="Luxury Entrance Decoration">Luxury Entrance Arch</option>
-                        <option value="Outdoor Garden Decoration">Outdoor Garden Lawn</option>
-                        <option value="Haldi & Mehndi Decoration">Haldi &amp; Mehndi Setup</option>
-                        <option value="Reception Stage Decoration">Reception Stage</option>
-                        <option value="Destination Wedding Decoration">Destination Wedding</option>
-                      </select>
-                    </div>
-
-                    <div>
-                      <label
-                        htmlFor="decor-enquiry-budget"
-                        className="block text-xs font-medium text-[#E8D9B5]"
-                      >
-                        Expected Budget
-                      </label>
-                      <select
-                        id="decor-enquiry-budget"
-                        value={formData.budget}
-                        onChange={(e) =>
-                          setFormData({ ...formData, budget: e.target.value })
-                        }
-                        className="mt-1 w-full cursor-pointer rounded-xl border border-[#665038] bg-[#241321] px-3 py-2 text-xs text-[#F8F1E5] outline-none focus:border-[#B08D45]"
-                      >
-                        <option value="">Select Range</option>
-                        <option value="Under ₹50,000">Under ₹50,000</option>
-                        <option value="₹50,000 – ₹1,00,000">₹50,000 – ₹1,00,000</option>
-                        <option value="₹1,00,000 – ₹2,50,000">₹1,00,000 – ₹2,50,000</option>
-                        <option value="₹2,50,000 – ₹5,00,000">₹2,50,000 – ₹5,00,000</option>
-                        <option value="Above ₹5,00,000">Above ₹5,00,000</option>
-                      </select>
-                    </div>
-                  </div>
-
-                  <div>
-                    <label
-                      htmlFor="decor-enquiry-message"
-                      className="block text-xs font-medium text-[#E8D9B5]"
-                    >
-                      Special Themes, Colors, or Floral Ideas
-                    </label>
-                    <textarea
-                      id="decor-enquiry-message"
-                      rows={3}
-                      value={formData.message}
-                      onChange={(e) =>
-                        setFormData({ ...formData, message: e.target.value })
-                      }
-                      placeholder="Share your color palette, indoor vs. outdoor preference, or specific setup ideas..."
-                      className="mt-1 w-full rounded-xl border border-[#665038] bg-[#241321] px-3.5 py-2 text-xs text-[#F8F1E5] placeholder-[#C9BBAF]/50 outline-none focus:border-[#B08D45]"
-                    />
-                  </div>
-
-                  <div className="pt-2">
-                    <button suppressHydrationWarning
-                      type="submit"
-                      className="w-full rounded-full bg-gradient-to-r from-[#B08D45] to-[#D6B875] py-2.5 text-xs font-semibold text-[#241321] shadow-md transition-all hover:brightness-105"
-                    >
-                      Submit Decoration Enquiry
-                    </button>
-                  </div>
-                </form>
-              </div>
-            )}
-          </div>
-        </div>
-      )}
+      <UniversalEnquiryModal
+        isOpen={!!enquiryModalVendor}
+        onClose={() => setEnquiryModalVendor(null)}
+        target={enquiryModalVendor}
+        targetType="decoration"
+        source="Wedding Decoration Page"
+      />
     </div>
   );
 }

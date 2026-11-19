@@ -5,6 +5,14 @@ import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
 import {
+  validateName,
+  validatePhone,
+  validateEmail,
+  sanitizePhoneInput,
+  sanitizeNameInput,
+  VALIDATION_MESSAGES,
+} from "@/lib/validations/formValidation";
+import {
   Heart,
   Store,
   ShoppingBag,
@@ -381,36 +389,43 @@ function RegisterContent() {
 
     if (stepNumber === 2) {
       if (selectedRole === "couple") {
-        if (!coupleData.groomName.trim()) {
-          setErrorMsg("Groom's Name is required.");
+        const groomVal = validateName(coupleData.groomName);
+        if (!groomVal.isValid) {
+          setErrorMsg(groomVal.error === VALIDATION_MESSAGES.NAME_REQUIRED ? "Groom's Name is required." : groomVal.error);
           return false;
         }
-        if (!coupleData.brideName.trim()) {
-          setErrorMsg("Bride's Name is required.");
+        const brideVal = validateName(coupleData.brideName);
+        if (!brideVal.isValid) {
+          setErrorMsg(brideVal.error === VALIDATION_MESSAGES.NAME_REQUIRED ? "Bride's Name is required." : brideVal.error);
           return false;
         }
       } else {
         const data = selectedRole === "seller" ? sellerData : vendorData;
-        if (!data.firstName.trim()) {
-          setErrorMsg("First name is required.");
+        const fnVal = validateName(data.firstName);
+        if (!fnVal.isValid) {
+          setErrorMsg(fnVal.error === VALIDATION_MESSAGES.NAME_REQUIRED ? "First name is required." : fnVal.error);
           return false;
         }
-        if (!data.lastName.trim()) {
-          setErrorMsg("Last name is required.");
+        const lnVal = validateName(data.lastName);
+        if (!lnVal.isValid) {
+          setErrorMsg(lnVal.error === VALIDATION_MESSAGES.NAME_REQUIRED ? "Last name is required." : lnVal.error);
           return false;
         }
       }
 
       const data = selectedRole === "couple" ? coupleData : selectedRole === "seller" ? sellerData : vendorData;
-      if (!data.email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email.trim())) {
-        setErrorMsg("Please enter a valid email address.");
+      const emailVal = validateEmail(data.email);
+      if (!emailVal.isValid) {
+        setErrorMsg(emailVal.error);
         return false;
       }
-      const cleanPhone = (data.phone || "").replace(/[^0-9]/g, "");
-      if (cleanPhone.length < 10) {
-        setErrorMsg("Please enter a valid 10-digit mobile number.");
+
+      const phoneVal = validatePhone(data.phone);
+      if (!phoneVal.isValid) {
+        setErrorMsg(phoneVal.error);
         return false;
       }
+
       if (!data.password || data.password.length < 8) {
         setErrorMsg("Password must contain at least 8 characters.");
         return false;

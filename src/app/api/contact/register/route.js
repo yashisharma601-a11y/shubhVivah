@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { createUser, findUserByEmailOrPhone, saveContactInquiry } from "@/lib/db";
 import { hashPassword } from "@/lib/auth";
+import { validateName, validatePhone, validateEmail } from "@/lib/validations/formValidation";
 
 export async function POST(request) {
   try {
@@ -42,11 +43,27 @@ export async function POST(request) {
       details = sellerData || {};
     }
 
-    if (!email) {
-      return NextResponse.json({ success: false, message: "Email is required." }, { status: 400 });
+    // Validate inputs
+    const nameVal = validateName(name);
+    if (!nameVal.isValid) {
+      return NextResponse.json({ success: false, message: nameVal.error }, { status: 400 });
     }
 
-    const cleanPhone = phone.replace(/[^0-9]/g, "") || "9876543210";
+    const phoneVal = validatePhone(phone);
+    if (!phoneVal.isValid) {
+      return NextResponse.json({ success: false, message: phoneVal.error }, { status: 400 });
+    }
+
+    const emailVal = validateEmail(email);
+    if (!emailVal.isValid) {
+      return NextResponse.json({ success: false, message: emailVal.error }, { status: 400 });
+    }
+
+    name = nameVal.value;
+    phone = phoneVal.value;
+    email = emailVal.value;
+
+    const cleanPhone = phone;
 
     // 1. Permanently save the contact inquiry
     await saveContactInquiry({

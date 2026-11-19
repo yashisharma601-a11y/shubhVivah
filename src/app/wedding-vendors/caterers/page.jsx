@@ -2,6 +2,7 @@
 
 import { useState, useMemo, useEffect } from "react";
 import Link from "next/link";
+import UniversalEnquiryModal from "@/components/UniversalEnquiryModal";
 import {
   Search,
   MapPin,
@@ -784,110 +785,14 @@ export default function WeddingCaterersPage() {
         </div>
       )}
 
-      {/* ENQUIRY MODAL */}
-      {enquiryModalVendor && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-in fade-in duration-200">
-          <div className="bg-[#241321] border border-[#B08D45]/40 rounded-2xl max-w-lg w-full p-6 text-[#F8F1E5] shadow-2xl relative">
-            <button
-              onClick={() => setEnquiryModalVendor(null)}
-              className="absolute top-4 right-4 text-[#F8F1E5]/70 hover:text-white p-1 rounded-lg bg-white/5"
-            >
-              <X className="w-5 h-5" />
-            </button>
-
-            <h3 className="font-serif text-2xl text-[#F8F1E5] mb-1">Send Catering Enquiry</h3>
-            <p className="text-xs text-[#B08D45] mb-6">
-              To: {enquiryModalVendor.name} ({enquiryModalVendor.company})
-            </p>
-
-            {formSubmitted ? (
-              <div className="p-6 bg-emerald-950/40 border border-emerald-500/40 rounded-xl text-center space-y-2">
-                <CheckCircle2 className="w-10 h-10 text-emerald-400 mx-auto" />
-                <h4 className="font-serif text-lg text-emerald-200">Enquiry Sent Successfully!</h4>
-                <p className="text-xs text-emerald-300/80">
-                  The caterer has received your requirements and will reach out with customized food packages soon.
-                </p>
-              </div>
-            ) : (
-              <form onSubmit={handleEnquirySubmit} className="space-y-4 text-xs">
-                <div>
-                  <label className="block text-[#D4AF37] font-semibold mb-1">Your Name</label>
-                  <input
-                    type="text"
-                    required
-                    value={formData.name}
-                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    placeholder="e.g. Rahul Sharma"
-                    className="w-full px-3 py-2 rounded-xl bg-[#1A0B18] border border-[#B08D45]/30 text-[#F8F1E5] focus:outline-none focus:border-[#D4AF37]"
-                  />
-                </div>
-
-                <div className="grid grid-cols-2 gap-3">
-                  <div>
-                    <label className="block text-[#D4AF37] font-semibold mb-1">Phone Number</label>
-                    <input
-                      type="tel"
-                      required
-                      value={formData.phone}
-                      onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                      placeholder="e.g. 9876543210"
-                      className="w-full px-3 py-2 rounded-xl bg-[#1A0B18] border border-[#B08D45]/30 text-[#F8F1E5] focus:outline-none focus:border-[#D4AF37]"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-[#D4AF37] font-semibold mb-1">Expected Guests</label>
-                    <input
-                      type="number"
-                      value={formData.guests}
-                      onChange={(e) => setFormData({ ...formData, guests: e.target.value })}
-                      placeholder="e.g. 300"
-                      className="w-full px-3 py-2 rounded-xl bg-[#1A0B18] border border-[#B08D45]/30 text-[#F8F1E5] focus:outline-none focus:border-[#D4AF37]"
-                    />
-                  </div>
-                </div>
-
-                <div>
-                  <label className="block text-[#D4AF37] font-semibold mb-1">Event Date</label>
-                  <input
-                    type="date"
-                    required
-                    value={formData.date}
-                    onChange={(e) => setFormData({ ...formData, date: e.target.value })}
-                    className="w-full px-3 py-2 rounded-xl bg-[#1A0B18] border border-[#B08D45]/30 text-[#F8F1E5] focus:outline-none focus:border-[#D4AF37]"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-[#D4AF37] font-semibold mb-1">Message / Menu Preferences</label>
-                  <textarea
-                    rows={3}
-                    value={formData.message}
-                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    placeholder="Mention specific menu items, vegetarian/non-vegetarian preferences..."
-                    className="w-full px-3 py-2 rounded-xl bg-[#1A0B18] border border-[#B08D45]/30 text-[#F8F1E5] focus:outline-none focus:border-[#D4AF37]"
-                  />
-                </div>
-
-                <div className="pt-2 flex justify-end gap-3">
-                  <button
-                    type="button"
-                    onClick={() => setEnquiryModalVendor(null)}
-                    className="px-4 py-2 rounded-xl border border-[#B08D45]/30 text-xs text-[#F8F1E5]/80 hover:bg-white/5"
-                  >
-                    Cancel
-                  </button>
-                  <button
-                    type="submit"
-                    className="px-5 py-2 rounded-xl bg-gradient-to-r from-[#B08D45] to-[#D4AF37] text-xs text-[#1A0B18] font-bold hover:brightness-110 shadow-md"
-                  >
-                    Submit Enquiry
-                  </button>
-                </div>
-              </form>
-            )}
-          </div>
-        </div>
-      )}
+      {/* ENQUIRY MODAL WITH FORM VALIDATION */}
+      <UniversalEnquiryModal
+        isOpen={Boolean(enquiryModalVendor)}
+        onClose={() => setEnquiryModalVendor(null)}
+        target={enquiryModalVendor}
+        targetType="caterer"
+        source="Wedding Caterers Page"
+      />
     </div>
   );
 }

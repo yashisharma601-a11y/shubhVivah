@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import fs from "fs/promises";
 import path from "path";
 import { saveVendorRegistration } from "@/lib/db";
+import { validateName, validatePhone, validateEmail } from "@/lib/validations/formValidation";
 
 // Helper to sanitize filenames
 function sanitizeFileName(name) {
@@ -75,12 +76,20 @@ export async function POST(request) {
     // 2. Validate required fields
     if (!businessName) return NextResponse.json({ error: "Business name is required" }, { status: 400 });
     if (!category) return NextResponse.json({ error: "Business category is required" }, { status: 400 });
-    if (!ownerName) return NextResponse.json({ error: "Owner name is required" }, { status: 400 });
-    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      return NextResponse.json({ error: "Valid business email address is required" }, { status: 400 });
+    
+    const ownerNameVal = validateName(ownerName);
+    if (!ownerNameVal.isValid) {
+      return NextResponse.json({ error: ownerNameVal.error }, { status: 400 });
     }
-    if (!phone || !/^[6-9]\d{9}$/.test(phone.replace(/[\s-]/g, ""))) {
-      return NextResponse.json({ error: "Valid 10-digit Indian contact number is required" }, { status: 400 });
+
+    const emailVal = validateEmail(email);
+    if (!emailVal.isValid) {
+      return NextResponse.json({ error: emailVal.error }, { status: 400 });
+    }
+
+    const phoneVal = validatePhone(phone);
+    if (!phoneVal.isValid) {
+      return NextResponse.json({ error: phoneVal.error }, { status: 400 });
     }
     if (!description) return NextResponse.json({ error: "Business description is required" }, { status: 400 });
     if (!state) return NextResponse.json({ error: "State is required" }, { status: 400 });

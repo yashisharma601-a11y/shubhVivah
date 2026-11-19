@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { validateName, validatePhone, validateEmail, sanitizePhoneInput } from "@/lib/validations/formValidation";
 import {
   Heart,
   Store,
@@ -119,14 +120,6 @@ export default function ContactPage() {
     message: "",
   });
 
-  const validateEmail = (email) => {
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-  };
-
-  const validateMobile = (mobile) => {
-    return /^[6-9]\d{9}$/.test(mobile.replace(/[\s-]/g, ""));
-  };
-
   const handleCoupleServiceToggle = (service) => {
     setCoupleData((prev) => {
       const exists = prev.services.includes(service);
@@ -139,29 +132,66 @@ export default function ContactPage() {
     });
   };
 
+  const handleBlur = (field, value, type = "text") => {
+    let error = "";
+    if (type === "name") {
+      const val = validateName(value);
+      if (!val.isValid) error = val.error;
+    } else if (type === "phone") {
+      const val = validatePhone(value);
+      if (!val.isValid) error = val.error;
+    } else if (type === "email") {
+      const val = validateEmail(value);
+      if (!val.isValid) error = val.error;
+    }
+    setErrors((prev) => ({ ...prev, [field]: error }));
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const newErrors = {};
 
     if (userType === "couple") {
-      if (!coupleData.brideName.trim()) newErrors.brideName = "Bride's name is required";
-      if (!coupleData.groomName.trim()) newErrors.groomName = "Groom's name is required";
-      if (!validateEmail(coupleData.email)) newErrors.email = "Enter a valid email address";
-      if (!validateMobile(coupleData.mobile)) newErrors.mobile = "Enter a valid 10-digit mobile number";
+      const brideVal = validateName(coupleData.brideName);
+      if (!brideVal.isValid) newErrors.brideName = brideVal.error;
+
+      const groomVal = validateName(coupleData.groomName);
+      if (!groomVal.isValid) newErrors.groomName = groomVal.error;
+
+      const emailVal = validateEmail(coupleData.email);
+      if (!emailVal.isValid) newErrors.email = emailVal.error;
+
+      const phoneVal = validatePhone(coupleData.mobile);
+      if (!phoneVal.isValid) newErrors.mobile = phoneVal.error;
+
       if (!coupleData.weddingDate) newErrors.weddingDate = "Wedding date is required";
       if (!coupleData.location.trim()) newErrors.location = "Wedding location/city is required";
     } else if (userType === "vendor") {
       if (!vendorData.businessName.trim()) newErrors.businessName = "Business name is required";
-      if (!vendorData.ownerName.trim()) newErrors.ownerName = "Owner's name is required";
-      if (!validateEmail(vendorData.email)) newErrors.email = "Enter a valid email address";
-      if (!validateMobile(vendorData.mobile)) newErrors.mobile = "Enter a valid 10-digit mobile number";
+      
+      const ownerVal = validateName(vendorData.ownerName);
+      if (!ownerVal.isValid) newErrors.ownerName = ownerVal.error;
+
+      const emailVal = validateEmail(vendorData.email);
+      if (!emailVal.isValid) newErrors.email = emailVal.error;
+
+      const phoneVal = validatePhone(vendorData.mobile);
+      if (!phoneVal.isValid) newErrors.mobile = phoneVal.error;
+
       if (!vendorData.category) newErrors.category = "Please select a business category";
       if (!vendorData.location.trim()) newErrors.location = "City/Location is required";
     } else if (userType === "seller") {
       if (!sellerData.businessName.trim()) newErrors.businessName = "Seller/Business name is required";
-      if (!sellerData.contactPerson.trim()) newErrors.contactPerson = "Contact person name is required";
-      if (!validateEmail(sellerData.email)) newErrors.email = "Enter a valid email address";
-      if (!validateMobile(sellerData.mobile)) newErrors.mobile = "Enter a valid 10-digit mobile number";
+
+      const contactVal = validateName(sellerData.contactPerson);
+      if (!contactVal.isValid) newErrors.contactPerson = contactVal.error;
+
+      const emailVal = validateEmail(sellerData.email);
+      if (!emailVal.isValid) newErrors.email = emailVal.error;
+
+      const phoneVal = validatePhone(sellerData.mobile);
+      if (!phoneVal.isValid) newErrors.mobile = phoneVal.error;
+
       if (!sellerData.category) newErrors.category = "Please select a product category";
       if (!sellerData.location.trim()) newErrors.location = "City/Location is required";
     }
@@ -358,7 +388,11 @@ export default function ContactPage() {
                       <input
                         type="text"
                         value={coupleData.brideName}
-                        onChange={(e) => setCoupleData({ ...coupleData, brideName: e.target.value })}
+                        onChange={(e) => {
+                          setCoupleData({ ...coupleData, brideName: e.target.value });
+                          if (errors.brideName) setErrors((prev) => ({ ...prev, brideName: "" }));
+                        }}
+                        onBlur={(e) => handleBlur("brideName", e.target.value, "name")}
                         placeholder="e.g. Radhika Sharma"
                         className={`w-full rounded-xl border bg-[#241321] px-4 py-2.5 text-sm text-[#F8F1E5] placeholder-[#C9BBAF]/50 outline-none transition-colors ${
                           errors.brideName ? "border-rose-500" : "border-[#665038] focus:border-[#D6B875]"
@@ -379,7 +413,11 @@ export default function ContactPage() {
                       <input
                         type="text"
                         value={coupleData.groomName}
-                        onChange={(e) => setCoupleData({ ...coupleData, groomName: e.target.value })}
+                        onChange={(e) => {
+                          setCoupleData({ ...coupleData, groomName: e.target.value });
+                          if (errors.groomName) setErrors((prev) => ({ ...prev, groomName: "" }));
+                        }}
+                        onBlur={(e) => handleBlur("groomName", e.target.value, "name")}
                         placeholder="e.g. Aryan Verma"
                         className={`w-full rounded-xl border bg-[#241321] px-4 py-2.5 text-sm text-[#F8F1E5] placeholder-[#C9BBAF]/50 outline-none transition-colors ${
                           errors.groomName ? "border-rose-500" : "border-[#665038] focus:border-[#D6B875]"
@@ -403,7 +441,11 @@ export default function ContactPage() {
                         <input
                           type="email"
                           value={coupleData.email}
-                          onChange={(e) => setCoupleData({ ...coupleData, email: e.target.value })}
+                          onChange={(e) => {
+                            setCoupleData({ ...coupleData, email: e.target.value });
+                            if (errors.email) setErrors((prev) => ({ ...prev, email: "" }));
+                          }}
+                          onBlur={(e) => handleBlur("email", e.target.value, "email")}
                           placeholder="couple@example.com"
                           className={`w-full rounded-xl border bg-[#241321] pl-10 pr-4 py-2.5 text-sm text-[#F8F1E5] placeholder-[#C9BBAF]/50 outline-none transition-colors ${
                             errors.email ? "border-rose-500" : "border-[#665038] focus:border-[#D6B875]"
@@ -426,8 +468,13 @@ export default function ContactPage() {
                       <div className="relative">
                         <input
                           type="tel"
+                          maxLength={10}
                           value={coupleData.mobile}
-                          onChange={(e) => setCoupleData({ ...coupleData, mobile: e.target.value })}
+                          onChange={(e) => {
+                            setCoupleData({ ...coupleData, mobile: sanitizePhoneInput(e.target.value) });
+                            if (errors.mobile) setErrors((prev) => ({ ...prev, mobile: "" }));
+                          }}
+                          onBlur={(e) => handleBlur("mobile", e.target.value, "phone")}
                           placeholder="10-digit mobile number"
                           className={`w-full rounded-xl border bg-[#241321] pl-10 pr-4 py-2.5 text-sm text-[#F8F1E5] placeholder-[#C9BBAF]/50 outline-none transition-colors ${
                             errors.mobile ? "border-rose-500" : "border-[#665038] focus:border-[#D6B875]"
@@ -617,7 +664,11 @@ export default function ContactPage() {
                       <input
                         type="text"
                         value={vendorData.ownerName}
-                        onChange={(e) => setVendorData({ ...vendorData, ownerName: e.target.value })}
+                        onChange={(e) => {
+                          setVendorData({ ...vendorData, ownerName: e.target.value });
+                          if (errors.ownerName) setErrors((prev) => ({ ...prev, ownerName: "" }));
+                        }}
+                        onBlur={(e) => handleBlur("ownerName", e.target.value, "name")}
                         placeholder="e.g. Rajesh Mehra"
                         className={`w-full rounded-xl border bg-[#241321] px-4 py-2.5 text-sm text-[#F8F1E5] placeholder-[#C9BBAF]/50 outline-none transition-colors ${
                           errors.ownerName ? "border-rose-500" : "border-[#665038] focus:border-[#D6B875]"
@@ -641,7 +692,11 @@ export default function ContactPage() {
                         <input
                           type="email"
                           value={vendorData.email}
-                          onChange={(e) => setVendorData({ ...vendorData, email: e.target.value })}
+                          onChange={(e) => {
+                            setVendorData({ ...vendorData, email: e.target.value });
+                            if (errors.email) setErrors((prev) => ({ ...prev, email: "" }));
+                          }}
+                          onBlur={(e) => handleBlur("email", e.target.value, "email")}
                           placeholder="vendor@business.com"
                           className={`w-full rounded-xl border bg-[#241321] pl-10 pr-4 py-2.5 text-sm text-[#F8F1E5] placeholder-[#C9BBAF]/50 outline-none transition-colors ${
                             errors.email ? "border-rose-500" : "border-[#665038] focus:border-[#D6B875]"
@@ -664,8 +719,13 @@ export default function ContactPage() {
                       <div className="relative">
                         <input
                           type="tel"
+                          maxLength={10}
                           value={vendorData.mobile}
-                          onChange={(e) => setVendorData({ ...vendorData, mobile: e.target.value })}
+                          onChange={(e) => {
+                            setVendorData({ ...vendorData, mobile: sanitizePhoneInput(e.target.value) });
+                            if (errors.mobile) setErrors((prev) => ({ ...prev, mobile: "" }));
+                          }}
+                          onBlur={(e) => handleBlur("mobile", e.target.value, "phone")}
                           placeholder="10-digit mobile number"
                           className={`w-full rounded-xl border bg-[#241321] pl-10 pr-4 py-2.5 text-sm text-[#F8F1E5] placeholder-[#C9BBAF]/50 outline-none transition-colors ${
                             errors.mobile ? "border-rose-500" : "border-[#665038] focus:border-[#D6B875]"
@@ -835,7 +895,11 @@ export default function ContactPage() {
                       <input
                         type="text"
                         value={sellerData.contactPerson}
-                        onChange={(e) => setSellerData({ ...sellerData, contactPerson: e.target.value })}
+                        onChange={(e) => {
+                          setSellerData({ ...sellerData, contactPerson: e.target.value });
+                          if (errors.contactPerson) setErrors((prev) => ({ ...prev, contactPerson: "" }));
+                        }}
+                        onBlur={(e) => handleBlur("contactPerson", e.target.value, "name")}
                         placeholder="e.g. Vikramaditya Rathore"
                         className={`w-full rounded-xl border bg-[#241321] px-4 py-2.5 text-sm text-[#F8F1E5] placeholder-[#C9BBAF]/50 outline-none transition-colors ${
                           errors.contactPerson ? "border-rose-500" : "border-[#665038] focus:border-[#D6B875]"
@@ -859,7 +923,11 @@ export default function ContactPage() {
                         <input
                           type="email"
                           value={sellerData.email}
-                          onChange={(e) => setSellerData({ ...sellerData, email: e.target.value })}
+                          onChange={(e) => {
+                            setSellerData({ ...sellerData, email: e.target.value });
+                            if (errors.email) setErrors((prev) => ({ ...prev, email: "" }));
+                          }}
+                          onBlur={(e) => handleBlur("email", e.target.value, "email")}
                           placeholder="seller@business.com"
                           className={`w-full rounded-xl border bg-[#241321] pl-10 pr-4 py-2.5 text-sm text-[#F8F1E5] placeholder-[#C9BBAF]/50 outline-none transition-colors ${
                             errors.email ? "border-rose-500" : "border-[#665038] focus:border-[#D6B875]"
@@ -882,8 +950,13 @@ export default function ContactPage() {
                       <div className="relative">
                         <input
                           type="tel"
+                          maxLength={10}
                           value={sellerData.mobile}
-                          onChange={(e) => setSellerData({ ...sellerData, mobile: e.target.value })}
+                          onChange={(e) => {
+                            setSellerData({ ...sellerData, mobile: sanitizePhoneInput(e.target.value) });
+                            if (errors.mobile) setErrors((prev) => ({ ...prev, mobile: "" }));
+                          }}
+                          onBlur={(e) => handleBlur("mobile", e.target.value, "phone")}
                           placeholder="10-digit mobile number"
                           className={`w-full rounded-xl border bg-[#241321] pl-10 pr-4 py-2.5 text-sm text-[#F8F1E5] placeholder-[#C9BBAF]/50 outline-none transition-colors ${
                             errors.mobile ? "border-rose-500" : "border-[#665038] focus:border-[#D6B875]"

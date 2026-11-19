@@ -3,6 +3,7 @@
 import { useState, useMemo } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import UniversalEnquiryModal from "@/components/UniversalEnquiryModal";
 import {
   Search,
   MapPin,
@@ -514,7 +515,7 @@ export default function BridalMakeupPage() {
           {/* Breadcrumb Navigation */}
           <nav
             aria-label="Breadcrumb"
-            className="mb-5 flex items-center gap-2 text-xs text-[#C9BBAF]"
+            className="hidden lg:flex mb-5 items-center gap-2 text-xs text-[#C9BBAF]"
           >
             <Link
               href="/"
@@ -1066,230 +1067,14 @@ export default function BridalMakeupPage() {
         </div>
       </section>
 
-      {/* =========================================================================
-          ENQUIRY / AVAILABILITY MODAL
-         ========================================================================= */}
-      {enquiryModalVendor && (
-        <div
-          role="dialog"
-          aria-modal="true"
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 backdrop-blur-sm"
-        >
-          <div className="relative w-full max-w-lg rounded-2xl border border-[#665038] bg-[#321B30] p-6 shadow-2xl sm:p-8">
-            <button suppressHydrationWarning
-              type="button"
-              onClick={closeEnquiryModal}
-              className="absolute right-4 top-4 flex h-8 w-8 items-center justify-center rounded-full border border-[#665038] bg-[#241321] text-[#F8F1E5] transition-colors hover:bg-[#3A2638]"
-              aria-label="Close modal"
-            >
-              <X size={18} />
-            </button>
-
-            {formSubmitted ? (
-              <div className="py-8 text-center">
-                <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-[#B08D45] text-[#241321]">
-                  <CheckCircle2 size={32} />
-                </div>
-                <h3 className="mt-4 font-serif text-2xl font-bold text-[#F8F1E5]">
-                  Availability Enquiry Prepared
-                </h3>
-                <p className="mx-auto mt-2 max-w-sm text-xs leading-relaxed text-[#C9BBAF]">
-                  Thank you, <strong className="text-[#F8F1E5]">{formData.name}</strong>. Your enquiry details for{" "}
-                  <strong className="text-[#D6B875]">{enquiryModalVendor.name}</strong> have been recorded in this demo UI.
-                </p>
-                <div className="mt-4 rounded-xl border border-[#665038]/60 bg-[#241321] p-3 text-left text-xs text-[#C9BBAF]">
-                  <p>
-                    <span className="font-semibold text-[#E8D9B5]">Date:</span> {formData.date}
-                  </p>
-                  <p className="mt-1">
-                    <span className="font-semibold text-[#E8D9B5]">Location:</span> {formData.location}
-                  </p>
-                  <p className="mt-1">
-                    <span className="font-semibold text-[#E8D9B5]">Service:</span> {formData.service}
-                  </p>
-                  <p className="mt-1">
-                    <span className="font-semibold text-[#E8D9B5]">Phone:</span> {formData.phone}
-                  </p>
-                </div>
-                <button suppressHydrationWarning
-                  type="button"
-                  onClick={closeEnquiryModal}
-                  className="mt-6 rounded-full bg-[#B08D45] px-6 py-2 text-xs font-semibold text-[#241321] transition-all hover:bg-[#D6B875]"
-                >
-                  Close Window
-                </button>
-              </div>
-            ) : (
-              <div>
-                <span className="text-xs font-semibold uppercase tracking-wider text-[#D6B875]">
-                  Check Date &amp; Package Availability
-                </span>
-                <h3 className="mt-1 font-serif text-2xl font-bold text-[#F8F1E5]">
-                  {enquiryModalVendor.name}
-                </h3>
-                <p className="mt-1 text-xs text-[#C9BBAF]">
-                  {enquiryModalVendor.location} • Starting from{" "}
-                  <span className="font-semibold text-[#D6B875]">
-                    {enquiryModalVendor.priceDisplay}/function
-                  </span>
-                </p>
-
-                <form onSubmit={handleEnquirySubmit} className="mt-5 space-y-3.5">
-                  <div>
-                    <label
-                      htmlFor="makeup-enquiry-name"
-                      className="block text-xs font-medium text-[#E8D9B5]"
-                    >
-                      Your Full Name *
-                    </label>
-                    <input
-                      id="makeup-enquiry-name"
-                      type="text"
-                      value={formData.name}
-                      onChange={(e) =>
-                        setFormData({ ...formData, name: e.target.value })
-                      }
-                      placeholder="e.g. Meera Kapoor"
-                      className="mt-1 w-full rounded-xl border border-[#665038] bg-[#241321] px-3.5 py-2 text-xs text-[#F8F1E5] placeholder-[#C9BBAF]/50 outline-none focus:border-[#B08D45]"
-                    />
-                    {formErrors.name && (
-                      <p className="mt-1 text-[11px] text-rose-400">
-                        {formErrors.name}
-                      </p>
-                    )}
-                  </div>
-
-                  <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-                    <div>
-                      <label
-                        htmlFor="makeup-enquiry-phone"
-                        className="block text-xs font-medium text-[#E8D9B5]"
-                      >
-                        Mobile Number *
-                      </label>
-                      <input
-                        id="makeup-enquiry-phone"
-                        type="tel"
-                        value={formData.phone}
-                        onChange={(e) =>
-                          setFormData({ ...formData, phone: e.target.value })
-                        }
-                        placeholder="9876543210"
-                        className="mt-1 w-full rounded-xl border border-[#665038] bg-[#241321] px-3.5 py-2 text-xs text-[#F8F1E5] placeholder-[#C9BBAF]/50 outline-none focus:border-[#B08D45]"
-                      />
-                      {formErrors.phone && (
-                        <p className="mt-1 text-[11px] text-rose-400">
-                          {formErrors.phone}
-                        </p>
-                      )}
-                    </div>
-
-                    <div>
-                      <label
-                        htmlFor="makeup-enquiry-service"
-                        className="block text-xs font-medium text-[#E8D9B5]"
-                      >
-                        Required Service
-                      </label>
-                      <select
-                        id="makeup-enquiry-service"
-                        value={formData.service}
-                        onChange={(e) =>
-                          setFormData({ ...formData, service: e.target.value })
-                        }
-                        className="mt-1 w-full cursor-pointer rounded-xl border border-[#665038] bg-[#241321] px-3 py-2 text-xs text-[#F8F1E5] outline-none focus:border-[#B08D45]"
-                      >
-                        <option value="HD Makeup">HD Bridal Makeup</option>
-                        <option value="Airbrush Makeup">Airbrush Bridal Makeup</option>
-                        <option value="Traditional Bridal Makeup">Traditional Bridal Look</option>
-                        <option value="Party Makeup">Sangeet / Party Makeup</option>
-                        <option value="Hair Styling & Draping">Hair Styling & Draping</option>
-                      </select>
-                    </div>
-                  </div>
-
-                  <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-                    <div>
-                      <label
-                        htmlFor="makeup-enquiry-date"
-                        className="block text-xs font-medium text-[#E8D9B5]"
-                      >
-                        Wedding / Function Date *
-                      </label>
-                      <input
-                        id="makeup-enquiry-date"
-                        type="date"
-                        value={formData.date}
-                        onChange={(e) =>
-                          setFormData({ ...formData, date: e.target.value })
-                        }
-                        className="mt-1 w-full rounded-xl border border-[#665038] bg-[#241321] px-3.5 py-2 text-xs text-[#F8F1E5] outline-none focus:border-[#B08D45]"
-                      />
-                      {formErrors.date && (
-                        <p className="mt-1 text-[11px] text-rose-400">
-                          {formErrors.date}
-                        </p>
-                      )}
-                    </div>
-
-                    <div>
-                      <label
-                        htmlFor="makeup-enquiry-location"
-                        className="block text-xs font-medium text-[#E8D9B5]"
-                      >
-                        Event Location / City *
-                      </label>
-                      <input
-                        id="makeup-enquiry-location"
-                        type="text"
-                        value={formData.location}
-                        onChange={(e) =>
-                          setFormData({ ...formData, location: e.target.value })
-                        }
-                        placeholder="e.g. Delhi NCR"
-                        className="mt-1 w-full rounded-xl border border-[#665038] bg-[#241321] px-3.5 py-2 text-xs text-[#F8F1E5] placeholder-[#C9BBAF]/50 outline-none focus:border-[#B08D45]"
-                      />
-                      {formErrors.location && (
-                        <p className="mt-1 text-[11px] text-rose-400">
-                          {formErrors.location}
-                        </p>
-                      )}
-                    </div>
-                  </div>
-
-                  <div>
-                    <label
-                      htmlFor="makeup-enquiry-message"
-                      className="block text-xs font-medium text-[#E8D9B5]"
-                    >
-                      Additional Notes or Questions
-                    </label>
-                    <textarea
-                      id="makeup-enquiry-message"
-                      rows={3}
-                      value={formData.message}
-                      onChange={(e) =>
-                        setFormData({ ...formData, message: e.target.value })
-                      }
-                      placeholder="Specify function time (morning/evening pheras), number of family makeups, etc..."
-                      className="mt-1 w-full rounded-xl border border-[#665038] bg-[#241321] px-3.5 py-2 text-xs text-[#F8F1E5] placeholder-[#C9BBAF]/50 outline-none focus:border-[#B08D45]"
-                    />
-                  </div>
-
-                  <div className="pt-2">
-                    <button suppressHydrationWarning
-                      type="submit"
-                      className="w-full rounded-full bg-[#B08D45] py-2.5 text-xs font-semibold text-[#241321] transition-all hover:bg-[#D6B875]"
-                    >
-                      Submit Availability Enquiry
-                    </button>
-                  </div>
-                </form>
-              </div>
-            )}
-          </div>
-        </div>
-      )}
+      {/* ENQUIRY / AVAILABILITY MODAL WITH COMPREHENSIVE FORM VALIDATION */}
+      <UniversalEnquiryModal
+        isOpen={Boolean(enquiryModalVendor)}
+        onClose={closeEnquiryModal}
+        target={enquiryModalVendor}
+        targetType="makeup_artist"
+        source="Bridal Makeup Artist Page"
+      />
 
       {/* =========================================================================
           DETAILS & PORTFOLIO MODAL

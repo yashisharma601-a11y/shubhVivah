@@ -4,6 +4,14 @@ import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
+  validateName,
+  validatePhone,
+  validateEmail,
+  sanitizePhoneInput,
+  sanitizeNameInput,
+  VALIDATION_MESSAGES,
+} from "@/lib/validations/formValidation";
+import {
   X,
   Minus,
   Trash2,
@@ -331,15 +339,24 @@ export default function SathiChatbot() {
     e.preventDefault();
     setInquiryError("");
 
-    if (!inquiryForm.fullName.trim() || inquiryForm.fullName.trim().length < 2) {
-      setInquiryError("Please enter your full name.");
+    const nameVal = validateName(inquiryForm.fullName);
+    if (!nameVal.isValid) {
+      setInquiryError(nameVal.error);
       return;
     }
 
-    const cleanPhone = inquiryForm.mobileNumber.replace(/[^0-9]/g, "");
-    if (cleanPhone.length < 10) {
-      setInquiryError("Please enter a valid 10-digit mobile number.");
+    const phoneVal = validatePhone(inquiryForm.mobileNumber);
+    if (!phoneVal.isValid) {
+      setInquiryError(phoneVal.error);
       return;
+    }
+
+    if (inquiryForm.email) {
+      const emailVal = validateEmail(inquiryForm.email);
+      if (!emailVal.isValid) {
+        setInquiryError(emailVal.error);
+        return;
+      }
     }
 
     if (!inquiryForm.query.trim()) {
@@ -360,7 +377,7 @@ export default function SathiChatbot() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           ...inquiryForm,
-          mobileNumber: cleanPhone,
+          mobileNumber: phoneVal.value,
           conversationSummary: summary,
         }),
       });
@@ -715,8 +732,8 @@ export default function SathiChatbot() {
                           type="text"
                           required
                           value={inquiryForm.fullName}
-                          onChange={(e) => setInquiryForm({ ...inquiryForm, fullName: e.target.value })}
-                          placeholder="e.g. Priya Sharma / Rohan Mehta"
+                          onChange={(e) => setInquiryForm({ ...inquiryForm, fullName: sanitizeNameInput(e.target.value) })}
+                          placeholder="e.g. Priya Sharma"
                           className="w-full bg-[#140A13] border border-[#B08D45]/30 rounded-xl px-3 py-1.5 text-xs text-[#F8F1E5] placeholder-[#C9BBAF]/40 outline-none focus:border-[#D6B875]"
                         />
                       </div>
@@ -730,8 +747,9 @@ export default function SathiChatbot() {
                           <input
                             type="tel"
                             required
+                            maxLength={10}
                             value={inquiryForm.mobileNumber}
-                            onChange={(e) => setInquiryForm({ ...inquiryForm, mobileNumber: e.target.value })}
+                            onChange={(e) => setInquiryForm({ ...inquiryForm, mobileNumber: sanitizePhoneInput(e.target.value) })}
                             placeholder="10-digit number"
                             className="w-full bg-[#140A13] border border-[#B08D45]/30 rounded-xl px-3 py-1.5 text-xs text-[#F8F1E5] placeholder-[#C9BBAF]/40 outline-none focus:border-[#D6B875]"
                           />

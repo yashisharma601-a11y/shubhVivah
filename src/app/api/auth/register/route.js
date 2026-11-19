@@ -15,6 +15,7 @@ import {
   saveVendorPortfolio,
 } from "@/lib/db";
 import { hashPassword, createSessionToken } from "@/lib/auth";
+import { validateName, validatePhone, validateEmail } from "@/lib/validations/formValidation";
 
 export async function POST(request) {
   try {
@@ -117,20 +118,22 @@ export async function POST(request) {
     }
 
     // 2. Email & Phone validation
-    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
+    const emailVal = validateEmail(email);
+    if (!emailVal.isValid) {
       return NextResponse.json(
-        { success: false, message: "A valid Email Address is required." },
+        { success: false, message: emailVal.error },
         { status: 400 }
       );
     }
 
-    const cleanPhone = (phone || "").replace(/[^0-9]/g, "");
-    if (!cleanPhone || cleanPhone.length < 10) {
+    const phoneVal = validatePhone(phone);
+    if (!phoneVal.isValid) {
       return NextResponse.json(
-        { success: false, message: "A valid 10-digit Indian Mobile Number is required." },
+        { success: false, message: phoneVal.error },
         { status: 400 }
       );
     }
+    const cleanPhone = phoneVal.value;
 
     // 3. Password Validation: Minimum 8 characters, at least 1 uppercase, 1 lowercase, 1 number, 1 special character
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]).{8,}$/;

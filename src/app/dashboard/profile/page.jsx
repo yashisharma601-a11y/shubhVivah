@@ -4,6 +4,14 @@ import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import {
+  validateName,
+  validatePhone,
+  validateEmail,
+  sanitizePhoneInput,
+  sanitizeNameInput,
+  VALIDATION_MESSAGES,
+} from "@/lib/validations/formValidation";
+import {
   User,
   Heart,
   Calendar,
@@ -217,13 +225,56 @@ export default function MyProfilePage() {
 
   // Handle Input Change
   const handleInputChange = (e) => {
-    const { name, value } = e.target;
+    let { name, value } = e.target;
+    if (name === "phone" || name === "mobile") {
+      value = sanitizePhoneInput(value);
+    } else if (name === "first_name" || name === "last_name" || name === "name") {
+      value = sanitizeNameInput(value);
+    }
     setEditFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   // Save Section Changes
   const handleSaveSection = async (e) => {
     e.preventDefault();
+
+    // Validate fields if edited
+    if (editFormData.name) {
+      const v = validateName(editFormData.name);
+      if (!v.isValid) {
+        showToast(v.error, "error");
+        return;
+      }
+    }
+    if (editFormData.first_name) {
+      const v = validateName(editFormData.first_name);
+      if (!v.isValid) {
+        showToast(v.error, "error");
+        return;
+      }
+    }
+    if (editFormData.last_name) {
+      const v = validateName(editFormData.last_name);
+      if (!v.isValid) {
+        showToast(v.error, "error");
+        return;
+      }
+    }
+    if (editFormData.phone || editFormData.mobile) {
+      const v = validatePhone(editFormData.phone || editFormData.mobile);
+      if (!v.isValid) {
+        showToast(v.error, "error");
+        return;
+      }
+    }
+    if (editFormData.email) {
+      const v = validateEmail(editFormData.email);
+      if (!v.isValid) {
+        showToast(v.error, "error");
+        return;
+      }
+    }
+
     setSaving(true);
 
     try {

@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { saveChatbotInquiry } from "@/lib/db";
+import { validateName, validatePhone, validateEmail } from "@/lib/validations/formValidation";
 
 export async function POST(request) {
   try {
@@ -16,24 +17,18 @@ export async function POST(request) {
     } = body;
 
     // Field Validation
-    if (!fullName || typeof fullName !== "string" || fullName.trim().length < 2) {
+    const nameVal = validateName(fullName);
+    if (!nameVal.isValid) {
       return NextResponse.json(
-        { success: false, message: "Please provide your valid Full Name (at least 2 characters)." },
+        { success: false, message: nameVal.error },
         { status: 400 }
       );
     }
 
-    if (!mobileNumber || typeof mobileNumber !== "string") {
+    const phoneVal = validatePhone(mobileNumber);
+    if (!phoneVal.isValid) {
       return NextResponse.json(
-        { success: false, message: "Please provide a valid Mobile Number." },
-        { status: 400 }
-      );
-    }
-
-    const cleanPhone = mobileNumber.replace(/[^0-9]/g, "");
-    if (cleanPhone.length < 10 || cleanPhone.length > 14) {
-      return NextResponse.json(
-        { success: false, message: "Please provide a valid 10-digit mobile number." },
+        { success: false, message: phoneVal.error },
         { status: 400 }
       );
     }
@@ -46,21 +41,22 @@ export async function POST(request) {
     }
 
     // Optional email validation
+    let validEmail = null;
     if (email && email.trim()) {
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailRegex.test(email.trim())) {
+      const emailVal = validateEmail(email);
+      if (!emailVal.isValid) {
         return NextResponse.json(
-          { success: false, message: "Please enter a valid email address or leave it empty." },
+          { success: false, message: emailVal.error },
           { status: 400 }
         );
       }
+      validEmail = emailVal.value;
     }
-
     // Save Inquiry
     const result = await saveChatbotInquiry({
-      fullName: fullName.trim(),
-      mobileNumber: cleanPhone,
-      email: (email || "").trim(),
+      fullName: nameVal.value,
+      mobileNumber: phoneVal.value,
+      email: validEmail || "",
       lookingFor: lookingFor || "Bride",
       age: age ? String(age).trim() : "",
       preferredLocation: (preferredLocation || "").trim(),

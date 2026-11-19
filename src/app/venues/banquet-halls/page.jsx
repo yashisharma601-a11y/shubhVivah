@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useMemo } from "react";
+import UniversalEnquiryModal from "@/components/ui/UniversalEnquiryModal";
 import Link from "next/link";
 import {
   MapPin,
@@ -162,7 +163,7 @@ export default function LuxuryBanquetHallsPage() {
           {/* Breadcrumbs matching reference website structure */}
           <nav
             aria-label="Breadcrumb"
-            className="flex items-center gap-2 text-xs text-[#C9BBAF]"
+            className="hidden lg:flex items-center gap-2 text-xs text-[#C9BBAF]"
           >
             <Link
               href="/"
@@ -537,150 +538,15 @@ export default function LuxuryBanquetHallsPage() {
       </section>
 
       {/* =========================================================================
-          4. QUICK ENQUIRY POPUP MODAL
+          4. QUICK ENQUIRY POPUP MODAL (Universal with strict validation)
          ========================================================================= */}
-      {enquiryModalVenue && (
-        <div
-          role="dialog"
-          aria-modal="true"
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 backdrop-blur-sm"
-        >
-          <div className="relative w-full max-w-lg rounded-2xl border border-[#B08D45] bg-[#321B30] p-6 shadow-2xl">
-            <button suppressHydrationWarning
-              type="button"
-              onClick={closeEnquiryModal}
-              className="absolute right-4 top-4 text-[#C9BBAF] transition-colors hover:text-[#F8F1E5]"
-            >
-              <X size={20} />
-            </button>
-
-            <div className="flex items-center gap-2 border-b border-[#665038]/50 pb-3">
-              <Sparkles size={18} className="text-[#B08D45]" />
-              <h3 className="font-serif text-xl font-bold text-[#F8F1E5]">
-                Book Inquiry — {enquiryModalVenue.name}
-              </h3>
-            </div>
-
-            {formSubmitted ? (
-              <div className="py-8 text-center">
-                <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-emerald-950/60 text-emerald-400">
-                  <CheckCircle2 size={32} />
-                </div>
-                <h4 className="mt-4 font-serif text-xl font-bold text-[#F8F1E5]">
-                  Inquiry Sent Successfully!
-                </h4>
-                <p className="mx-auto mt-2 max-w-sm text-xs text-[#C9BBAF]">
-                  The banquet reservation team of {enquiryModalVenue.name} has received your request and will contact you via Phone / WhatsApp within 2 hours.
-                </p>
-                <button suppressHydrationWarning
-                  type="button"
-                  onClick={closeEnquiryModal}
-                  className="mt-6 rounded-xl bg-[#B08D45] px-6 py-2.5 text-xs font-bold text-[#241321] hover:bg-[#D6B875]"
-                >
-                  Close Window
-                </button>
-              </div>
-            ) : (
-              <div className="mt-4">
-                <div className="mb-4 rounded-xl border border-[#665038]/40 bg-[#241321] p-3 text-xs">
-                  <div className="flex items-center justify-between">
-                    <span className="font-semibold text-[#F8F1E5]">
-                      {enquiryModalVenue.name}
-                    </span>
-                    <span className="text-[#D6B875]">
-                      {enquiryModalVenue.startingPrice} onwards
-                    </span>
-                  </div>
-                  <div className="mt-1 text-[#C9BBAF]">
-                    Location: {enquiryModalVenue.location} • Capacity: {enquiryModalVenue.guestCapacity}
-                  </div>
-                </div>
-
-                <form onSubmit={handleEnquirySubmit} className="space-y-3">
-                  <div>
-                    <label className="block text-xs font-medium text-[#E8D9B5]">
-                      Your Full Name *
-                    </label>
-                    <input
-                      type="text"
-                      required
-                      value={formData.name}
-                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      placeholder="e.g., Rajesh Sharma"
-                      className="mt-1 w-full rounded-xl border border-[#665038] bg-[#241321] px-3 py-2 text-xs text-[#F8F1E5] outline-none focus:border-[#B08D45]"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-xs font-medium text-[#E8D9B5]">
-                      Contact Number (WhatsApp) *
-                    </label>
-                    <input
-                      type="tel"
-                      required
-                      value={formData.phone}
-                      onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                      placeholder="+91 98765 43210"
-                      className="mt-1 w-full rounded-xl border border-[#665038] bg-[#241321] px-3 py-2 text-xs text-[#F8F1E5] outline-none focus:border-[#B08D45]"
-                    />
-                  </div>
-
-                  <div className="grid grid-cols-2 gap-3">
-                    <div>
-                      <label className="block text-xs font-medium text-[#E8D9B5]">
-                        Wedding Date *
-                      </label>
-                      <input
-                        type="date"
-                        required
-                        value={formData.date}
-                        onChange={(e) => setFormData({ ...formData, date: e.target.value })}
-                        className="mt-1 w-full rounded-xl border border-[#665038] bg-[#241321] px-3 py-2 text-xs text-[#F8F1E5] outline-none focus:border-[#B08D45]"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-xs font-medium text-[#E8D9B5]">
-                        Estimated Guests
-                      </label>
-                      <select
-                        value={formData.guests}
-                        onChange={(e) => setFormData({ ...formData, guests: e.target.value })}
-                        className="mt-1 w-full rounded-xl border border-[#665038] bg-[#241321] px-3 py-2 text-xs text-[#F8F1E5] outline-none focus:border-[#B08D45]"
-                      >
-                        <option value="400-800">400 - 800 Guests</option>
-                        <option value="800-1500">800 - 1,500 Guests</option>
-                        <option value="1500-2500">1,500 - 2,500 Guests</option>
-                      </select>
-                    </div>
-                  </div>
-
-                  <div>
-                    <label className="block text-xs font-medium text-[#E8D9B5]">
-                      Requirements / Message
-                    </label>
-                    <textarea
-                      rows={2}
-                      value={formData.message}
-                      onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                      placeholder="Mention preferred catering, mandap style, or room requirements..."
-                      className="mt-1 w-full rounded-xl border border-[#665038] bg-[#241321] px-3 py-2 text-xs text-[#F8F1E5] outline-none focus:border-[#B08D45]"
-                    />
-                  </div>
-
-                  <div className="pt-2">
-                    <button suppressHydrationWarning
-                      type="submit"
-                      className="w-full rounded-xl bg-[#B08D45] py-2.5 text-xs font-bold text-[#241321] transition-all hover:bg-[#D6B875]"
-                    >
-                      Submit Booking Inquiry
-                    </button>
-                  </div>
-                </form>
-              </div>
-            )}
-          </div>
-        </div>
-      )}
+      <UniversalEnquiryModal
+        isOpen={!!enquiryModalVenue}
+        onClose={() => setEnquiryModalVenue(null)}
+        target={enquiryModalVenue}
+        targetType="venue"
+        source="Banquet Halls Page"
+      />
     </div>
   );
 }

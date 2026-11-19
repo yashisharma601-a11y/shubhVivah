@@ -1,5 +1,6 @@
 import "./globals.css";
 import Navbar from "@/components/Navbar";
+import MobileBreadcrumbs from "@/components/MobileBreadcrumbs";
 import Footer from "@/components/Footer";
 import SathiChatbot from "@/components/SathiChatbot";
 import GuestSignupPopup from "@/components/GuestSignupPopup";
@@ -42,6 +43,7 @@ export default function RootLayout({ children }) {
         className="min-h-screen bg-[#241321] font-sans text-[#F8F1E5] antialiased selection:bg-[#B08D45] selection:text-[#241321]"
       >
         <Navbar />
+        <MobileBreadcrumbs />
         <GuestSignupPopup />
         <main>{children}</main>
         <Footer />
